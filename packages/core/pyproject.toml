@@ -1,6 +1,6 @@
 [project]
 name = "libsocial-core"
-version = "1.0.0"
+version = "1.0.1"
 description = "Async core shared by the lib.social site SDKs: api.cdnlibs.org client, caching, titles, chapters and catalog"
 readme = "README.md"
 license = "MIT"

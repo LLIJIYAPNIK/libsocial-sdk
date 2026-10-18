@@ -1,6 +1,6 @@
 [project]
 name = "mangalib-python-sdk"
-version = "0.1.0"
+version = "0.2.0"
 description = "Async Python SDK for mangalib.me: title metadata, chapters, translations, catalog and page images"
 readme = "README.md"
 license = "MIT"
