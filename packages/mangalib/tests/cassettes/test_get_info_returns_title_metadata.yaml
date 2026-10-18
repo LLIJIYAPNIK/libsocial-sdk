@@ -1,0 +1,121 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/7965--chainsaw-man?fields%5B%5D=background&fields%5B%5D=eng_name&fields%5B%5D=otherNames&fields%5B%5D=summary&fields%5B%5D=releaseDate&fields%5B%5D=genres&fields%5B%5D=tags&fields%5B%5D=teams&fields%5B%5D=authors&fields%5B%5D=artists&fields%5B%5D=chap_count&fields%5B%5D=last_item_at
+  response:
+    body:
+      string: !!binary |
+        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
+        1/BHmvRKIC9tFfpPNds4+PY/VxXAckYtAAA=
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:00:44 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=ZQxHW0fOiL43c68A; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:44 GMT
+      - __ddg10_=1792332044; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:44 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:44 GMT
+      - __ddg1_=Wa9giT09HIW5k3crfGK9; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:00:44 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '95'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
