@@ -21,7 +21,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`06_multiple_volumes.py`](06_multiple_volumes.py) | `get_volumes()` — several volumes at once |
 | [`07_translation_selection.py`](07_translation_selection.py) | `get_translations()` + `branch_id` — picking a translation |
 | [`08_download_title.py`](08_download_title.py) | `download_title()` — whole-title bulk download |
-| [`09_disk_caching.py`](09_disk_caching.py) | disk cache + `refresh=True` |
+| [`09_disk_caching.py`](09_disk_caching.py) | disk cache + `refresh=True`, `cache_stats()` / `clear_cache()` |
 | [`10_export_formats.py`](10_export_formats.py) | `export()` to txt/fb2/epub/pdf |
 | [`11_error_handling.py`](11_error_handling.py) | `TitleNotFoundError` / `ChapterNotFoundError` / `AccessBlockedError` |
 | [`12_catalog_listing.py`](12_catalog_listing.py) | `Catalog.list_titles()` — browsing/searching the catalog |

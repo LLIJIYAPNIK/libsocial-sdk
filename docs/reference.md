@@ -46,6 +46,14 @@
 
 ::: ranobelib.DownloadTitleInterruptedError
 
+## Cache maintenance
+
+::: ranobelib.cache_stats
+
+::: ranobelib.clear_cache
+
+::: ranobelib.CacheStats
+
 ## Sizing
 
 ::: ranobelib.chapter_size

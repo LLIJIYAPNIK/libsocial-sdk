@@ -1,5 +1,6 @@
 """Async Python SDK for ranobelib.me."""
 
+from ranobelib.cache import CacheStats, cache_stats, clear_cache
 from ranobelib.catalog import Catalog
 from ranobelib.exceptions import (
     AccessBlockedError,
@@ -34,6 +35,7 @@ __all__ = [
     "AccessBlockedError",
     "AmbiguousChapter",
     "AuthRequiredError",
+    "CacheStats",
     "Catalog",
     "CatalogPage",
     "Chapter",
@@ -53,9 +55,11 @@ __all__ = [
     "TitleNotFoundError",
     "Volume",
     "VolumeNotFoundError",
+    "cache_stats",
     "chapter_image_urls",
     "chapter_paragraphs",
     "chapter_size",
+    "clear_cache",
     "rewrite_image_urls",
     "volume_size",
 ]

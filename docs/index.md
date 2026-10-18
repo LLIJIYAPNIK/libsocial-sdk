@@ -80,6 +80,17 @@ async with RanobeLib(url, cache_dir=".cache", cache_ttl=3600) as lib:
     toc = await lib.get_table_of_contents(refresh=True)  # Bypasses the cache.
 ```
 
+To see how much space the cache takes, or to empty it (all of it, or only entries older
+than a given age), use `cache_stats()` / `clear_cache()` rather than deleting its files
+yourself — the on-disk layout is an SDK internal:
+
+```python
+from ranobelib import cache_stats, clear_cache
+
+print(cache_stats(".cache"))  # CacheStats(entries=..., bytes=...)
+clear_cache(".cache", older_than=86400)  # Drop entries older than a day.
+```
+
 ## Documentation
 
 - [API reference](reference.md) — generated from the source's own docstrings.
