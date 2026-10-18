@@ -9,3 +9,17 @@ package follows [Semantic Versioning](https://semver.org/). Entries are generate
 `main` whenever a GitHub Release of this package is published — don't hand-edit released
 sections, fix the underlying commit message/PR title instead.
 
+## [1.0.0](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/tree/core-v1.0.0) - 2026-10-18
+
+### Added
+
+- Add the libsocial-core package with the site-independent core
+- Add extension points site packages need on libsocial-core
+
+### Changed
+
+- Release each package by its own prefixed tag
+
+### Fixed
+
+- Scope libsocial-core cache keys to the site
