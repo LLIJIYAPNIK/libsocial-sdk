@@ -33,9 +33,13 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [packages/ranobelib/src]
+          paths: [packages/ranobelib/src, packages/core/src]
           options:
             docstring_style: google
+            # RanobeLib/Catalog inherit most of their methods from libsocial-core, and many
+            # ranobelib names are re-exported from it, so it has to be loaded too.
+            inherited_members: true
+            preload_modules: [libsocial]
             show_source: true
             show_root_heading: true
             show_signature_annotations: true

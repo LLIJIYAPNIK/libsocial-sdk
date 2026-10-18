@@ -1,5 +1,6 @@
 """Unit tests for ranobelib.exceptions."""
 
+from ranobelib.client import ApiClient
 from ranobelib.exceptions import (
     AccessBlockedError,
     AmbiguousChapter,
@@ -13,8 +14,7 @@ from ranobelib.exceptions import (
     TitleNotFoundError,
     VolumeNotFoundError,
 )
-from ranobelib.models import Chapter, ChapterBranch, ChapterUser, Team
-from ranobelib.sdk import _group_into_volumes
+from ranobelib.models import Chapter, ChapterBranch, ChapterUser, Team, Volume
 
 
 def test_title_not_found_error_carries_slug_url() -> None:
@@ -57,7 +57,8 @@ def test_auth_required_error_carries_url() -> None:
 
 def test_access_blocked_error_carries_url_and_hints() -> None:
     url = "https://api.cdnlibs.org/api/manga/6712--example"
-    error = AccessBlockedError(url)
+    # The hint naming RanobeLib/Catalog comes from ranobelib's ApiClient, which raises it.
+    error = AccessBlockedError(url, headers_hint=ApiClient.headers_hint)
 
     assert isinstance(error, RanobeLibError)
     assert not isinstance(error, AuthRequiredError)
@@ -145,7 +146,7 @@ def test_download_title_interrupted_error_carries_partial_progress_and_cause() -
     chapter = Chapter.model_validate(
         {"id": 1, "volume": "1", "number": "1", "name": "One", "content": "<p>Hi.</p>"}
     )
-    volumes = _group_into_volumes([chapter])
+    volumes = [Volume(number="1", chapters=[chapter])]
     cause = RateLimitError(retry_after=30.0)
 
     try:

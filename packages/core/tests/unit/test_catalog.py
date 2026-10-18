@@ -4,7 +4,7 @@ Tests taking the ``site`` fixture run once per site: the catalog must list, filt
 for whichever site its subclass names.
 """
 
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -48,6 +48,10 @@ class _SiteTitle(Title):
     """Stands in for a site package's own Title subclass."""
 
 
+class _SitePage(CatalogPage[_SiteTitle]):
+    """Stands in for a site package's own CatalogPage subclass."""
+
+
 def _catalog(
     site: Site,
     tmp_path: Path,
@@ -55,10 +59,9 @@ def _catalog(
     **kwargs: Any,
 ) -> Catalog[_SiteTitle]:
     class SiteCatalog(Catalog[_SiteTitle]):
-        pass
+        page_model = _SitePage
 
     SiteCatalog.site = site
-    SiteCatalog.title_model = _SiteTitle
     catalog = SiteCatalog(cache_dir=tmp_path, **kwargs)
     if handler is not None:
         catalog._client = ApiClient(site, transport=httpx.MockTransport(handler), pacer=Pacer())
@@ -78,7 +81,7 @@ def _constants_handler(
     return handler
 
 
-async def test_list_titles_scopes_the_listing_to_the_site_and_uses_its_title_model(
+async def test_list_titles_scopes_the_listing_to_the_site_and_uses_its_page_model(
     site: Site, tmp_path: Path
 ) -> None:
     def handler(request: httpx.Request) -> httpx.Response:
@@ -91,7 +94,7 @@ async def test_list_titles_scopes_the_listing_to_the_site_and_uses_its_title_mod
     async with _catalog(site, tmp_path, handler) as catalog:
         page = await catalog.list_titles(page=2)
 
-    assert isinstance(page, CatalogPage)
+    assert isinstance(page, _SitePage)
     assert isinstance(page.items[0], _SiteTitle)
     assert page.items[0].id == 1
     assert page.page == 2
@@ -270,14 +273,39 @@ async def test_catalog_headers_are_merged_into_the_api_client(site: Site, tmp_pa
 
 async def test_catalog_uses_the_subclass_default_cache_dir(site: Site, tmp_path: Path) -> None:
     class SiteCatalog(Catalog[Title]):
-        pass
+        page_model = CatalogPage[Title]
 
     SiteCatalog.site = site
-    SiteCatalog.title_model = Title
     SiteCatalog.default_cache_dir = tmp_path / "site-cache"
 
     async with SiteCatalog() as catalog:
         assert catalog._cache._dir == tmp_path / "site-cache"
+
+
+async def test_catalog_requests_go_through_the_client_the_subclass_creates(
+    site: Site, tmp_path: Path
+) -> None:
+    created: list[ApiClient] = []
+
+    class SiteCatalog(Catalog[Title]):
+        page_model = CatalogPage[Title]
+
+        def _create_client(self, headers: Mapping[str, str] | None) -> ApiClient:
+            client = ApiClient(
+                self.site,
+                headers=headers,
+                transport=httpx.MockTransport(_constants_handler()),
+                pacer=Pacer(),
+            )
+            created.append(client)
+            return client
+
+    SiteCatalog.site = site
+    async with SiteCatalog(cache_dir=tmp_path, headers={"X-Extra": "yes"}) as catalog:
+        await catalog.list_statuses()
+
+    assert len(created) == 1
+    assert created[0]._http.headers["X-Extra"] == "yes"
 
 
 def test_cache_key_differs_by_page() -> None:

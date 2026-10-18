@@ -233,14 +233,14 @@ ranobelib-python-sdk/
 │       ├── src/
 │       │   └── ranobelib/
 │       │       ├── __init__.py          # публичный экспорт (RanobeLib, модели, исключения)
-│       │       ├── _http.py             # общие для всех HTTP-клиентов браузерные заголовки
-│       │       ├── client.py            # низкоуровневый HTTP-клиент к api.cdnlibs.org
-│       │       ├── sdk.py                # класс RanobeLib — публичный фасад
-│       │       ├── models.py             # pydantic-модели (Title, Chapter, Volume, Team, Branch, ...)
-│       │       ├── exceptions.py
-│       │       ├── cache.py              # дисковый кэш сырых ответов API
-│       │       ├── numbering.py          # сортировка/сравнение номеров глав, парсинг URL тайтла
-│       │       ├── catalog.py            # класс Catalog — листинг/поиск по каталогу (не по тайтлу)
+│       │       ├── _http.py             # сайт ranobelib.me (Site id 3) и его браузерные заголовки
+│       │       ├── client.py            # ApiClient: наследник libsocial.ApiClient с зашитым сайтом
+│       │       ├── sdk.py                # RanobeLib(TitleClient): + estimate_title_size, export
+│       │       ├── models.py             # контент/сноски главы, base_names; прочее — из ядра
+│       │       ├── exceptions.py         # реэкспорт ядра, RanobeLibError = LibSocialError
+│       │       ├── cache.py              # cache_stats/clear_cache с дефолтом .ranobelib_cache
+│       │       ├── numbering.py          # реэкспорт parse_slug_url из ядра
+│       │       ├── catalog.py            # Catalog(libsocial.Catalog) для ranobelib.me
 │       │       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
 │       │       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
 │       │       └── exporters/
@@ -1375,7 +1375,7 @@ owner/repo/workflow-file/environment) — это может сделать то�
     `packages/core/`, импорт `libsocial`, версия `1.0.0` (шаг 3, #88, объявит
     `libsocial-core>=1.0,<2`). Зависимости: только `httpx`, `pydantic`, `rich`. Пакет
     `ranobelib` ядро пока **не использует**, это шаг 3. До него код временно дублируется, в
-    релиз это дублирование попасть не должно. Публикация ядра — после шага 4 (#89, теги с
+    релиз это дублирование попасть не должно (снято в шаге 43). Публикация ядра — после шага 4 (#89, теги с
     префиксом пакета); `release.yml` пока собирает только `ranobelib-python-sdk`.
     - **`Site(id, origin)`** (`site.py`): ядро не знает ни одного сайта, сайт передаёт фасад.
       `ApiClient(site, ...)` берёт `Site-Id`/`site_id[]` из `site.id`, а `Origin`/`Referer` из
@@ -1426,5 +1426,59 @@ owner/repo/workflow-file/environment) — это может сделать то�
       `--import-mode=importlib`: у пакетов одноимённые `tests/conftest.py` и `test_*.py`.
       Живой смоук против API (не входит в тесты): `TitleClient` для ranobelib, `Catalog` для
       site 3 и site 1; жанров 54 и 49, общий `Pacer` у обоих.
+
+43. **Монорепозиторий, шаг 3: `ranobelib` на `libsocial-core`** (issue #88, часть #85).
+    `ranobelib-python-sdk` зависит от `libsocial-core>=1.0,<2` (локально
+    `[tool.uv.sources] libsocial-core = { workspace = true }`); `rich` больше не прямая
+    зависимость — приходит с ядром. Дублирование из шага 2 снято.
+    - **Что осталось в `ranobelib`**: `Site(id=3, origin="https://ranobelib.me")`
+      (`_http.RANOBELIB`), модель главы с текстовым `content`/`footnotes` и парсингом
+      HTML/ProseMirror, `Title.base_names` с суффиксами ранобэ, иллюстрации, `sizing`,
+      экспортёры, `RanobeLib.estimate_title_size()`/`export()`. Остальное — наследники ядра
+      (`RanobeLib(TitleClient)`, `Catalog(libsocial.Catalog)`, `Chapter`/`Title`/`Volume`/
+      `CatalogPage` — подклассы моделей ядра) или реэкспорт (исключения, общие модели,
+      `parse_slug_url`, `Reporter`, `DiskCache`/`CacheStats`).
+    - **Совместимость**: все модули `ranobelib.*` на месте, все 115 публичных имён из них
+      на `main` импортируются оттуда же (проверено скриптом по AST `origin/main`).
+      Исключения — те же объекты, что в ядре; `RanobeLibError` — псевдоним
+      `LibSocialError`, поэтому `except ranobelib.RanobeLibError` ловит всё, что бросает
+      ядро (тест `test_core_reexports.py`). `RanobeLib`/`Catalog` переопределяют
+      `__init__` только ради своих докстрингов и дефолта `.ranobelib_cache`, который, как и
+      раньше, читается из модульного `DEFAULT_CACHE_DIR` при каждом вызове.
+    - **`ranobelib.client.ApiClient` сохранён** — тонкий наследник `libsocial.ApiClient` с
+      прежним конструктором (без `site`, с `clock=`; `clock` даёт клиенту собственный `Pacer`
+      на этих часах вместо общего). `DEFAULT_REQUEST_DELAY` читается из `ranobelib.client`,
+      как и раньше. `headers_hint` называет `RanobeLib(..., headers=...) /
+      Catalog(headers=...)`, поэтому текст `AccessBlockedError` у ranobelib дословно прежний.
+    - **Точки расширения, добавленные в ядро ради этого шага**: `_create_client()` у
+      `TitleClient`/`Catalog` (фасад подставляет свой `ApiClient`), `Catalog.page_model`
+      вместо `title_model` (иначе `list_titles()` возвращал бы `CatalogPage[Title]` ядра, а не
+      `ranobelib.CatalogPage`), `AccessBlockedError(headers_hint=...)` /
+      `ApiClient.headers_hint`, публичный `browser_headers_for()`. `_plan_chapters()` теперь
+      отдаёт неразрешённые главы сырыми: `estimate_title_size()` раньше не валидировал их
+      ветки, и не должен начинать.
+    - **Правки тестов `ranobelib`** (тесты внутренних деталей, переехавших в ядро; всё
+      публичное и все кассеты прошли без правок): путь монкипатча
+      `ranobelib.sdk.asyncio.sleep` → `libsocial.title.asyncio.sleep`; приватные
+      `_group_into_volumes`/`_resolve_bulk_branch_id`/`_build_*`/`_cache_key` стали
+      методами/функциями ядра — тесты обращаются к ним через `RanobeLib`/`Catalog` с
+      неизменными телами; литерал ключа кэша заменён на `lib._cache_key(...)` (в ключе
+      теперь сайт, см. шаг 42); часы в тесте пейсинга читаются один раз за запрос;
+      `AccessBlockedError` в тесте сообщения создаётся с `headers_hint` ranobelib. Итог: те
+      же 410 тестов + 7 skipped (pdf на Windows), плюс новый `test_core_reexports.py`.
+    - **mkdocs**: `paths` включает `packages/core/src`, `inherited_members: true` (иначе
+      справочник `RanobeLib`/`Catalog` потерял бы унаследованные методы) и
+      `preload_modules: [libsocial]` (иначе griffe не разрешает реэкспорты).
+    - **ranobelib-companion** прогнан без единой правки в его коде на SDK из этой ветки и на
+      `ranobelib-python-sdk==0.13.0` из PyPI (временный Postgres через `pgserver`, окружение
+      вне его репозитория): 2018 passed / 16 failed / 16 errors / 176 skipped в обоих
+      прогонах, исходы совпадают по каждому тесту, кроме двух нестабильных
+      (`test_library_desktop::test_hero_continues_the_most_recently_read_title`,
+      `test_api_profile::..._truncates_many_titles_read_in_one_day`): повторные прогоны дают
+      то passed, то failed на обеих версиях SDK. Уже падающие 32 (`test_service_worker` и
+      др.) падают одинаково и с 0.13.0.
+    - **Релиз**: `ranobelib` теперь требует `libsocial-core` с PyPI, поэтому до следующего
+      релиза `ranobelib` должно быть опубликовано ядро (шаг 4, #89). Версию `ranobelib`
+      (следующий минорный — `0.14.0`, 0.13.0 уже вышел) поднимает отдельный PR, как обычно.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

@@ -23,8 +23,8 @@ classifiers = [
 dependencies = [
     "ebooklib>=0.20",
     "httpx>=0.27",
+    "libsocial-core>=1.0,<2",
     "pydantic>=2.7",
-    "rich>=15.0.0",
     "weasyprint>=69.0",
 ]
 
@@ -40,6 +40,10 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-name = "ranobelib"
+
+# Inside this repository the core comes from the workspace, not PyPI.
+[tool.uv.sources]
+libsocial-core = { workspace = true }
 
 # Test stack for this package only. Workspace-wide tools (ruff, mypy, coveralls) live in the
 # root pyproject.toml's dev group. Kept here rather than at the root because

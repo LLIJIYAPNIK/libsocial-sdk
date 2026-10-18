@@ -1,14 +1,35 @@
 """Unit tests for ranobelib.catalog: helpers, plus Catalog construction (no network)."""
 
-from ranobelib.catalog import (
-    Catalog,
-    _build_countries,
-    _build_genres,
-    _build_page,
-    _build_statuses,
-    _cache_key,
-)
+from typing import Any
+
+from libsocial.catalog import _cache_key as _core_cache_key
+from libsocial.catalog import _for_site
+from ranobelib.catalog import Catalog
 from ranobelib.models import CatalogPage, Country, Genre, Label, Title
+
+# These helpers were module functions here; they're libsocial-core's now (a Catalog method
+# and functions taking the site), so the tests reach them through ranobelib's Catalog/site.
+
+
+def _build_page(data: dict[str, Any]) -> CatalogPage:
+    return Catalog()._build_page(data)  # type: ignore[return-value]
+
+
+def _build_genres(data: list[dict[str, Any]]) -> list[Genre]:
+    return _for_site(Genre, data, Catalog.site)
+
+
+def _build_countries(data: list[dict[str, Any]]) -> list[Country]:
+    return _for_site(Country, data, Catalog.site)
+
+
+def _build_statuses(data: list[dict[str, Any]]) -> list[Label]:
+    return _for_site(Label, data, Catalog.site)
+
+
+def _cache_key(**kwargs: Any) -> str:
+    return _core_cache_key(site_id=Catalog.site.id, **kwargs)
+
 
 _TITLE_ITEM = {
     "id": 1,

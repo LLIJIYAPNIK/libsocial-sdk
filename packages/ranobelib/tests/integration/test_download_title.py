@@ -67,7 +67,7 @@ async def test_download_title_applies_chapter_delay_between_chapters_not_after_l
     async def fake_sleep(delay: float) -> None:
         sleeps.append(delay)
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("https://ranobelib.me/ru/book/40195--enbizaka-no-shitateya") as lib:
         volumes = await lib.download_title(chapter_delay=0.75)

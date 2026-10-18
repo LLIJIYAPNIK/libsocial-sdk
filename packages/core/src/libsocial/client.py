@@ -5,12 +5,13 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Awaitable, Callable, Mapping
 from types import TracebackType
-from typing import Any, Self
+from typing import Any, ClassVar, Self
 
 import httpx
 
 from libsocial._http import browser_headers_for
 from libsocial.exceptions import (
+    DEFAULT_HEADERS_HINT,
     AccessBlockedError,
     AuthRequiredError,
     ChapterNotFoundError,
@@ -46,7 +47,13 @@ class ApiClient:
     of the API-specific ``Site-Id``/``Accept``: without a non-empty ``Referer``, the
     DDoS-Guard edge in front of the API answers every request with an HTML 403 page (see
     docs/api-notes.md, section "WAF 403").
+
+    Attributes:
+        headers_hint: Where ``AccessBlockedError``'s message suggests passing different
+            headers. A site package's subclass names its own entry points here.
     """
+
+    headers_hint: ClassVar[str] = DEFAULT_HEADERS_HINT
 
     def __init__(
         self,
@@ -349,7 +356,7 @@ class ApiClient:
             # can change (see docs/api-notes.md, section "WAF 403").
             media_type = response.headers.get("Content-Type", "").split(";")[0].strip().lower()
             if media_type != "application/json":
-                raise AccessBlockedError(str(response.request.url))
+                raise AccessBlockedError(str(response.request.url), headers_hint=self.headers_hint)
             raise AuthRequiredError(str(response.request.url))
         if response.status_code == 429:
             retry_after = response.headers.get("Retry-After")
