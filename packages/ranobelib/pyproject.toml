@@ -40,3 +40,17 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-name = "ranobelib"
+
+# Test stack for this package only. Workspace-wide tools (ruff, mypy, coveralls) live in the
+# root pyproject.toml's dev group. Kept here rather than at the root because
+# `uv run --package ranobelib-python-sdk` installs the package's own groups, not the root's.
+[dependency-groups]
+dev = [
+    "lxml>=5.0",
+    "pypdf>=6.14.2",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5.0",
+    "pytest-recording>=0.13",
+    "vcrpy>=6.0",
+]

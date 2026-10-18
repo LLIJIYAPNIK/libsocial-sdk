@@ -1336,8 +1336,13 @@ owner/repo/workflow-file/environment) — это может сделать то�
     - Пакет целиком переехал в `packages/ranobelib/` (`src/`, `tests/`, `pyproject.toml`,
       `CHANGELOG.md`, `README.md`). Корневой `pyproject.toml` — виртуальный корень
       workspace (без `[project]`): `[tool.uv.workspace] members = ["packages/*"]`, общие
-      настройки ruff/mypy/pytest/coverage и dependency groups `dev`/`docs`; `uv.lock` один.
-      `examples/` и `docs/` остались в корне.
+      настройки ruff/mypy/pytest/coverage, группа `docs` и `dev` с общими инструментами
+      (ruff, mypy, coveralls); `uv.lock` один. `examples/` и `docs/` остались в корне.
+    - **Тестовый стек (pytest*, vcrpy, lxml, pypdf) — в группе `dev` самого пакета**, не в
+      корне: `uv run --package ranobelib-python-sdk` ставит только группы пакета, корневые
+      нет (первый прогон CI на чистом раннере упал на `Failed to spawn: pytest`; локально
+      не воспроизводилось, т.к. venv уже был заполнен). Обычный `uv run` из корня ставит
+      все пакеты workspace вместе с их группами, так что `uv run pytest` тоже работает.
     - **README пакета переехал вместе с ним**, а не остался в корне по ссылке
       `readme = "../../README.md"`: sdist включает только файлы внутри каталога пакета, и
       сборка wheel из sdist падает на таком пути (проверено). В корне теперь короткая
