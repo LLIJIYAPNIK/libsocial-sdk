@@ -472,8 +472,16 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
             self.volume_model(number=number, chapters=items) for number, items in grouped.items()
         ]
 
+    def _cache_key(self, kind: str, *parts: object) -> str:
+        """Disk-cache key for one response, scoped to the site.
+
+        Every endpoint here answers per site (the ``Site-Id`` header), so clients for
+        different sites sharing a ``cache_dir`` must not read each other's entries.
+        """
+        return ":".join([kind, str(self.site.id), self._slug_url, *map(str, parts)])
+
     async def _get_title(self, *, refresh: bool = False) -> dict[str, Any]:
-        key = f"title:{self._slug_url}:{','.join(sorted(self.info_fields))}"
+        key = self._cache_key("title", ",".join(sorted(self.info_fields)))
         if not refresh:
             cached = self._cache.get(key)
             if cached is not None:
@@ -485,7 +493,7 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
         return data
 
     async def _get_chapters(self, *, refresh: bool = False) -> list[dict[str, Any]]:
-        key = f"chapters:{self._slug_url}"
+        key = self._cache_key("chapters")
         if not refresh:
             cached = self._cache.get(key)
             if cached is not None:
@@ -499,7 +507,7 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
     async def _fetch_chapter(
         self, volume_str: str, number: str, branch_id: int | None, *, refresh: bool = False
     ) -> ChapterT:
-        key = f"chapter:{self._slug_url}:{volume_str}:{number}:{branch_id}"
+        key = self._cache_key("chapter", volume_str, number, branch_id)
         if not refresh:
             cached = self._cache.get(key)
             if cached is not None:

@@ -180,6 +180,7 @@ class Catalog(Generic[TitleT]):
             )
 
         key = _cache_key(
+            site_id=self.site.id,
             page=page,
             per_page=per_page,
             query=query,
@@ -229,6 +230,8 @@ class Catalog(Generic[TitleT]):
         Returns:
             Every ``Genre`` (id, name, adult flag) that applies to ``site``.
         """
+        # No site in the key, unlike list_titles(): the response is the whole network's
+        # list, and _for_site() filters it on every read, cached or not.
         key = "catalog:genres"
         if not refresh:
             cached = self._cache.get(key)
@@ -303,6 +306,7 @@ class Catalog(Generic[TitleT]):
 
 def _cache_key(
     *,
+    site_id: int,
     page: int,
     per_page: int,
     query: str | None,
@@ -318,8 +322,10 @@ def _cache_key(
     tags_part = ",".join(str(tag_id) for tag_id in tags or [])
     statuses_part = ",".join(str(status_id) for status_id in statuses or [])
     countries_part = ",".join(str(country_id) for country_id in countries or [])
+    # The listing is scoped to the site (site_id[]), so catalogs for different sites sharing
+    # a cache_dir must not read each other's pages.
     return (
-        f"catalog:{page}:{per_page}:{query or ''}:{genres_part}:{tags_part}:"
+        f"catalog:{site_id}:{page}:{per_page}:{query or ''}:{genres_part}:{tags_part}:"
         f"{statuses_part}:{countries_part}:{min_chapters}:{max_chapters}:{sort}"
     )
 

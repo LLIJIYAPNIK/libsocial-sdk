@@ -216,6 +216,49 @@ async def test_constants_cache_is_filtered_for_each_site_reading_it(tmp_path: Pa
     assert [genre.id for genre in genres] == [34, 91]
 
 
+async def test_list_titles_cache_is_not_shared_between_sites(tmp_path: Path) -> None:
+    # Same parameters, same cache_dir: each site still gets its own listing, not the page
+    # cached for the other one (the listing is scoped by site_id[]).
+    ranobelib, mangalib = Site(3, "https://ranobelib.me"), Site(1, "https://mangalib.me")
+    requested: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        site_id = request.url.params["site_id[]"]
+        requested.append(site_id)
+        item = {**_TITLE_ITEM, "id": int(site_id), "name": f"Site {site_id} title"}
+        return httpx.Response(
+            200, json={"data": [item], "meta": {"current_page": 1, "has_next_page": False}}
+        )
+
+    async with _catalog(ranobelib, tmp_path, handler) as catalog:
+        ranobelib_page = await catalog.list_titles(query="dxd")
+    async with _catalog(mangalib, tmp_path, handler) as catalog:
+        mangalib_page = await catalog.list_titles(query="dxd")
+        mangalib_again = await catalog.list_titles(query="dxd")  # Its own cache entry.
+
+    assert requested == ["3", "1"]
+    assert [title.name for title in ranobelib_page.items] == ["Site 3 title"]
+    assert [title.name for title in mangalib_page.items] == ["Site 1 title"]
+    assert mangalib_again == mangalib_page
+
+
+def test_cache_key_differs_by_site() -> None:
+    params: dict[str, Any] = {
+        "page": 1,
+        "per_page": 30,
+        "query": "dxd",
+        "genres": None,
+        "tags": None,
+        "statuses": None,
+        "countries": None,
+        "min_chapters": None,
+        "max_chapters": None,
+        "sort": "name",
+    }
+
+    assert _cache_key(site_id=3, **params) != _cache_key(site_id=1, **params)
+
+
 async def test_catalog_headers_are_merged_into_the_api_client(site: Site, tmp_path: Path) -> None:
     async with _catalog(site, tmp_path, headers={"user-agent": "CustomAgent/1.0"}) as catalog:
         sent = catalog._client._http.headers
@@ -239,6 +282,7 @@ async def test_catalog_uses_the_subclass_default_cache_dir(site: Site, tmp_path:
 
 def test_cache_key_differs_by_page() -> None:
     key1 = _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -251,6 +295,7 @@ def test_cache_key_differs_by_page() -> None:
         sort="name",
     )
     key2 = _cache_key(
+        site_id=3,
         page=2,
         per_page=30,
         query=None,
@@ -268,6 +313,7 @@ def test_cache_key_differs_by_page() -> None:
 
 def test_cache_key_differs_by_every_filter_and_sort() -> None:
     base = _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -281,6 +327,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
     )
 
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query="dxd",
@@ -293,6 +340,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="name",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -305,6 +353,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="name",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -317,6 +366,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="name",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -329,6 +379,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="name",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -341,6 +392,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="name",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -353,6 +405,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         sort="views",
     )
     assert base != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -366,6 +419,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
     )
     # The same number as an upper instead of a lower bound is a different query.
     assert _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -377,6 +431,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
         max_chapters=None,
         sort="name",
     ) != _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query=None,
@@ -392,6 +447,7 @@ def test_cache_key_differs_by_every_filter_and_sort() -> None:
 
 def test_cache_key_stable_for_equivalent_calls() -> None:
     key1 = _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query="dxd",
@@ -404,6 +460,7 @@ def test_cache_key_stable_for_equivalent_calls() -> None:
         sort="name",
     )
     key2 = _cache_key(
+        site_id=3,
         page=1,
         per_page=30,
         query="dxd",

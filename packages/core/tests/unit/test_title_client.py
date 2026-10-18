@@ -516,6 +516,21 @@ async def test_full_verbosity_logs_cache_hits_and_api_fetches(site: Site, tmp_pa
         assert line in output
 
 
+async def test_cache_is_not_shared_between_sites(tmp_path: Path) -> None:
+    # Same slug, same cache_dir, two sites: every endpoint answers per Site-Id, so each
+    # client fetches its own title, chapter list and chapter instead of reading the other's.
+    ranobelib, mangalib = Site(3, "https://ranobelib.me"), Site(1, "https://mangalib.me")
+    apis = {site.id: _FakeApi(site) for site in (ranobelib, mangalib)}
+
+    for site in (ranobelib, mangalib):
+        async with _client(site, tmp_path, apis[site.id]) as client:
+            await client.get_info()
+            await client.get_chapter(volume=1, number="1")
+
+    for api in apis.values():
+        assert api.paths() == ["", "/chapters", "/chapter"]
+
+
 def test_plan_chapters_separates_resolved_and_unresolved(site: Site, tmp_path: Path) -> None:
     client = _client_class(site)(SLUG, cache_dir=tmp_path)
     toc = [_toc_entry("1", "1"), _toc_entry("1", "2", 5, 6), _toc_entry("1", "3", 7, 8)]
