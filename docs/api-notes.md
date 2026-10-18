@@ -575,8 +575,10 @@ per-instance, а без этого тесты вроде `get_volume()` на р�
 - Проверено вживую (2026-10-18): `Catalog` ядра для site 3 и site 1 в одном процессе получают
   один и тот же объект `Pacer`, и оба листинга отвечают нормально.
 
-Пакет `ranobelib` пока работает на своём `client.py` (шаг 3 монорепозитория, #88, переведёт
-его на ядро). До этого пейсинг у него прежний, по клиенту.
+С шага 3 монорепозитория (#88) `ranobelib` работает на ядре: `ranobelib.client.ApiClient` —
+наследник `libsocial.ApiClient` с зашитым сайтом, так что общий пейсер по умолчанию теперь
+и у `RanobeLib`/`Catalog`. Параметр `clock=` у `ranobelib.client.ApiClient` остался:
+переданный, он даёт клиенту собственный `Pacer` на этих часах вместо общего.
 
 #### `download_title()` outliving `ApiClient`'s per-request retry budget (issue #41)
 

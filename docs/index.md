@@ -5,7 +5,9 @@ chapters and volumes, and export to epub, fb2, txt, or pdf.
 
 The SDK talks to the undocumented but open JSON API behind the site (`api.cdnlibs.org`,
 part of the lib.social network) instead of scraping HTML — see [API notes](api-notes.md)
-for what's been learned about it along the way.
+for what's been learned about it along the way. The part shared by every lib.social site
+(API client, request pacing, cache, titles, chapters, catalog) comes from `libsocial-core`,
+installed with it.
 
 ## Installation
 

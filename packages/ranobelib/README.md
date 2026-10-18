@@ -11,7 +11,9 @@ Async Python SDK for [ranobelib.me](https://ranobelib.me): fetch title metadata,
 chapters and volumes, and export to epub, fb2, txt, or pdf.
 
 The SDK talks to the undocumented but open JSON API behind the site (`api.cdnlibs.org`,
-part of the lib.social network) instead of scraping HTML.
+part of the lib.social network) instead of scraping HTML. The part shared by every
+lib.social site (API client, request pacing, cache, titles, chapters, catalog) comes from
+`libsocial-core`, installed with it.
 
 > **Status:** all the calls in the quickstart below are implemented — metadata, table of
 > contents, single/bulk chapter and volume downloads, whole-title bulk download, translation
