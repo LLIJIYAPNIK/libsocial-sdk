@@ -1097,7 +1097,8 @@ Two more things about `compress`:
 
 So `MangaLib.download_page()` tries the servers in the order `compress`, `download`, `main`,
 `secondary` (`images.DEFAULT_SERVER_ORDER`), skips any server whose URL was already tried,
-and moves on after a network error, a non-2xx status or a non-image `Content-Type`.
+and moves on after a non-2xx status or a non-image `Content-Type` (a 429, a 5xx or a network
+error only after retries, see "Export, page sizes and the image host's rate limit" below).
 `server=` puts a server first; `crop` is only used when asked for. Image requests send
 `browser_headers_for("https://mangalib.me")` plus `Accept: image/*`, with the same
 `headers=` overrides as the API client. They don't send `Site-Id`.
@@ -1130,10 +1131,58 @@ the refusal never reaches the disk cache. A cached refusal would keep failing af
 chapter opens at `expired_at`. The chapter list isn't used to refuse early: a cached list
 can be older than the chapter's opening.
 
-`download_title()` and the other bulk methods hit the same error on a closed chapter. Since
-closed chapters are usually the newest ones, `download_title()` on a title with early
-access ends in `DownloadTitleInterruptedError` with everything before them. Skipping closed
-chapters in a whole-title download is part of #91.
+`get_chapters()`/`get_volume()`/`get_volumes()` hit the same error on a closed chapter:
+they're given explicit chapters, and silently leaving one out would hand back less than
+was asked for. The whole-title operations, `download_title()` and `estimate_title_size()`,
+work over open translations only instead (issue #91). They'd otherwise end at the first
+closed chapter, usually one of the newest, with `DownloadTitleInterruptedError`. A chapter
+whose translations are all closed is skipped (logged with `verbosity="full"`). A closed
+translation next to open ones is dropped from the choice, so `translation_index` counts
+open translations and `MultipleTitleTranslationsError` lists only those. When one
+translation is left open out of several, it's requested by its `branch_id`, because without
+one the API picks its own default, which can be the closed one. On
+`226780--online-game-...` this downloads 132 of the 134 chapters, leaving out the two in
+early access.
+
+### Export, page sizes and the image host's rate limit (issue #91, checked 2026-10-18)
+
+- **`HEAD` gives a page's exact size.** `img3.cdnlibs.org` answers `HEAD` with
+  `Content-Length` equal to the downloaded body (checked page by page), with
+  `Cache-Control: max-age=4320000`. `MangaLib.chapter_size()`/`volume_size()` sum these
+  without downloading any image. `estimate_title_size()` samples chapters the same way:
+  the chapter list has no page counts, so both the page count and the page weight come from
+  the sample. For chapter 1/1 of `7965--chainsaw-man` (55 pages) the sum was 17,943,292
+  bytes, and the PDF export of it 17,974,132.
+- **The image host rate-limits, through DDoS-Guard.** 300 full-size GETs (63 MB) went
+  through with five at a time, 0.2 s between request starts, without a 429. So did 300 GETs
+  with twenty at a time and no delay, which ran at ~15 requests/s because of bandwidth.
+  Dense `HEAD` bursts got 429s: 5 of 256 requests at ~57 requests/s, and 751 of 927 with
+  thirty at a time (the first after 2.6 s). The 429 is DDoS-Guard's HTML page, with no
+  `Retry-After`. A request a minute or two later went through again. `GET`s at 0.1 s
+  pacing right after those bursts got a few 429s too, so the limit looks like requests per
+  time window, not request rate alone.
+- **A 429 on `HEAD` breaks the connection.** DDoS-Guard sends its HTML body even in answer
+  to `HEAD`, so the next response on that keep-alive connection fails to parse
+  (`httpx.RemoteProtocolError: illegal status line`, with the leftover HTML in it).
+- So page requests go through the process-wide `libsocial.shared_pacer()` of the image's
+  own host (not api.cdnlibs.org's) with `images.DEFAULT_IMAGE_REQUEST_DELAY = 0.2`, five at
+  a time by default (`concurrency=`). A 429, a 5xx or any `httpx.TransportError` (the broken
+  connection above included) is retried on the same server up to 3 times, after 1, 2 and
+  4 s. A refusal (another 4xx, or a 2xx that isn't an image) isn't retried. After either,
+  the next server is tried.
+- **PDF via img2pdf** (the `pdf` extra). JPEGs are embedded as-is: the page image in the
+  PDF is byte-identical to the download. It also took PNG with alpha (adding a soft mask)
+  and WebP. A 690×38200 webtoon strip, beyond the PDF page-size limit (14,400 pt), came out
+  as one page of 69×3820 with `/UserUnit 10`, not split. That keeps one PDF page per
+  image, as the issue asks. The PDF is built in memory, so for a whole long title CBZ is the
+  lighter format.
+- **A fetched chapter's `name` belongs to its translation.** It can be missing where the
+  chapter list has one (1/1 of `7965--chainsaw-man`, `branch_id` 4667: `null` vs.
+  `"Пёс и бензопила"`), and two translations can name a chapter differently (3/20:
+  `"За выпивкой"` in the list, `"Выпивка"` in the fetched one). Export uses the fetched
+  chapter's name, so a translation's file isn't labelled with another translation's title.
+  Many chapters have an empty `""` name. A chapter without a name is labelled
+  `Том N Глава M`.
 
 ### Title names without a format marker (checked 2026-10-18)
 

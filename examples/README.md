@@ -29,6 +29,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`14_chapter_images.py`](14_chapter_images.py) | `chapter_image_urls()` / `rewrite_image_urls()` — listing and rewriting a chapter's image URLs |
 | [`15_chapter_paragraphs.py`](15_chapter_paragraphs.py) | `chapter_paragraphs()` — a chapter's top-level blocks as plain text, indexed like the DOM |
 | [`16_mangalib_pages.py`](16_mangalib_pages.py) | mangalib.me (`mangalib-python-sdk`): a chapter's pages, image servers, closed chapters |
+| [`17_mangalib_export.py`](17_mangalib_export.py) | mangalib.me: `export()` to CBZ/PDF, `chapter_size()` / `estimate_title_size()` |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/reference/)
 for every public class/method, including `AuthRequiredError` and `RateLimitError`, which

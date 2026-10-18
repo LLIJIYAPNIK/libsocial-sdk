@@ -6,7 +6,7 @@
 [![CI](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml)
 
 Async Python SDK for [mangalib.me](https://mangalib.me): title metadata, table of contents,
-translations, catalog search, and chapter pages as images.
+translations, catalog search, chapter pages as images, and export to CBZ or PDF.
 
 Like [`ranobelib-python-sdk`](https://pypi.org/project/ranobelib-python-sdk/), it talks to
 the undocumented but open JSON API behind the site (`api.cdnlibs.org`, shared by the whole
@@ -14,9 +14,8 @@ lib.social network) instead of scraping HTML. The shared part (API client, reque
 cache, titles, chapters, catalog) comes from `libsocial-core`, installed with it, so a
 process using both SDKs paces its requests to the API together.
 
-> **Status:** early. Titles, chapters, translations, the catalog and page downloads work;
-> export to CBZ/PDF is planned. There is no login, so paid and early-access chapters can't
-> be read: fetching one raises `AuthRequiredError`.
+> **Status:** early. There is no login, so paid and early-access chapters can't be read:
+> fetching one raises `AuthRequiredError`, and a whole-title download leaves them out.
 
 ## Installation
 
@@ -30,7 +29,9 @@ or
 pip install mangalib-python-sdk
 ```
 
-Requires Python 3.11+.
+PDF export needs the `pdf` extra (img2pdf): `uv add "mangalib-python-sdk[pdf]"` /
+`pip install "mangalib-python-sdk[pdf]"`. Without it, `"pdf"` just isn't one of the export
+formats. Requires Python 3.11+.
 
 ## Quickstart
 
@@ -49,6 +50,13 @@ async with MangaLib("https://mangalib.me/ru/manga/7965--chainsaw-man") as lib:
         print(page.number, page.width, page.height)
     images = await lib.download_pages(chapter)  # list[bytes], in reading order
 
+    # One chapter, several, a volume, or the whole title, into one file.
+    await lib.export([chapter], fmt="cbz", path="chainsaw-man-1.cbz")
+    volumes = await lib.download_title(translation_index=0, on_chapter=print)
+    await lib.export(volumes, fmt="pdf", path="chainsaw-man.pdf", on_chapter=print)
+
+    size = await lib.estimate_title_size()  # bytes of page images, from a sample
+
 async with Catalog() as catalog:
     page = await catalog.list_titles(query="chainsaw")
 ```
@@ -59,7 +67,13 @@ async with Catalog() as catalog:
 - `ChapterBranch.is_open` (from `get_table_of_contents()` / `get_translations()`) says
   whether a translation can be read without an account.
 - `download_page()` / `download_pages()` fall back from one image server to the next; see
-  `list_image_servers()` and the API notes for why `compress` is tried first.
+  `list_image_servers()` and the API notes for why `compress` is tried first. Requests to
+  an image host are paced across the process and retried on 429/5xx; `concurrency=` sets
+  how many pages are fetched at once.
+- `export()` writes `"cbz"` (pages in order + `ComicInfo.xml`) or `"pdf"` (a page per image,
+  an outline entry per chapter); `mangalib.exporters.EXPORTERS` lists what's available.
+- `chapter_size()` / `volume_size()` give the exact size of the page images, from `HEAD`
+  requests; `estimate_title_size()` extrapolates from a sample of chapters.
 
 ## Documentation
 
