@@ -23,7 +23,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - run: uv run mypy packages/ranobelib/src
+      - run: uv run mypy packages/core/src packages/ranobelib/src
 
   test:
     runs-on: ubuntu-latest
@@ -44,7 +44,13 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - run: uv run --package ranobelib-python-sdk --python ${{ matrix.python-version }} pytest --cov=ranobelib --cov-report=xml --cov-fail-under=95 --record-mode=none
+      # One run per package, each with only that package installed (--package) and its own
+      # coverage threshold, and each given its own tests/ explicitly: the root testpaths
+      # list every package's tests, which a package that doesn't depend on another can't
+      # import.
+      - run: uv run --package libsocial-core --python ${{ matrix.python-version }} pytest packages/core/tests --cov=libsocial --cov-fail-under=95
+      # Last, so .coverage (uploaded below) holds this package's data, as before.
+      - run: uv run --package ranobelib-python-sdk --python ${{ matrix.python-version }} pytest packages/ranobelib/tests --cov=ranobelib --cov-report=xml --cov-fail-under=95 --record-mode=none
       # One upload, not three: the matrix runs the same suite on 3.11/3.12/3.13, and
       # Coveralls treats each upload as its own build, so uploading from every leg would
       # just create noise (and cost separate build slots) for identical coverage data.
@@ -61,6 +67,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
+      - run: uv build --package libsocial-core
       - run: uv build --package ranobelib-python-sdk
 
   docs:
