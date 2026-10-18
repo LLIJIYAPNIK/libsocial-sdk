@@ -19,5 +19,5 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - run: uv build
+      - run: uv build --package ranobelib-python-sdk
       - run: uv publish --trusted-publishing automatic
