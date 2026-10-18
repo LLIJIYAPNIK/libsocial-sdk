@@ -33,6 +33,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
+          paths: [packages/ranobelib/src]
           options:
             docstring_style: google
             show_source: true
