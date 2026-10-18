@@ -222,29 +222,34 @@ GET /api/manga/{slug}?fields[]=background&fields[]=eng_name&fields[]=otherNames&
 
 ```
 ranobelib-python-sdk/
-├── src/
-│   └── ranobelib/
-│       ├── __init__.py          # публичный экспорт (RanobeLib, модели, исключения)
-│       ├── _http.py             # общие для всех HTTP-клиентов браузерные заголовки
-│       ├── client.py            # низкоуровневый HTTP-клиент к api.cdnlibs.org
-│       ├── sdk.py                # класс RanobeLib — публичный фасад
-│       ├── models.py             # pydantic-модели (Title, Chapter, Volume, Team, Branch, ...)
-│       ├── exceptions.py
-│       ├── cache.py              # дисковый кэш сырых ответов API
-│       ├── numbering.py          # сортировка/сравнение номеров глав, парсинг URL тайтла
-│       ├── catalog.py            # класс Catalog — листинг/поиск по каталогу (не по тайтлу)
-│       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
-│       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
-│       └── exporters/
-│           ├── __init__.py       # Protocol Exporter + реестр форматов
-│           ├── txt.py
-│           ├── fb2.py
-│           ├── epub.py
-│           └── pdf.py            # WeasyPrint, переиспользует HTML-шаблон из epub
-├── tests/
-│   ├── cassettes/                 # VCR-кассеты (записанные реальные ответы API)
-│   ├── unit/
-│   └── integration/                # тесты поверх кассет (используют реальные записанные данные)
+├── packages/
+│   └── ranobelib/                 # пакет ranobelib-python-sdk (uv workspace member, шаг 41)
+│       ├── src/
+│       │   └── ranobelib/
+│       │       ├── __init__.py          # публичный экспорт (RanobeLib, модели, исключения)
+│       │       ├── _http.py             # общие для всех HTTP-клиентов браузерные заголовки
+│       │       ├── client.py            # низкоуровневый HTTP-клиент к api.cdnlibs.org
+│       │       ├── sdk.py                # класс RanobeLib — публичный фасад
+│       │       ├── models.py             # pydantic-модели (Title, Chapter, Volume, Team, Branch, ...)
+│       │       ├── exceptions.py
+│       │       ├── cache.py              # дисковый кэш сырых ответов API
+│       │       ├── numbering.py          # сортировка/сравнение номеров глав, парсинг URL тайтла
+│       │       ├── catalog.py            # класс Catalog — листинг/поиск по каталогу (не по тайтлу)
+│       │       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│       │       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
+│       │       └── exporters/
+│       │           ├── __init__.py       # Protocol Exporter + реестр форматов
+│       │           ├── txt.py
+│       │           ├── fb2.py
+│       │           ├── epub.py
+│       │           └── pdf.py            # WeasyPrint, переиспользует HTML-шаблон из epub
+│       ├── tests/
+│       │   ├── cassettes/                 # VCR-кассеты (записанные реальные ответы API)
+│       │   ├── unit/
+│       │   └── integration/                # тесты поверх кассет (используют реальные записанные данные)
+│       ├── pyproject.toml         # метаданные/зависимости пакета, build-backend
+│       ├── README.md              # описание пакета на PyPI
+│       └── CHANGELOG.md           # регенерируется changelog.yml
 ├── docs/
 │   ├── index.md
 │   └── api-notes.md               # сюда складывать находки про недокументированный API
@@ -269,11 +274,11 @@ ranobelib-python-sdk/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
 │   ├── release.yml                # публикация на PyPI по событию GitHub Release
-│   └── changelog.yml              # регенерирует CHANGELOG.md по тому же событию
+│   └── changelog.yml              # регенерирует CHANGELOG.md пакета по тому же событию
 ├── cliff.toml                     # конфиг git-cliff для CHANGELOG.md
-├── pyproject.toml
-├── README.md
-├── CHANGELOG.md
+├── pyproject.toml                 # корень workspace: members + ruff/mypy/pytest/coverage + dev-группы
+├── uv.lock                        # один общий на весь workspace
+├── README.md                      # витрина репозитория, ссылается на README пакетов
 ├── LICENSE
 └── CLAUDE.md
 ```
@@ -498,7 +503,8 @@ false }` (значение по умолчанию из официального
   пользователя, с какой ветки продолжать, либо ответвиться от ветки предыдущей фичи и
   явно указать это в описании нового PR (потребуется ребейз после мержа зависимости).
 - Перед открытием PR: локально прогнать `uv run ruff check .`, `uv run ruff format --check .`,
-  `uv run mypy src`, `uv run pytest --cov`. Не открывать PR с падающими проверками.
+  `uv run mypy packages/ranobelib/src`, `uv run pytest --cov`. Не открывать PR с падающими
+  проверками.
 - Каждый PR с новой фичей включает: код, тесты (держащие общее покрытие ≥95%), обновление
   докстрингов/документации, при необходимости — обновление `docs/api-notes.md`.
 
@@ -511,8 +517,9 @@ CI не нужен.
 `.github/workflows/ci.yml`, триггеры — `pull_request` и `push` в `main`:
 
 - job `lint`: `uv run ruff check .`, `uv run ruff format --check .`
-- job `typecheck`: `uv run mypy src`
-- job `test`: матрица по Python 3.11 / 3.12 / 3.13, `uv run pytest --cov=ranobelib --cov-report=xml --cov-fail-under=95`.
+- job `typecheck`: `uv run mypy packages/ranobelib/src`
+- job `test`: матрица по Python 3.11 / 3.12 / 3.13, `uv run --package ranobelib-python-sdk
+  pytest --cov=ranobelib --cov-report=xml --cov-fail-under=95`.
   Загрузка покрытия в Coveralls — только с одной ноги матрицы (`3.12`, `if:` в шаге), не со
   всех трёх: покрытие одно и то же на всех версиях Python, а Coveralls считает каждую
   загрузку отдельным build — три загрузки одних и тех же данных только шум. Инструмент —
@@ -521,7 +528,7 @@ CI не нужен.
   промежуточный файл конкретного формата (lcov и т.п.), и сам определяет GitHub Actions
   через `GITHUB_ACTIONS`/`COVERALLS_REPO_TOKEN` без доп. настройки — токен уже создан на
   coveralls.io и лежит в секретах репозитория под тем же именем.
-- job `build`: `uv build`, проверка, что пакет собирается
+- job `build`: `uv build --package ranobelib-python-sdk`, проверка, что пакет собирается
 - job `docs`: `uv run --group docs mkdocs build --strict` — не деплоит, только проверяет, что
   сайт вообще собирается (`--strict` роняет билд на битых mkdocstrings-ссылках вроде `:::
   ranobelib.ЧтоТоПереименованное`), чтобы сломанный `docs/reference.md` не всплывал только
@@ -1323,5 +1330,29 @@ owner/repo/workflow-file/environment) — это может сделать то�
       один тайтл от другого (фанфик с «(Фанфик)» не должен совпасть с аниме оригинала).
       Нормализация для сравнения (регистр, пунктуация, `×` → `x`) — не здесь, как и
       просил issue.
+
+41. **Монорепозиторий, шаг 1: uv workspace без изменения кода** (issue #86, часть #85 —
+    общее ядро `libsocial-core` + `ranobelib-python-sdk` + `mangalib-python-sdk`).
+    - Пакет целиком переехал в `packages/ranobelib/` (`src/`, `tests/`, `pyproject.toml`,
+      `CHANGELOG.md`, `README.md`). Корневой `pyproject.toml` — виртуальный корень
+      workspace (без `[project]`): `[tool.uv.workspace] members = ["packages/*"]`, общие
+      настройки ruff/mypy/pytest/coverage и dependency groups `dev`/`docs`; `uv.lock` один.
+      `examples/` и `docs/` остались в корне.
+    - **README пакета переехал вместе с ним**, а не остался в корне по ссылке
+      `readme = "../../README.md"`: sdist включает только файлы внутри каталога пакета, и
+      сборка wheel из sdist падает на таком пути (проверено). В корне теперь короткая
+      витрина монорепозитория (таблица пакетов + команды разработки), полный README —
+      `packages/ranobelib/README.md` (он же описание на PyPI).
+    - Wheel `uv build --package ranobelib-python-sdk` сверен с wheel текущего `main`
+      (0.13.0): модули байт-в-байт, зависимости и метаданные те же. Отличаются только ссылки,
+      которые сломал бы переезд: `Project-URL: Changelog` → `packages/ranobelib/CHANGELOG.md`,
+      в README — `LICENSE` и `examples/` → `../../`.
+    - Workflows: `ci.yml` — `uv run mypy packages/ranobelib/src`, `uv run --package
+      ranobelib-python-sdk ... pytest`, `uv build --package ranobelib-python-sdk`;
+      `release.yml` — тот же `uv build --package` (артефакты в корневом `dist/`, `uv publish`
+      без изменений, пакет и схема тегов прежние); `changelog.yml` пишет
+      `packages/ranobelib/CHANGELOG.md`. `mkdocs.yml` — явный `paths:
+      [packages/ranobelib/src]` для mkdocstrings; `docs.yml` правок не потребовал (команда
+      сборки та же, `site/` в корне).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
