@@ -39,6 +39,13 @@ async def main() -> None:
         # `genres` is a list of Genre models; slicing keeps the printed output short.
         print([genre.name for genre in info.genres[:5]])
 
+        # ranobelib.me appends a format marker to titles' names — "(Новелла)", "(Novel)",
+        # "(LN)", ... `base_names` gives every name (rus_name, eng_name, name, other_names,
+        # in that order) without it, deduplicated — e.g. to search another catalog (anime,
+        # manga) by name, where the marker would only get in the way. The fields above stay
+        # as the API sent them.
+        print(info.base_names)
+
 
 asyncio.run(main())
 
@@ -50,3 +57,5 @@ asyncio.run(main())
 # 308
 # 2026-07-09 13:29:40+00:00
 # ['Боевик', 'Боевые искусства', 'Вампиры', 'Гарем', 'Драма']
+# ['Старшая школа D×D', 'High School D×D', 'Haisukuru Di Di', 'Демоны старшей школы', 'ไฮสคูล D×D',
+#  'ハイスクールD×D', '高校龙中龙 D×D', '하이스쿨 D×D']

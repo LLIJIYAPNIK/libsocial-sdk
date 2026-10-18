@@ -237,6 +237,44 @@ can't return either value.
 way to get them for a catalog page is one `get_info()` per title, which is the N+1 that issue
 #74 itself rules out.
 
+### Title names without the format suffix (issue #79, checked 2026-10-18)
+
+ranobelib.me appends a publication-format marker to titles' names: `Старшая школа D×D
+(Новелла)`, `Haisukuru Di Di (Novel)`. `Title.base_names` removes it. To build the list of
+markers from real data, I walked the whole catalog (`GET /api/manga`, `sort_by=created_at`,
+411 pages, 24,658 titles) and counted every bracketed tail of `rus_name`, `eng_name` and
+`name`:
+
+- `(Новелла)` ends 11,648 `rus_name`s and `(Novel)` ends 10,870 `name`s. Those two are
+  what the site appends itself.
+- Next come `(LN)` (358 over the three fields), `(WN)` (149), then a long tail of spellings
+  people typed by hand: `(Light Novel)`, `(Web Novel)`, `(webnovel)`, `(web-novel)`,
+  `(Lite-Novel)`, `(Novella)`, `(Novell)`, `(Webnovela)`, `(новела)`, `(Лайт-новелла)`,
+  `(Лайт Новелла)`, `(Веб-Новелла)`, `( веб - новелла)`, `(Вэб Новелла)`, `(ЛН)`, `(Ranobe)`,
+  `(Ранобэ)`, `(web serial)`, `[quest]`, `[квест]`, `[ln]`, `[wn]`. Case and inner spaces
+  vary.
+- Markers can stack: `(LN) (Novel)`, `(WN) (Новелла)`, `(новелла) (Novel)`, `(Вэб Новелла)
+  (WN)`. A separator is sometimes left in front of one (`Цитрусовый маг, (Новелла)`,
+  `...Shuren: (Novel)`, `... / (Novel)`). A few names are only the marker (` (Новелла)`).
+- Every other tail is part of telling one title from another, so it's kept: `(Oneshot)`,
+  `(перезапуск)`/`(Remake)`, `(Фанфик)`/`(фф)`, `(18+)`, years (`(2013)`), `(Прототип)`,
+  `(Печатная версия)`, `[LitRPG]`, `[MTL]`, franchise names (`(Star Wars)`, `(Гарри Поттер)`),
+  `(#1)`/`(#2)`. Tails that mention a format word but aren't a bare marker are kept too:
+  `(Gothic novel)`, `(Novel test)`, `(не Новелла)`, `[A Tower Climb Web Serial]`.
+
+The rule is a closed list of format words inside `(...)` or `[...]` at the very end of the
+name, repeated until none is left, together with any `,`/`:`/`/` and whitespace before it.
+A `-`/`–` before the marker stays, because it usually closes a subtitle (`Devil May Cry 5
+-Before the Nightmare- (Novel)`). Over the full catalog this changes 24,321 names, and no
+bare format marker is left at the end of any of them.
+
+`other_names` isn't in the listing. A random sample of 150 titles through `get_info()` (91
+of them have `other_names`) had no bracketed tail in any of them: those are translations
+and original-language names. The same rule is applied to them anyway, as the issue asks.
+
+Normalizing names for comparison (case, punctuation, `×` → `x`) isn't done here. That
+belongs to whatever matches two catalogs against each other.
+
 ### Title URL / slug format
 
 A title URL like `https://ranobelib.me/ru/book/91443--new-hero-in-dxd` (locale prefix is

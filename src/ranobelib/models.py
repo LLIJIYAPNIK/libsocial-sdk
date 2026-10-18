@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import re
 from datetime import datetime
 from html.parser import HTMLParser
 from typing import Any
@@ -438,6 +439,28 @@ class Team(BaseModel):
     name: str
 
 
+_FORMAT_WORD = (
+    r"(?:(?:light|lite|web|лайт|веб|вэб)\s*-?\s*)?(?:novel(?:la|l|a)?|новелл?а)"
+    r"|web\s*-?\s*serial|ranobe|ранобэ|ln|wn|лн|quest|квест"
+)
+_FORMAT_SUFFIX = re.compile(
+    rf"[\s,:/]*(?:\(\s*(?:{_FORMAT_WORD})\s*\)|\[\s*(?:{_FORMAT_WORD})\s*\])\s*$",
+    re.IGNORECASE,
+)
+"""A publication-format marker at the end of a title name — ``(Новелла)``, ``(Novel)``,
+``(LN)``, ``[квест]``, ... — plus the separator (``,``/``:``/``/``) sometimes left before it.
+The word list comes from every name in the live catalog (see docs/api-notes.md, "Title
+names without the format suffix"); other bracketed tails (a year, ``(18+)``, ``(Фанфик)``,
+``[LitRPG]``, a franchise) tell titles apart, so they're not on it."""
+
+
+def _strip_format_suffix(name: str) -> str:
+    """``name`` without its trailing format marker(s) — they can stack: ``(LN) (Novel)``."""
+    while (match := _FORMAT_SUFFIX.search(name)) is not None:
+        name = name[: match.start()]
+    return name.strip()
+
+
 class Title(BaseModel):
     """Metadata for a single title (novel)."""
 
@@ -471,6 +494,26 @@ class Title(BaseModel):
     ``sort="last_chapter_at"`` orders by. Only ``RanobeLib.get_info()`` fills it in: the
     catalog listing endpoint doesn't return it (see docs/api-notes.md), so it's ``None`` on
     ``Catalog.list_titles()`` items, and on a title with no chapters yet."""
+
+    @property
+    def base_names(self) -> list[str]:
+        """The title's names without the format suffix ranobelib.me appends to them.
+
+        ``rus_name``, ``eng_name``, ``name`` and ``other_names``, in that order, each with
+        trailing publication-format markers removed — ``"Старшая школа D×D (Новелла)"`` →
+        ``"Старшая школа D×D"``, likewise ``(Novel)``, ``(LN)``, ``(WN)``, ``(Light Novel)``,
+        ``(Ранобэ)``, ``[квест]``, ... (stacked ones too, ``(LN) (Novel)``). Other bracketed
+        tails — a year, ``(18+)``, ``(Фанфик)``, ``[LitRPG]``, a franchise name — distinguish
+        one title from another and are kept. Whitespace is trimmed; empty names and
+        duplicates (keeping the first) are dropped. Nothing else is normalized (case,
+        punctuation, ``×``): that's up to whatever compares the names.
+
+        The original fields are left as they are. On ``Catalog.list_titles()`` items
+        ``other_names`` is empty (the listing doesn't return it), so it contributes nothing.
+        """
+        names = [self.rus_name, self.eng_name, self.name, *self.other_names]
+        stripped = (_strip_format_suffix(name) for name in names if name)
+        return list(dict.fromkeys(name for name in stripped if name))
 
     @model_validator(mode="before")
     @classmethod
