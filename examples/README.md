@@ -31,7 +31,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`16_mangalib_pages.py`](16_mangalib_pages.py) | mangalib.me (`mangalib-python-sdk`): a chapter's pages, image servers, closed chapters |
 | [`17_mangalib_export.py`](17_mangalib_export.py) | mangalib.me: `export()` to CBZ/PDF, `chapter_size()` / `estimate_title_size()` |
 
-See the [full API reference](https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/reference/)
+See the [full API reference](https://LLIJIYAPNIK.github.io/libsocial-sdk/ranobelib-reference/)
 for every public class/method, including `AuthRequiredError` and `RateLimitError`, which
 aren't demonstrated here since they need conditions (paid content, sustained rate limiting)
 that aren't reliably reproducible in a short script.

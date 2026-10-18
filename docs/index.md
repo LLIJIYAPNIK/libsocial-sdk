@@ -1,107 +1,39 @@
-# ranobelib-python-sdk
+# libsocial-sdk
 
-Async Python SDK for [ranobelib.me](https://ranobelib.me): fetch title metadata, download
-chapters and volumes, and export to epub, fb2, txt, or pdf.
+Async Python SDKs for the lib.social sites. ranobelib.me and mangalib.me run on one
+backend, the undocumented but open JSON API at `api.cdnlibs.org`, and these packages talk to
+it instead of scraping HTML. What's been learned about that API along the way is in the
+[API notes](api-notes.md).
 
-The SDK talks to the undocumented but open JSON API behind the site (`api.cdnlibs.org`,
-part of the lib.social network) instead of scraping HTML — see [API notes](api-notes.md)
-for what's been learned about it along the way. The part shared by every lib.social site
-(API client, request pacing, cache, titles, chapters, catalog) comes from `libsocial-core`,
-installed with it.
+| Package | Install | For |
+|---|---|---|
+| [ranobelib](ranobelib.md) | `pip install ranobelib-python-sdk` | [ranobelib.me](https://ranobelib.me): novels — chapter text, footnotes, illustrations, export to epub/fb2/txt/pdf |
+| [mangalib](mangalib.md) | `pip install mangalib-python-sdk` | [mangalib.me](https://mangalib.me): manga — chapter pages as images, export to CBZ/PDF |
+| [libsocial-core](core.md) | installed with either | The shared part: API client, request pacing, disk cache, titles, chapters, translations, catalog |
 
-## Installation
-
-```bash
-uv add ranobelib-python-sdk
-```
-
-or
-
-```bash
-pip install ranobelib-python-sdk
-```
-
-Requires Python 3.11+. `fmt="pdf"` on [`RanobeLib.export()`][ranobelib.RanobeLib.export]
-additionally needs [WeasyPrint's native dependencies](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation)
-(Pango/cairo, via a GTK3 runtime) installed on the system — `pip install`/`uv add` alone
-doesn't guarantee that on every platform. Without them, `export(fmt="pdf")` raises the same
-"unknown format" error the other three formats don't.
-
-## Quickstart
+The two site packages have the same shape: a title client (`RanobeLib` / `MangaLib`) built
+from a title's URL, and a `Catalog` for listing and searching the site. Both are async-only
+(`httpx`) and need Python 3.11+.
 
 ```python
+from mangalib import MangaLib
 from ranobelib import RanobeLib
 
-async with RanobeLib("https://ranobelib.me/ru/book/6712--high-school-dxd-novel") as lib:
-    info = await lib.get_info()
-    toc = await lib.get_table_of_contents()
+async with RanobeLib("https://ranobelib.me/ru/book/6712--high-school-dxd-novel") as novel:
+    info = await novel.get_info()
 
-    chapter = await lib.get_chapter(volume=6, number="51.6")
-    volume = await lib.get_volume(volume=6)
-
-    chapters = await lib.get_chapters([(6, "51.6"), (6, "52")])
-    volumes = await lib.get_volumes([1, 2, 3])
-
-    translations = await lib.get_translations(volume=6, number="51.6")
-    chapter = await lib.get_chapter(volume=6, number="51.6", branch_id=...)
-
-    await lib.export(chapters, fmt="epub", path="output.epub")
+async with MangaLib("https://mangalib.me/ru/manga/7965--chainsaw-man") as manga:
+    chapter = await manga.get_chapter(volume=1, number="1", branch_id=4667)
 ```
 
-`number` is a string exactly as the API returns it, and may contain a decimal for
-sub-chapters (`"51.6"`) — there's no separate parameter for the fractional part.
+Used together in one process, they pace their requests to `api.cdnlibs.org` together rather
+than each at its full rate, and `except LibSocialError` (alias `RanobeLibError` /
+`MangaLibError`) catches errors from either.
 
-### Selecting a translation
-
-When a chapter has more than one team's translation, `get_chapter()` (and anything built on
-it — `get_chapters()`, `get_volume()`, `get_volumes()`) raises
-[`MultipleTranslationsError`][ranobelib.MultipleTranslationsError] instead of guessing which
-one you want:
-
-```python
-from ranobelib import MultipleTranslationsError
-
-try:
-    chapter = await lib.get_chapter(volume=6, number="51.6")
-except MultipleTranslationsError as exc:
-    for branch in exc.branches:
-        print(branch.branch_id, [team.name for team in branch.teams])
-    chapter = await lib.get_chapter(volume=6, number="51.6", branch_id=exc.branches[0].branch_id)
-```
-
-### Caching
-
-Raw API responses (title metadata, chapter list, chapter content) are cached to disk by
-default, so re-exporting to a different format or downloading newly added chapters doesn't
-re-fetch data already on hand:
-
-```python
-async with RanobeLib(url, cache_dir=".cache", cache_ttl=3600) as lib:
-    toc = await lib.get_table_of_contents()  # First call: hits the API.
-    toc = await lib.get_table_of_contents()  # Second call: served from disk.
-    toc = await lib.get_table_of_contents(refresh=True)  # Bypasses the cache.
-```
-
-To see how much space the cache takes, or to empty it (all of it, or only entries older
-than a given age), use `cache_stats()` / `clear_cache()` rather than deleting its files
-yourself — the on-disk layout is an SDK internal:
-
-```python
-from ranobelib import cache_stats, clear_cache
-
-print(cache_stats(".cache"))  # CacheStats(entries=..., bytes=...)
-clear_cache(".cache", older_than=86400)  # Drop entries older than a day.
-```
-
-## Documentation
-
-- [API reference](reference.md) — generated from the source's own docstrings.
-- [API notes](api-notes.md) — a running log of what's been learned about ranobelib's
-  undocumented API and the design decisions that followed from it (translation selection,
-  rate limiting, why each exporter is built the way it is, and more).
-- The project's [CLAUDE.md](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/blob/main/CLAUDE.md)
-  documents the full architecture, public API contract, and roadmap.
+Each package is versioned and released on its own — see its changelog in the
+[repository](https://github.com/LLIJIYAPNIK/libsocial-sdk). Runnable examples:
+[`examples/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples).
 
 ## License
 
-MIT — see [LICENSE](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/blob/main/LICENSE).
+MIT — see [LICENSE](https://github.com/LLIJIYAPNIK/libsocial-sdk/blob/main/LICENSE).

@@ -1,10 +1,12 @@
-# ranobelib-python-sdk
+# libsocial-sdk
 
-[![PyPI](https://img.shields.io/pypi/v/ranobelib-python-sdk)](https://pypi.org/project/ranobelib-python-sdk/)
-[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/ranobelib-python-sdk)](LICENSE)
-[![CI](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml)
+[![ranobelib-python-sdk](https://img.shields.io/pypi/v/ranobelib-python-sdk?label=ranobelib-python-sdk)](https://pypi.org/project/ranobelib-python-sdk/)
+[![mangalib-python-sdk](https://img.shields.io/pypi/v/mangalib-python-sdk?label=mangalib-python-sdk)](https://pypi.org/project/mangalib-python-sdk/)
+[![libsocial-core](https://img.shields.io/pypi/v/libsocial-core?label=libsocial-core)](https://pypi.org/project/libsocial-core/)
+[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/libsocial-sdk)](LICENSE)
+[![CI](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/LLIJIYAPNIK/ranobelib-python-sdk/badge.svg?branch=main)](https://coveralls.io/github/LLIJIYAPNIK/ranobelib-python-sdk?branch=main)
-[![Docs](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/docs.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/docs.yml)
+[![Docs](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/docs.yml/badge.svg)](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/docs.yml)
 
 Async Python SDKs for the lib.social sites, built on their open JSON API
 (`api.cdnlibs.org`). This repository is a [uv workspace](https://docs.astral.sh/uv/concepts/projects/workspaces/);
@@ -13,13 +15,15 @@ each package under `packages/` is published to PyPI on its own.
 | Package | PyPI | Description |
 |---|---|---|
 | [`packages/ranobelib`](packages/ranobelib/) | [`ranobelib-python-sdk`](https://pypi.org/project/ranobelib-python-sdk/) | [ranobelib.me](https://ranobelib.me): title metadata, chapter/volume downloads, export to epub/fb2/txt/pdf |
-| [`packages/mangalib`](packages/mangalib/) | `mangalib-python-sdk` (not published yet) | [mangalib.me](https://mangalib.me): title metadata, chapters, translations, catalog, page images |
-| [`packages/core`](packages/core/) | `libsocial-core` (not published yet) | The site-independent core: api.cdnlibs.org client, shared pacing, cache, titles, chapters, catalog |
+| [`packages/mangalib`](packages/mangalib/) | [`mangalib-python-sdk`](https://pypi.org/project/mangalib-python-sdk/) | [mangalib.me](https://mangalib.me): title metadata, chapters, translations, catalog, page images, export to CBZ/PDF |
+| [`packages/core`](packages/core/) | [`libsocial-core`](https://pypi.org/project/libsocial-core/) | The site-independent core: api.cdnlibs.org client, shared pacing, cache, titles, chapters, catalog |
 
 Installation, quickstart and changelog: [`packages/ranobelib/README.md`](packages/ranobelib/README.md),
-[`packages/mangalib/README.md`](packages/mangalib/README.md).
+[`packages/mangalib/README.md`](packages/mangalib/README.md), [`packages/core/README.md`](packages/core/README.md).
+This repository was called `ranobelib-python-sdk` until the mangalib package joined it; the
+old GitHub URLs redirect here, and the package names on PyPI haven't changed.
 Runnable examples: [`examples/`](examples/). Full documentation:
-**<https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/>**.
+**<https://LLIJIYAPNIK.github.io/libsocial-sdk/>**.
 
 ## Development
 

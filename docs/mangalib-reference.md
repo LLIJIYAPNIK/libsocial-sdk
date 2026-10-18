@@ -1,4 +1,4 @@
-# MangaLib API reference
+# mangalib API reference
 
 `mangalib-python-sdk` (`import mangalib`): the SDK for [mangalib.me](https://mangalib.me), on
 the same `libsocial-core` as `ranobelib`. Chapters are page images rather than text. What
@@ -21,6 +21,11 @@ the API returns for MangaLib is in [API notes](api-notes.md#mangalib-mangalib-py
 ::: mangalib.Page
 
 ::: mangalib.ChapterBranch
+    options:
+      # Its base, libsocial.ChapterBranch, is documented on two pages (the core's and, as a
+      # re-export, ranobelib's), which leaves the link to it ambiguous. It extends that model
+      # with restricted_view/is_open.
+      show_bases: false
 
 ::: mangalib.RestrictedView
 
@@ -67,8 +72,20 @@ with `@register`. `"pdf"` is registered only when the `pdf` extra (img2pdf) is i
 
 ::: mangalib.AuthRequiredError
 
+::: mangalib.ChapterNotFoundError
+
+::: mangalib.VolumeNotFoundError
+
+::: mangalib.MultipleTranslationsError
+
+::: mangalib.MultipleTitleTranslationsError
+
+::: mangalib.DownloadTitleInterruptedError
+
 ## Cache maintenance
 
 ::: mangalib.cache_stats
 
 ::: mangalib.clear_cache
+
+::: mangalib.CacheStats

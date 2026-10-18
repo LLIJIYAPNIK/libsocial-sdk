@@ -8,8 +8,10 @@ Python SDK для сайта ranobelib.me: получение метаданны
 экспорт в epub/fb2/txt/pdf. SDK дёргает недокументированный, но открытый JSON API сети
 lib.social (`api.cdnlibs.org`), а не парсит HTML.
 
-Пакет публикуется как `ranobelib-python-sdk` (репозиторий и PyPI-имя), импортируется как
-`ranobelib`.
+Репозиторий — `LLIJIYAPNIK/libsocial-sdk` (до шага 47 назывался `ranobelib-python-sdk`,
+старые URL GitHub перенаправляет), монорепозиторий из трёх пакетов: `ranobelib-python-sdk`
+(`import ranobelib`), `mangalib-python-sdk` (`import mangalib`) и общее ядро `libsocial-core`
+(`import libsocial`). Имена пакетов на PyPI при переименовании не менялись.
 
 Код, докстринги, комментарии, README и публичная документация — **на английском**
 (стандарт для OSS-пакета на PyPI). Issue/PR-описания и коммуникация с пользователем внутри
@@ -221,7 +223,7 @@ GET /api/manga/{slug}?fields[]=background&fields[]=eng_name&fields[]=otherNames&
 ## Структура репозитория
 
 ```
-ranobelib-python-sdk/
+libsocial-sdk/
 ├── packages/
 │   ├── core/                      # пакет libsocial-core, import libsocial (шаг 42)
 │   │   ├── src/libsocial/         # site, _http, client, pacing, cache, exceptions, numbering,
@@ -274,9 +276,13 @@ ranobelib-python-sdk/
 │       ├── README.md
 │       └── CHANGELOG.md
 ├── docs/
-│   ├── index.md
-│   ├── reference.md               # mkdocstrings-справочник ranobelib
+│   ├── index.md                   # обзор трёх пакетов (шаг 47)
+│   ├── ranobelib.md               # руководство ranobelib
+│   ├── ranobelib-reference.md     # mkdocstrings-справочник ranobelib
+│   ├── mangalib.md                # руководство mangalib
 │   ├── mangalib-reference.md      # mkdocstrings-справочник mangalib
+│   ├── core.md                    # обзор libsocial-core
+│   ├── core-reference.md          # mkdocstrings-справочник libsocial-core
 │   └── api-notes.md               # сюда складывать находки про недокументированный API
 ├── examples/
 │   ├── README.md                  # индекс: файл → фича, со ссылками
@@ -1709,5 +1715,34 @@ owner/repo/workflow-file/environment) — это может сделать то�
       его валидация до сети) и две кассеты с HEAD-запросами к настоящему `compress`
       (`chapter_size`, `estimate_title_size`) — без тел картинок, поэтому кассеты маленькие.
       Покрытие mangalib 100%. Версию поднимает отдельный PR (следующая — `0.2.0`).
+
+47. **Монорепозиторий, шаг 7: репозиторий переименован в `libsocial-sdk`** (issue #92, часть
+    #85, последний шаг).
+    - Переименован на GitHub 2026-10-18 (`gh repo rename`). Старые URL репозитория, `git
+      clone` и ссылки на issue перенаправляются (проверено: 301). **GitHub Pages — нет**:
+      `llijiyapnik.github.io/ranobelib-python-sdk/` теперь 404, документация живёт на
+      `llijiyapnik.github.io/libsocial-sdk/`. Ссылки на документацию в README уже вышедших
+      версий на PyPI поэтому битые до следующего релиза каждого пакета. Завести редирект
+      нельзя: репозиторий со старым именем сломал бы редирект самого репозитория.
+    - Ссылки обновлены в `[project.urls]` всех трёх `pyproject.toml`, во всех README (корневой
+      и каждого пакета — последние видны на PyPI), `mkdocs.yml` (`site_name`, `site_url`,
+      `repo_url`, `repo_name`), бейджах. `CHANGELOG.md` не трогаются (выпущенные секции не
+      правятся руками, старые ссылки перенаправляются); новые секции git-cliff строит из
+      `github.repository`, то есть уже с новым именем.
+    - **Бейдж Coveralls оставлен на старом имени**: Coveralls сам переименование не видит
+      (по новому адресу бейдж «unknown», по старому — актуальное покрытие). После Resync
+      репозитория на coveralls.io поменять адрес в бейджах корневого README и README
+      ranobelib.
+    - Документация разделена на разделы: обзор (`index.md`), ranobelib (руководство —
+      бывшая главная, и справочник), mangalib (руководство и справочник), libsocial-core
+      (обзор и новый справочник). Реэкспортированные из ядра классы документированы на
+      нескольких страницах, поэтому autorefs не может выбрать якорь для ссылок на них из
+      третьей: в справочник mangalib добавлены его реэкспорты исключений/`CacheStats`, у
+      `mangalib.ChapterBranch` скрыты базы (`show_bases: false`).
+    - **Вручную, на стороне PyPI (только владелец аккаунта)**: trusted publisher каждого из
+      трёх проектов привязан к имени репозитория — во всех трёх добавить publisher с
+      репозиторием `libsocial-sdk` (workflow `release.yml`, environment `pypi`), иначе
+      следующий релиз не опубликуется. Старый можно удалить после первого успешного релиза.
+    - ranobelib-companion: адрес репозитория SDK обновлён отдельным PR в его репозитории.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
