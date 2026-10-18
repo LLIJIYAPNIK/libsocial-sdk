@@ -645,7 +645,9 @@ async def test_pace_waits_for_request_delay_between_calls() -> None:
     async def recording_sleep(delay: float) -> None:
         delays.append(delay)
 
-    clock_values = iter([0.0, 0.0, 0.15, 0.15])
+    # One clock read per request: pacing is libsocial-core's Pacer, which reserves each
+    # request's start slot instead of re-reading the clock after waiting.
+    clock_values = iter([0.0, 0.15])
 
     def fake_clock() -> float:
         return next(clock_values)

@@ -1,35 +1,56 @@
-"""Pydantic models: Title, Chapter, Volume, Team, Branch, and related types."""
+"""Pydantic models: Title, Chapter, Volume, Team, Branch, and related types.
+
+Everything that isn't specific to ranobelib.me is ``libsocial-core``'s and re-exported here
+unchanged (``Cover``, ``Label``, ``Genre``, ``Tag``, ``Country``, ``Person``, ``Team``,
+``ChapterUser``, ``ChapterBranch``). ``Title``, ``Chapter``, ``Volume`` and ``CatalogPage``
+subclass the core's with what is: a chapter's text ``content`` and translator ``footnotes``
+(parsed from the API's HTML or ProseMirror), and ``Title.base_names`` without ranobelib's
+format suffixes.
+"""
 
 from __future__ import annotations
 
 import html
 import re
-from datetime import datetime
 from html.parser import HTMLParser
 from typing import Any
 from urllib.parse import urlsplit
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, Field, model_validator
+
+from libsocial import models as _core
+from libsocial.models import (
+    ChapterBranch,
+    ChapterUser,
+    Country,
+    Cover,
+    Genre,
+    Label,
+    Person,
+    Tag,
+    Team,
+)
+
+__all__ = [
+    "SITE_BASE_URL",
+    "CatalogPage",
+    "Chapter",
+    "ChapterBranch",
+    "ChapterUser",
+    "Country",
+    "Cover",
+    "Footnote",
+    "Genre",
+    "Label",
+    "Person",
+    "Tag",
+    "Team",
+    "Title",
+    "Volume",
+]
 
 SITE_BASE_URL = "https://ranobelib.me"
 """Base URL used to resolve relative asset paths (e.g. in-chapter image attachments)."""
-
-
-def _prosemirror_to_text(doc: dict[str, Any]) -> str:
-    """Flatten a prosemirror-doc JSON structure into plain text paragraphs.
-
-    This is a minimal parser (text leaves only, joined paragraph by paragraph) sufficient
-    for a title's summary. Chapter content will need a richer version that preserves
-    formatting (bold/italic/headings/lists) once that feature is implemented.
-    """
-
-    def extract(node: dict[str, Any]) -> str:
-        if node.get("type") == "text":
-            return str(node.get("text", ""))
-        return "".join(extract(child) for child in node.get("content", []))
-
-    paragraphs = [extract(block) for block in doc.get("content", [])]
-    return "\n\n".join(paragraph for paragraph in paragraphs if paragraph)
 
 
 def _child_nodes(node: dict[str, Any]) -> list[dict[str, Any]]:
@@ -369,76 +390,6 @@ def _sanitize_content_html(content: str) -> tuple[str, list[str]]:
     return sanitizer.get_html(), sanitizer.footnotes
 
 
-class Cover(BaseModel):
-    """A set of cover image URLs at different sizes."""
-
-    filename: str | None = None
-    thumbnail: str | None = None
-    default: str | None = None
-    md: str | None = None
-
-
-class Label(BaseModel):
-    """A small ``{id, label}`` enum value used throughout the API (status, age rating, ...)."""
-
-    id: int
-    label: str
-
-
-class Genre(BaseModel):
-    """A genre tag (e.g. Fantasy, Romance)."""
-
-    id: int
-    name: str
-    adult: bool = False
-
-
-class Tag(BaseModel):
-    """A free-form content tag."""
-
-    id: int
-    name: str
-    adult: bool = False
-
-
-class Country(BaseModel):
-    """A title's country/region of origin.
-
-    Despite the name (matching issue #48's requested public shape), this maps onto what the
-    raw API itself calls "type" (`Title`'s raw `type` field; the catalog filter's `types[]`
-    parameter; `GET /api/constants?fields[]=types`) — not a `country`/`countries[]`/
-    `fields[]=countries` concept, which turned out to be something unrelated (see
-    docs/api-notes.md). For ranobelib.me specifically, the values are three literal
-    countries (Japan, Korea, China) plus three additional non-national origin categories the
-    site groups the same way: original English-language work, original (non-translated) web
-    novel, and fanfiction — surfaced as-is, not filtered down to "real" countries only.
-    """
-
-    model_config = ConfigDict(populate_by_name=True)
-
-    id: int
-    name: str = Field(alias="label")
-
-
-class Person(BaseModel):
-    """An author or artist credited on a title."""
-
-    id: int
-    slug: str
-    slug_url: str
-    name: str
-    rus_name: str | None = None
-
-
-class Team(BaseModel):
-    """A translation team."""
-
-    id: int
-    slug: str
-    slug_url: str
-    name: str
-
-
 _FORMAT_WORD = (
     r"(?:(?:light|lite|web|лайт|веб|вэб)\s*-?\s*)?(?:novel(?:la|l|a)?|новелл?а)"
     r"|web\s*-?\s*serial|ranobe|ранобэ|ln|wn|лн|quest|квест"
@@ -461,39 +412,8 @@ def _strip_format_suffix(name: str) -> str:
     return name.strip()
 
 
-class Title(BaseModel):
+class Title(_core.Title):
     """Metadata for a single title (novel)."""
-
-    model_config = ConfigDict(populate_by_name=True)
-
-    id: int
-    name: str
-    rus_name: str | None = None
-    eng_name: str | None = None
-    other_names: list[str] = Field(default_factory=list, alias="otherNames")
-    slug: str
-    slug_url: str
-    cover: Cover
-    age_restriction: Label = Field(alias="ageRestriction")
-    status: Label
-    summary: str | None = None
-    release_date: str | None = Field(default=None, alias="releaseDate")
-    is_licensed: bool = False
-    country: Country | None = Field(default=None, alias="type")
-    genres: list[Genre] = Field(default_factory=list)
-    tags: list[Tag] = Field(default_factory=list)
-    authors: list[Person] = Field(default_factory=list)
-    artists: list[Person] = Field(default_factory=list)
-    teams: list[Team] = Field(default_factory=list)
-    chapter_count: int | None = None
-    """Number of uploaded chapters. Only ``RanobeLib.get_info()`` fills it in: the catalog
-    listing endpoint doesn't return it (see docs/api-notes.md), so it's ``None`` on
-    ``Catalog.list_titles()`` items."""
-    last_chapter_at: datetime | None = Field(default=None, alias="last_item_at")
-    """When the most recent chapter was published — the value the catalog's
-    ``sort="last_chapter_at"`` orders by. Only ``RanobeLib.get_info()`` fills it in: the
-    catalog listing endpoint doesn't return it (see docs/api-notes.md), so it's ``None`` on
-    ``Catalog.list_titles()`` items, and on a title with no chapters yet."""
 
     @property
     def base_names(self) -> list[str]:
@@ -515,45 +435,6 @@ class Title(BaseModel):
         stripped = (_strip_format_suffix(name) for name in names if name)
         return list(dict.fromkeys(name for name in stripped if name))
 
-    @model_validator(mode="before")
-    @classmethod
-    def _flatten_chapter_count(cls, data: Any) -> Any:
-        if isinstance(data, dict) and "chapter_count" not in data:
-            items_count = data.get("items_count")
-            if isinstance(items_count, dict):
-                data = {**data, "chapter_count": items_count.get("uploaded")}
-        return data
-
-    @field_validator("summary", mode="before")
-    @classmethod
-    def _parse_summary(cls, value: Any) -> str | None:
-        if value is None:
-            return None
-        if isinstance(value, dict):
-            return _prosemirror_to_text(value)
-        return str(value)
-
-
-class ChapterUser(BaseModel):
-    """The uploader of a chapter branch."""
-
-    id: int
-    username: str
-
-
-class ChapterBranch(BaseModel):
-    """A single team's (or solo uploader's) translation of a chapter.
-
-    A chapter has more than one branch when several teams have translated it
-    independently; see ``Chapter.branches_count``.
-    """
-
-    id: int
-    branch_id: int | None = None
-    created_at: datetime
-    teams: list[Team] = Field(default_factory=list)
-    user: ChapterUser
-
 
 class Footnote(BaseModel):
     """A translator footnote (term explanation, translation note) taken out of a chapter.
@@ -571,7 +452,7 @@ class Footnote(BaseModel):
     and without a wrapping ``<p>``."""
 
 
-class Chapter(BaseModel):
+class Chapter(_core.Chapter):
     """A chapter: volume, number, name, available translations, and optionally its content.
 
     ``index``/``item_number``/``branches_count``/``branches`` come from the chapter-list
@@ -585,15 +466,6 @@ class Chapter(BaseModel):
     none, or when ``content`` isn't fetched.
     """
 
-    id: int
-    volume: str
-    number: str
-    name: str | None = None
-    index: int | None = None
-    item_number: int | None = None
-    branches_count: int = 1
-    branches: list[ChapterBranch] = Field(default_factory=list)
-    bundle_id: int | None = None
     content: str | None = None
     footnotes: list[Footnote] = Field(default_factory=list)
 
@@ -621,14 +493,11 @@ class Chapter(BaseModel):
         return data
 
 
-class Volume(BaseModel):
+class Volume(_core.Volume[Chapter]):
     """A volume: its number and the chapters it contains, in title order."""
 
-    number: str
-    chapters: list[Chapter] = Field(default_factory=list)
 
-
-class CatalogPage(BaseModel):
+class CatalogPage(_core.CatalogPage[Title]):
     """One page of catalog listing/search results, as returned by ``Catalog.list_titles()``.
 
     ``items`` reuses ``Title`` as-is — a catalog list item has every field ``Title`` requires,
@@ -636,7 +505,3 @@ class CatalogPage(BaseModel):
     ...) just come back at their defaults, same as any other partially-populated ``Title``
     (see docs/api-notes.md).
     """
-
-    items: list[Title]
-    page: int
-    has_next_page: bool

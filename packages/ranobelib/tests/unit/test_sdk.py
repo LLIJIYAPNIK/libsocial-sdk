@@ -7,6 +7,7 @@ from typing import Any
 import pytest
 from rich.console import Console
 
+from libsocial.title import _resolve_bulk_branch_id
 from ranobelib.console import Reporter
 from ranobelib.exceptions import (
     AccessBlockedError,
@@ -14,8 +15,13 @@ from ranobelib.exceptions import (
     RateLimitError,
 )
 from ranobelib.exporters import EXPORTERS
-from ranobelib.models import Chapter, Title
-from ranobelib.sdk import RanobeLib, _group_into_volumes, _resolve_bulk_branch_id
+from ranobelib.models import Chapter, Title, Volume
+from ranobelib.sdk import RanobeLib
+
+
+def _group_into_volumes(chapters: list[Chapter]) -> list[Volume]:
+    # Grouping is a TitleClient method in libsocial-core now, no longer a module function.
+    return RanobeLib("1--slug")._group_into_volumes(chapters)
 
 
 def _chapter(*, volume: str, number: str, index: int) -> Chapter:
@@ -320,7 +326,9 @@ async def test_download_title_full_mode_logs_cache_and_api_fetches(
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
         lib._reporter = reporter
         # Prime the disk cache for chapter "0" so the fetch is served from cache, not the API.
-        lib._cache.set("chapter:1--slug:1:0:None", {"id": 1, "volume": "1", "number": "0"})
+        # Cache keys now carry the site (libsocial-core), so the SDK builds this one.
+        key = lib._cache_key("chapter", "1", "0", None)
+        lib._cache.set(key, {"id": 1, "volume": "1", "number": "0"})
 
         await lib.download_title()
 
@@ -351,7 +359,7 @@ async def test_download_title_retries_past_a_rate_limit_then_succeeds(
                 raise RateLimitError(retry_after=45.0)
         return _fake_content_chapter(volume_str, number, branch_id)
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("1--slug") as lib:
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
@@ -386,7 +394,7 @@ async def test_download_title_backs_off_without_retry_after(
             raise RateLimitError()
         return _fake_content_chapter(volume_str, number, branch_id)
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("1--slug") as lib:
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
@@ -416,7 +424,7 @@ async def test_download_title_raises_interrupted_error_with_partial_progress(
             raise RateLimitError()
         return _fake_content_chapter(volume_str, number, branch_id)
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("1--slug") as lib:
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
@@ -455,7 +463,7 @@ async def test_download_title_wraps_access_blocked_without_retrying(
             raise AccessBlockedError("https://api.cdnlibs.org/api/manga/1--slug/chapter")
         return _fake_content_chapter(volume_str, number, branch_id)
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("1--slug") as lib:
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
@@ -492,7 +500,7 @@ async def test_download_title_max_rate_limit_retries_zero_disables_extra_retryin
     ) -> Chapter:
         raise RateLimitError()
 
-    monkeypatch.setattr("ranobelib.sdk.asyncio.sleep", fake_sleep)
+    monkeypatch.setattr("libsocial.title.asyncio.sleep", fake_sleep)
 
     async with RanobeLib("1--slug") as lib:
         monkeypatch.setattr(lib, "_get_chapters", fake_get_chapters)
