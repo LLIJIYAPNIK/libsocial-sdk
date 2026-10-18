@@ -13,6 +13,7 @@ each package under `packages/` is published to PyPI on its own.
 | Package | PyPI | Description |
 |---|---|---|
 | [`packages/ranobelib`](packages/ranobelib/) | [`ranobelib-python-sdk`](https://pypi.org/project/ranobelib-python-sdk/) | [ranobelib.me](https://ranobelib.me): title metadata, chapter/volume downloads, export to epub/fb2/txt/pdf |
+| [`packages/core`](packages/core/) | `libsocial-core` (not published yet) | The site-independent core: api.cdnlibs.org client, shared pacing, cache, titles, chapters, catalog |
 
 Installation, quickstart and changelog: [`packages/ranobelib/README.md`](packages/ranobelib/README.md).
 Runnable examples: [`examples/`](examples/). Full documentation:
@@ -23,8 +24,9 @@ Runnable examples: [`examples/`](examples/). Full documentation:
 ```bash
 uv sync                                         # all packages + dev tools, one shared uv.lock
 uv run ruff check . && uv run ruff format --check .
-uv run mypy packages/ranobelib/src
-uv run pytest --cov
+uv run mypy packages/core/src packages/ranobelib/src
+uv run pytest --cov                             # every package's tests
+uv build --package libsocial-core
 uv build --package ranobelib-python-sdk
 ```
 

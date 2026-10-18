@@ -223,6 +223,12 @@ GET /api/manga/{slug}?fields[]=background&fields[]=eng_name&fields[]=otherNames&
 ```
 ranobelib-python-sdk/
 ├── packages/
+│   ├── core/                      # пакет libsocial-core, import libsocial (шаг 42)
+│   │   ├── src/libsocial/         # site, _http, client, pacing, cache, exceptions, numbering,
+│   │   │                          # console, models, catalog, title (TitleClient)
+│   │   ├── tests/unit/            # параметризованы по сайту (фикстура site: id 3 и id 1)
+│   │   ├── pyproject.toml
+│   │   └── README.md
 │   └── ranobelib/                 # пакет ranobelib-python-sdk (uv workspace member, шаг 41)
 │       ├── src/
 │       │   └── ranobelib/
@@ -503,8 +509,8 @@ false }` (значение по умолчанию из официального
   пользователя, с какой ветки продолжать, либо ответвиться от ветки предыдущей фичи и
   явно указать это в описании нового PR (потребуется ребейз после мержа зависимости).
 - Перед открытием PR: локально прогнать `uv run ruff check .`, `uv run ruff format --check .`,
-  `uv run mypy packages/ranobelib/src`, `uv run pytest --cov`. Не открывать PR с падающими
-  проверками.
+  `uv run mypy packages/core/src packages/ranobelib/src`, `uv run pytest --cov`. Не открывать
+  PR с падающими проверками.
 - Каждый PR с новой фичей включает: код, тесты (держащие общее покрытие ≥95%), обновление
   докстрингов/документации, при необходимости — обновление `docs/api-notes.md`.
 
@@ -517,9 +523,11 @@ CI не нужен.
 `.github/workflows/ci.yml`, триггеры — `pull_request` и `push` в `main`:
 
 - job `lint`: `uv run ruff check .`, `uv run ruff format --check .`
-- job `typecheck`: `uv run mypy packages/ranobelib/src`
-- job `test`: матрица по Python 3.11 / 3.12 / 3.13, `uv run --package ranobelib-python-sdk
-  pytest --cov=ranobelib --cov-report=xml --cov-fail-under=95`.
+- job `typecheck`: `uv run mypy packages/core/src packages/ranobelib/src`
+- job `test`: матрица по Python 3.11 / 3.12 / 3.13, по прогону на пакет, каждый со своим путём к
+  тестам и порогом: `uv run --package libsocial-core pytest packages/core/tests
+  --cov=libsocial --cov-fail-under=95`, затем `uv run --package ranobelib-python-sdk pytest
+  packages/ranobelib/tests --cov=ranobelib --cov-report=xml --cov-fail-under=95`.
   Загрузка покрытия в Coveralls — только с одной ноги матрицы (`3.12`, `if:` в шаге), не со
   всех трёх: покрытие одно и то же на всех версиях Python, а Coveralls считает каждую
   загрузку отдельным build — три загрузки одних и тех же данных только шум. Инструмент —
@@ -528,7 +536,10 @@ CI не нужен.
   промежуточный файл конкретного формата (lcov и т.п.), и сам определяет GitHub Actions
   через `GITHUB_ACTIONS`/`COVERALLS_REPO_TOKEN` без доп. настройки — токен уже создан на
   coveralls.io и лежит в секретах репозитория под тем же именем.
-- job `build`: `uv build --package ranobelib-python-sdk`, проверка, что пакет собирается
+- job `build`: `uv build --package libsocial-core` и `uv build --package ranobelib-python-sdk`,
+  проверка, что пакеты собираются.
+  Coveralls по-прежнему получает только покрытие `ranobelib` (его прогон последний и
+  перезаписывает `.coverage`); у ядра порог `--cov-fail-under=95` проверяется в самом CI.
 - job `docs`: `uv run --group docs mkdocs build --strict` — не деплоит, только проверяет, что
   сайт вообще собирается (`--strict` роняет билд на битых mkdocstrings-ссылках вроде `:::
   ranobelib.ЧтоТоПереименованное`), чтобы сломанный `docs/reference.md` не всплывал только
@@ -1359,5 +1370,53 @@ owner/repo/workflow-file/environment) — это может сделать то�
       `packages/ranobelib/CHANGELOG.md`. `mkdocs.yml` — явный `paths:
       [packages/ranobelib/src]` для mkdocstrings; `docs.yml` правок не потребовал (команда
       сборки та же, `site/` в корне).
+
+42. **Монорепозиторий, шаг 2: общее ядро `libsocial-core`** (issue #87, часть #85).
+    `packages/core/`, импорт `libsocial`, версия `1.0.0` (шаг 3, #88, объявит
+    `libsocial-core>=1.0,<2`). Зависимости: только `httpx`, `pydantic`, `rich`. Пакет
+    `ranobelib` ядро пока **не использует**, это шаг 3. До него код временно дублируется, в
+    релиз это дублирование попасть не должно. Публикация ядра — после шага 4 (#89, теги с
+    префиксом пакета); `release.yml` пока собирает только `ranobelib-python-sdk`.
+    - **`Site(id, origin)`** (`site.py`): ядро не знает ни одного сайта, сайт передаёт фасад.
+      `ApiClient(site, ...)` берёт `Site-Id`/`site_id[]` из `site.id`, а `Origin`/`Referer` из
+      `site.origin` (`_http.browser_headers_for(origin)` вместо константы `BROWSER_HEADERS`).
+      Отдельный `site_id` и origin свёрнуты в один объект, потому что ходят всегда вместе.
+    - **Общий пейсер на хост** (`pacing.py`, `Pacer` + `shared_pacer(host)`). По умолчанию
+      все `ApiClient` процесса на один хост делят интервал между стартами запросов, так что
+      ranobelib и mangalib в одном процессе не удваивают частоту. Слоты резервируются под
+      `threading.Lock`, а не ждутся под `asyncio.Lock`: так пейсер работает в любом event
+      loop и потоке. `clock` переехал из `ApiClient` в `Pacer`, у `ApiClient` появился
+      `pacer=`. Подробности в `docs/api-notes.md`, «Пейсинг общий на хост».
+    - **`TitleClient`** (`title.py`): всё сайт-независимое из `RanobeLib` (`get_info`,
+      `get_table_of_contents`, `get_chapter(s)`, `get_translations`, `get_volume(s)`,
+      `download_title` с rate-limit-ретраями и `DownloadTitleInterruptedError`, кэш,
+      `verbosity`). Не вошли `estimate_title_size` (зависит от `sizing`, то есть от
+      текста) и `export`. Выбор веток вынесен в защищённый `_plan_chapters()` (плюс
+      `_check_translation_selectors()`), чтобы фасад собрал на нём свою оценку размера.
+    - **Сайт и модели — атрибуты класса, не параметры конструктора**: `site`,
+      `title_model`, `chapter_model`, `volume_model` (и `default_cache_dir`, `info_fields`)
+      задаёт подкласс. Так фасад сохраняет свою сигнатуру (`RanobeLib(url, ...)`,
+      `Catalog(...)`) без переопределения `__init__`, а mypy выводит типы возвращаемых
+      моделей из параметров generic (`TitleClient[TitleT, ChapterT, VolumeT]`,
+      `Catalog[TitleT]`). Сам по себе базовый класс не используется.
+    - **`Volume` и `CatalogPage` — generic** по модели главы/тайтла. Если бы поле было
+      типизировано базовым `Chapter`, pydantic v2 при `model_dump()` сериализовал бы
+      главу фасада только по полям базового класса и терял бы `content`. Это проверяется
+      тестом.
+    - **Модели**: всё общее, кроме контента. В ядре `Chapter` без `content`/`footnotes`,
+      `Title` без `base_names` (суффиксы «(Новелла)»/«(LN)» — ранобэ-специфика, остаются в
+      фасаде). `SITE_BASE_URL` ядру не понадобился: он нужен только для картинок внутри
+      глав, а это парсинг контента.
+    - **Исключения**: база `LibSocialError`. Шаг 3 сможет сделать `RanobeLibError` её
+      псевдонимом, тогда `except ranobelib.RanobeLibError` будет ловить и ошибки ядра.
+      Тексты, где упоминался `RanobeLib(...)`, переписаны нейтрально.
+    - **`DEFAULT_CACHE_DIR` ядра — `.libsocial_cache`**; фасад задаёт свой через
+      `default_cache_dir`.
+    - **Тесты**: перенесены из `ranobelib` и параметризованы фикстурой `site`
+      (ranobelib id 3, mangalib id 1). Проверки `Site-Id`/`site_id[]`/`Origin` идут от неё, а
+      не от захардкоженной тройки. Покрытие ядра 100%. В корневом pytest включён
+      `--import-mode=importlib`: у пакетов одноимённые `tests/conftest.py` и `test_*.py`.
+      Живой смоук против API (не входит в тесты): `TitleClient` для ranobelib, `Catalog` для
+      site 3 и site 1; жанров 54 и 49, общий `Pacer` у обоих.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
