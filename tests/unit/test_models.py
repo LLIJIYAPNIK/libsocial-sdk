@@ -3,6 +3,8 @@
 from datetime import UTC, datetime
 from typing import Any
 
+import pytest
+
 from ranobelib.models import Country, Title
 
 RAW_TITLE: dict[str, Any] = {
@@ -166,3 +168,109 @@ def test_country_accepts_name_by_field_name_too() -> None:
     country = Country(id=10, name="Япония")
 
     assert country.name == "Япония"
+
+
+def _title_named(**names: Any) -> Title:
+    return Title.model_validate({**RAW_TITLE, "rus_name": None, "eng_name": None, **names})
+
+
+def test_base_names_strips_format_suffix_in_field_order() -> None:
+    title = Title.model_validate(
+        {
+            **RAW_TITLE,
+            "rus_name": "Старшая школа D×D (Новелла)",
+            "eng_name": "High School D×D (Novel)",
+            "name": "Haisukuru Di Di",
+            "otherNames": ["Демоны старшей школы", "ハイスクールD×D"],
+        }
+    )
+
+    assert title.base_names == [
+        "Старшая школа D×D",
+        "High School D×D",
+        "Haisukuru Di Di",
+        "Демоны старшей школы",
+        "ハイスクールD×D",
+    ]
+    assert title.rus_name == "Старшая школа D×D (Новелла)"  # the field itself is unchanged
+
+
+@pytest.mark.parametrize(
+    ("name", "expected"),
+    [
+        # Every spelling family seen in the live catalog (docs/api-notes.md).
+        ("Добро пожаловать в класс превосходства (LN)", "Добро пожаловать в класс превосходства"),
+        ("Токийский гуль: Перерождение [квест]", "Токийский гуль: Перерождение"),
+        ("A (WN)", "A"),
+        ("A (novel)", "A"),
+        ("A (Novella)", "A"),
+        ("A (Novell)", "A"),
+        ("A (Light Novel)", "A"),
+        ("A (light novel)", "A"),
+        ("A (Web Novel)", "A"),
+        ("A (webnovel)", "A"),
+        ("A (web-novel)", "A"),
+        ("A (web serial)", "A"),
+        ("A (Lite-Novel)", "A"),
+        ("A (Webnovela)", "A"),
+        ("A (Ranobe)", "A"),
+        ("A (Ранобэ)", "A"),
+        ("A (новелла)", "A"),
+        ("A (новела)", "A"),
+        ("A (Лайт-новелла)", "A"),
+        ("A (Лайт Новелла)", "A"),
+        ("A (Веб-Новелла)", "A"),
+        ("A ( веб - новелла)", "A"),
+        ("A (Вэб Новелла)", "A"),
+        ("A (ЛН)", "A"),
+        ("A (лн)", "A"),
+        ("A [quest]", "A"),
+        ("A [ln]", "A"),
+        ("A ( LN )", "A"),
+        ("A ( Новелла)", "A"),
+        # Stacked markers.
+        ("A (LN) (Novel)", "A"),
+        ("A (WN) (Новелла)", "A"),
+        ("A (новелла) (Novel)", "A"),
+        ("A (Вэб Новелла) (WN)", "A"),
+        # A separator left in front of the marker goes with it...
+        ("Цитрусовый маг, (Новелла)", "Цитрусовый маг"),
+        ("Bundrion Koko no Shuren: (Novel)", "Bundrion Koko no Shuren"),
+        ("Dansou Shoujo wa Kishi wo Mezasu! / (Novel)", "Dansou Shoujo wa Kishi wo Mezasu!"),
+        # ...but a dash closing a subtitle is part of the name.
+        (
+            "Devil May Cry 5 -Before the Nightmare- (Novel)",
+            "Devil May Cry 5 -Before the Nightmare-",
+        ),
+        # Bracketed tails that aren't the format stay.
+        ("Тёмный Путь: Эхо Убийц (Перезапуск) (Новелла)", "Тёмный Путь: Эхо Убийц (Перезапуск)"),
+        ("A (Фанфик)", "A (Фанфик)"),
+        ("A (18+)", "A (18+)"),
+        ("A (2013)", "A (2013)"),
+        ("A [LitRPG]", "A [LitRPG]"),
+        ("A (Oneshot)", "A (Oneshot)"),
+        ("A (Star Wars) (Novel)", "A (Star Wars)"),
+        # Only a whole bracketed marker at the very end counts.
+        ("Novel (LN) Academy", "Novel (LN) Academy"),
+        ("My Light Novel", "My Light Novel"),
+        ("A (Novelist)", "A (Novelist)"),
+        ("A (LN", "A (LN"),
+    ],
+)
+def test_base_names_suffix_rules(name: str, expected: str) -> None:
+    assert _title_named(name=name).base_names == [expected]
+
+
+def test_base_names_drops_duplicates_and_empty_names() -> None:
+    title = _title_named(
+        rus_name=" (Новелла)",  # nothing left once the marker goes
+        eng_name="Same (Novel)",
+        name="Same (LN)",
+        otherNames=["", "Same", "Other\xa0", "Other"],
+    )
+
+    assert title.base_names == ["Same", "Other"]
+
+
+def test_base_names_skips_missing_optional_names() -> None:
+    assert _title_named(name="Only (Novel)").base_names == ["Only"]
