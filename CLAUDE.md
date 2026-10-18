@@ -230,35 +230,52 @@ ranobelib-python-sdk/
 │   │   ├── pyproject.toml
 │   │   ├── README.md
 │   │   └── CHANGELOG.md
-│   └── ranobelib/                 # пакет ranobelib-python-sdk (uv workspace member, шаг 41)
-│       ├── src/
-│       │   └── ranobelib/
-│       │       ├── __init__.py          # публичный экспорт (RanobeLib, модели, исключения)
-│       │       ├── _http.py             # сайт ranobelib.me (Site id 3) и его браузерные заголовки
-│       │       ├── client.py            # ApiClient: наследник libsocial.ApiClient с зашитым сайтом
-│       │       ├── sdk.py                # RanobeLib(TitleClient): + estimate_title_size, export
-│       │       ├── models.py             # контент/сноски главы, base_names; прочее — из ядра
-│       │       ├── exceptions.py         # реэкспорт ядра, RanobeLibError = LibSocialError
-│       │       ├── cache.py              # cache_stats/clear_cache с дефолтом .ranobelib_cache
-│       │       ├── numbering.py          # реэкспорт parse_slug_url из ядра
-│       │       ├── catalog.py            # Catalog(libsocial.Catalog) для ranobelib.me
-│       │       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
-│       │       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
-│       │       └── exporters/
-│       │           ├── __init__.py       # Protocol Exporter + реестр форматов
-│       │           ├── txt.py
-│       │           ├── fb2.py
-│       │           ├── epub.py
-│       │           └── pdf.py            # WeasyPrint, переиспользует HTML-шаблон из epub
-│       ├── tests/
-│       │   ├── cassettes/                 # VCR-кассеты (записанные реальные ответы API)
-│       │   ├── unit/
-│       │   └── integration/                # тесты поверх кассет (используют реальные записанные данные)
-│       ├── pyproject.toml         # метаданные/зависимости пакета, build-backend
-│       ├── README.md              # описание пакета на PyPI
-│       └── CHANGELOG.md           # секцию каждого релиза пакета дописывает changelog.yml
+│   ├── ranobelib/                 # пакет ranobelib-python-sdk (uv workspace member, шаг 41)
+│   │   ├── src/
+│   │   │   └── ranobelib/
+│   │   │       ├── __init__.py          # публичный экспорт (RanobeLib, модели, исключения)
+│   │   │       ├── _http.py             # сайт ranobelib.me (Site id 3) и его браузерные заголовки
+│   │   │       ├── client.py            # ApiClient: наследник libsocial.ApiClient с зашитым сайтом
+│   │   │       ├── sdk.py                # RanobeLib(TitleClient): + estimate_title_size, export
+│   │   │       ├── models.py             # контент/сноски главы, base_names; прочее — из ядра
+│   │   │       ├── exceptions.py         # реэкспорт ядра, RanobeLibError = LibSocialError
+│   │   │       ├── cache.py              # cache_stats/clear_cache с дефолтом .ranobelib_cache
+│   │   │       ├── numbering.py          # реэкспорт parse_slug_url из ядра
+│   │   │       ├── catalog.py            # Catalog(libsocial.Catalog) для ranobelib.me
+│   │   │       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│   │   │       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
+│   │   │       └── exporters/
+│   │   │           ├── __init__.py       # Protocol Exporter + реестр форматов
+│   │   │           ├── txt.py
+│   │   │           ├── fb2.py
+│   │   │           ├── epub.py
+│   │   │           └── pdf.py            # WeasyPrint, переиспользует HTML-шаблон из epub
+│   │   ├── tests/
+│   │   │   ├── cassettes/                 # VCR-кассеты (записанные реальные ответы API)
+│   │   │   ├── unit/
+│   │   │   └── integration/                # тесты поверх кассет (используют реальные записанные данные)
+│   │   ├── pyproject.toml         # метаданные/зависимости пакета, build-backend
+│   │   ├── README.md              # описание пакета на PyPI
+│   │   └── CHANGELOG.md           # секцию каждого релиза пакета дописывает changelog.yml
+│   └── mangalib/                  # пакет mangalib-python-sdk, import mangalib (шаг 45)
+│       ├── src/mangalib/
+│       │   ├── __init__.py        # публичный экспорт (MangaLib, Catalog, модели, исключения)
+│       │   ├── _http.py           # сайт mangalib.me (Site id 1), заголовки для картинок
+│       │   ├── client.py          # ApiClient: закрытая глава → AuthRequiredError, imageServers
+│       │   ├── sdk.py             # MangaLib(TitleClient): серверы картинок, download_page(s)
+│       │   ├── models.py          # Chapter.pages/Page, ChapterBranch.restricted_view, base_names
+│       │   ├── images.py          # page_url(), порядок серверов и фоллбэк
+│       │   ├── catalog.py         # Catalog(libsocial.Catalog) для mangalib.me
+│       │   ├── exceptions.py      # реэкспорт ядра, MangaLibError, PageDownloadError
+│       │   └── cache.py           # cache_stats/clear_cache с дефолтом .mangalib_cache
+│       ├── tests/                 # cassettes/, unit/, integration/ — как у ranobelib
+│       ├── pyproject.toml
+│       ├── README.md
+│       └── CHANGELOG.md
 ├── docs/
 │   ├── index.md
+│   ├── reference.md               # mkdocstrings-справочник ranobelib
+│   ├── mangalib-reference.md      # mkdocstrings-справочник mangalib
 │   └── api-notes.md               # сюда складывать находки про недокументированный API
 ├── examples/
 │   ├── README.md                  # индекс: файл → фича, со ссылками
@@ -276,7 +293,8 @@ ranobelib-python-sdk/
 │   ├── 12_catalog_listing.py      # Catalog.list_titles() — см. шаг 24
 │   ├── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
 │   ├── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
-│   └── 15_chapter_paragraphs.py   # chapter_paragraphs() — см. шаг 38
+│   ├── 15_chapter_paragraphs.py   # chapter_paragraphs() — см. шаг 38
+│   └── 16_mangalib_pages.py       # mangalib: страницы главы, серверы, закрытые главы — шаг 45
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -1568,5 +1586,63 @@ owner/repo/workflow-file/environment) — это может сделать то�
     - **Порядок первых релизов**: `core-v1.0.0` (версия ядра уже 1.0.0) → после
       публикации CI-проверка фасадов становится строгой → PR с поднятием версии `ranobelib`
       до 0.14.0 → `ranobelib-v0.14.0`. `mangalib-v…` — после #90.
+
+45. **Монорепозиторий, шаг 5: пакет `mangalib-python-sdk`** (issue #90, часть #85).
+    `packages/mangalib/`, импорт `mangalib`, версия `0.1.0`, зависит от
+    `libsocial-core>=1.0,<2`. Ядро **не менялось**, поэтому выпускать отдельный релиз ядра
+    перед mangalib не нужно. Перед кодом всё проверено на живом API, находки — в
+    `docs/api-notes.md`, раздел "MangaLib".
+    - **Фасад по образцу `ranobelib`**: `Site(id=1, origin="https://mangalib.me")`
+      (`_http.MANGALIB`), `MangaLib(TitleClient)`, `Catalog(libsocial.Catalog)`, `ApiClient`
+      (наследник ядра с `headers_hint`, конструктор без `site`: `**kwargs` ядра).
+      Исключения ядра реэкспортируются, `MangaLibError = LibSocialError`. Дефолтный кэш —
+      `.mangalib_cache`, `cache_stats()`/`clear_cache()` с ним.
+    - **Глава — `pages: list[Page]`**. `Page`: `id`, `number` (alias API-шного `slug`,
+      позиция с 1), `image`, `url` (относительный путь, начинается с `//`), `width`/`height`.
+      `chunks` (0–5) и `external` (всегда 0) не моделируются: сервер отдаёт картинку целиком,
+      даже длинную вебтун-полосу.
+    - **Серверы изображений** (`/constants?fields[]=imageServers`, фильтр по `site_ids` с 1 и
+      непустому `url`; кэш `constants:imageServers` — общий на сеть, как справочники
+      `Catalog`). `main`/`secondary` (`img2.imglib.info`) отдают HTML-403 DDoS-Guard на любые
+      заголовки, `compress`/`download` (`img3.cdnlibs.org`) — полноразмерную картинку, `crop` —
+      превью 310×450. Поэтому порядок по умолчанию `compress` → `download` → `main` →
+      `secondary` (`images.DEFAULT_SERVER_ORDER`), серверы с уже опробованным URL
+      пропускаются, `crop` — только явно через `server=`. Фоллбэк на следующий сервер — на
+      сетевую ошибку, не-2xx и не-`image/*` ответ; после последнего — `PageDownloadError`
+      (новое исключение, со списком попыток). `download_page()`/`download_pages()`
+      (до 5 параллельно, порядок чтения), `page_url()` склеивает через один `/`.
+      Картинки — отдельный `httpx.AsyncClient`: браузерные заголовки mangalib.me +
+      `Accept: image/*` + `headers=` пользователя, без `Site-Id`. На диск не кэшируются.
+    - **Закрытые главы**: в списке глав у ветки `restricted_view {is_open, expired_at,
+      price}` → `ChapterBranch.restricted_view` и `ChapterBranch.is_open`. Сама глава
+      приходит **200, а не 403**: `restricted_view.is_open: false` и без `pages`.
+      `mangalib.client.ApiClient.get_chapter()` бросает `AuthRequiredError` до записи в
+      кэш (иначе закэшированный отказ пережил бы открытие главы по `expired_at`). Заранее по
+      списку глав не отказываем — кэшированный список может быть старше открытия.
+      `download_title()` на тайтле с ранним доступом из-за этого заканчивается
+      `DownloadTitleInterruptedError` на первой закрытой главе — пропуск закрытых глав
+      оставлен на #91 (скачивание тайтла с прогрессом).
+    - **`get_translations()` переопределён** в `MangaLib`, чтобы отдавать
+      `mangalib.ChapterBranch` (с `restricted_view`), а не базовую модель ядра; аналогично
+      `Chapter.branches` переобъявлен с этой моделью. Оба — `type: ignore` (инвариантность
+      `list` для mypy). Чистое решение — `branch_model` в `TitleClient` — потребовало бы
+      сначала релиза ядра; возможное будущее расширение ядра. В
+      `MultipleTranslationsError.branches` по-прежнему модели ядра.
+    - **Ветка по умолчанию** ведёт себя как у ранобэ: из 12 глав с конкурирующими переводами
+      на 4 тайтлах API выбрал первую в списке лишь в 5 — `MultipleTranslationsError`, как в
+      ядре.
+    - **`Title.base_names`** — правило ранобэ (шаг 40), список слов свой. Обход всего
+      каталога (691 страница, 41 419 тайтлов): своего суффикса mangalib.me **не дописывает**,
+      голые маркеры формата набраны вручную лишь у 49 названий — `(webtoon)`/`[Вебтун]`,
+      `(manhwa)`, `(Манга)`, `(Manhua)`, `(comic)`/`(Комикс)`, `(comic book)`, `(Webcomic)`.
+      Хвосты, говорящие больше формата (`(манга-версия)` vs `(вебтун-версия)` у Wakfu —
+      два разных тайтла, `(Color Webtoon)`, `(Fan Comics)`, `(Graphic Novel)`), и голое
+      `(novel)` (на манга-сайте отличает единственный не-мангу) сохраняются. Правило меняет
+      ровно эти 49 названий.
+    - **CI/инфраструктура**: mypy/тесты/сборка/`facade-vs-published-core` включают mangalib
+      (тесты пакета — отдельный прогон со своим порогом 95% и `--record-mode=none`);
+      `release_package.py` уже знал префикс `mangalib`. `docs/mangalib-reference.md` —
+      mkdocstrings-справочник, `examples/16_mangalib_pages.py` — прогнан вживую. Тег
+      `mangalib-v0.1.0` — после регистрации trusted publisher на PyPI (#93).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
