@@ -228,7 +228,8 @@ ranobelib-python-sdk/
 │   │   │                          # console, models, catalog, title (TitleClient)
 │   │   ├── tests/unit/            # параметризованы по сайту (фикстура site: id 3 и id 1)
 │   │   ├── pyproject.toml
-│   │   └── README.md
+│   │   ├── README.md
+│   │   └── CHANGELOG.md
 │   └── ranobelib/                 # пакет ranobelib-python-sdk (uv workspace member, шаг 41)
 │       ├── src/
 │       │   └── ranobelib/
@@ -255,7 +256,7 @@ ranobelib-python-sdk/
 │       │   └── integration/                # тесты поверх кассет (используют реальные записанные данные)
 │       ├── pyproject.toml         # метаданные/зависимости пакета, build-backend
 │       ├── README.md              # описание пакета на PyPI
-│       └── CHANGELOG.md           # регенерируется changelog.yml
+│       └── CHANGELOG.md           # секцию каждого релиза пакета дописывает changelog.yml
 ├── docs/
 │   ├── index.md
 │   └── api-notes.md               # сюда складывать находки про недокументированный API
@@ -279,9 +280,12 @@ ranobelib-python-sdk/
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
-│   ├── release.yml                # публикация на PyPI по событию GitHub Release
-│   └── changelog.yml              # регенерирует CHANGELOG.md пакета по тому же событию
-├── cliff.toml                     # конфиг git-cliff для CHANGELOG.md
+│   ├── release.yml                # публикация пакета по тегу <префикс>-vX.Y.Z (GitHub Release)
+│   └── changelog.yml              # дописывает секцию релиза в CHANGELOG.md этого пакета
+├── .github/scripts/
+│   ├── release_package.py         # тег релиза → пакет, версия, шаблон тегов (шаг 44)
+│   └── test_release_package.py
+├── cliff.toml                     # общий конфиг git-cliff для CHANGELOG.md всех пакетов
 ├── pyproject.toml                 # корень workspace: members + ruff/mypy/pytest/coverage + dev-группы
 ├── uv.lock                        # один общий на весь workspace
 ├── README.md                      # витрина репозитория, ссылается на README пакетов
@@ -499,12 +503,12 @@ false }` (значение по умолчанию из официального
   (`feat:`, `fix:`, `test:`, `docs:`, `chore:`, `refactor:`). Один коммит = одно логическое
   изменение, не "накопил и залил одним махом".
 - **Никогда не мержить и не пушить в `main` напрямую.** PR открывается и оставляется на
-  ревью — пользователь мержит вручную. Единственное исключение — `changelog.yml` (см. шаг
-  21): полностью детерминированный, не требующий ревью пуш `CHANGELOG.md` от лица
-  `github-actions[bot]` сразу после публикации GitHub Release, тем же способом, что и
-  `docs.yml`/`release.yml` уже действуют без PR на события `push`/`release` (не решение
-  человека или Claude Code, а действие CI на его собственное скоуп-ограниченное дело —
-  регенерация одного файла из тегов/коммитов, без права трогать что-либо ещё).
+  ревью — пользователь мержит вручную. Единственное исключение — `changelog.yml` (см. шаги
+  21 и 44): полностью детерминированный, не требующий ревью пуш `CHANGELOG.md` выпущенного
+  пакета от лица `github-actions[bot]` сразу после публикации GitHub Release, тем же
+  способом, что и `docs.yml`/`release.yml` уже действуют без PR на события `push`/`release`
+  (не решение человека или Claude Code, а действие CI на его собственное скоуп-ограниченное
+  дело — секция релиза в одном файле из тегов/коммитов, без права трогать что-либо ещё).
 - Если следующая фича логически зависит от ещё не смерженного PR — либо явно спросить
   пользователя, с какой ветки продолжать, либо ответвиться от ветки предыдущей фичи и
   явно указать это в описании нового PR (потребуется ребейз после мержа зависимости).
@@ -544,6 +548,13 @@ CI не нужен.
   сайт вообще собирается (`--strict` роняет билд на битых mkdocstrings-ссылках вроде `:::
   ranobelib.ЧтоТоПереименованное`), чтобы сломанный `docs/reference.md` не всплывал только
   постфактум в `docs.yml` после мержа в `main`.
+- job `facade-vs-published-core` (матрица по фасадам): фасад ставится как у пользователя —
+  `uv pip install --no-sources ./packages/<фасад> --group .../pyproject.toml:dev`, то есть
+  с самым новым `libsocial-core` с PyPI, допустимым его ограничением, а не из workspace — и
+  гоняет свои тесты. Ловит фасад, которому нужно ещё не выпущенное ядро. Пока ядро ни разу
+  не публиковалось, джоба пропускает тесты с `::warning::` (см. шаг 44).
+- job `release-scripts`: тесты `.github/scripts/release_package.py`
+  (`--import-mode=prepend`: тест импортирует скрипт из своего каталога).
 
 `.github/workflows/docs.yml`: отдельный workflow (не блокирует PR, только `push` в `main` +
 `workflow_dispatch`), деплоит через официальный Pages-flow (`actions/upload-pages-artifact` +
@@ -562,6 +573,10 @@ GitHub environment `pypi` (`environment: {name: pypi, url: ...}`), это дол
 именем environment, указанным при регистрации trusted publisher на pypi.org (или там же
 оставить environment пустым, если сузить до конкретного environment не нужно). Requires
 `permissions: id-token: write` — без него OIDC-обмен с PyPI не пройдёт.
+
+С шага 44 (монорепозиторий) `release.yml` один на все пакеты: тег релиза —
+`<префикс>-vX.Y.Z` (`core-v1.0.0`, `ranobelib-v0.14.0`, `mangalib-v1.0.0`), пакет, его
+`[project].name` и проверку версии даёт `.github/scripts/release_package.py`; см. шаг 44.
 
 **Важно**: Trusted Publishing нужно один раз настроить на стороне PyPI (pending trusted
 publisher — можно зарегистрировать даже до первого релиза, привязывается к
@@ -1480,5 +1495,54 @@ owner/repo/workflow-file/environment) — это может сделать то�
     - **Релиз**: `ranobelib` теперь требует `libsocial-core` с PyPI, поэтому до следующего
       релиза `ranobelib` должно быть опубликовано ядро (шаг 4, #89). Версию `ranobelib`
       (следующий минорный — `0.14.0`, 0.13.0 уже вышел) поднимает отдельный PR, как обычно.
+
+44. **Монорепозиторий, шаг 4: релизы по тегам с префиксом пакета** (issue #89, часть #85).
+    - **Схема тегов**: `core-vX.Y.Z`, `ranobelib-vX.Y.Z`, `mangalib-vX.Y.Z`; релиз — GitHub
+      Release из `main`, веток под пакеты нет. Старые `vX.Y.Z` остаются историей
+      `ranobelib` и не переписываются, но новых релизов по ним больше нет: тег `vX.Y.Z`
+      `release.yml` отклоняет как неизвестный префикс.
+    - **`.github/scripts/release_package.py`** — единственное место, где префикс тега
+      сопоставлен пакету (`PACKAGES`). По тегу выдаёт каталог, `[project].name`, версию и
+      шаблон тегов пакета (у `ranobelib` он включает легаси `vX.Y.Z`) в формате
+      `$GITHUB_OUTPUT`. Отклоняет с `::error::` тег не вида `<префикс>-vX.Y.Z`, неизвестный
+      префикс, отсутствующий каталог пакета (`mangalib-v…` до #90) и — кроме
+      `--no-version-check` — версию, не совпадающую с `pyproject.toml` пакета. Тесты рядом,
+      CI-джоба `release-scripts`.
+    - **`release.yml`**: скрипт → проверка, что коммит тега есть в `main`
+      (`git merge-base --is-ancestor`) → `uv build --package <name>` → `uv publish
+      --trusted-publishing automatic`. Environment прежний (`pypi`), URL — страница
+      выпущенного пакета.
+    - **Changelog: секция дописывается, а не перегенерируется весь файл.** Отдельный
+      `CHANGELOG.md` у каждого пакета, `changelog.yml` гоняет git-cliff с `--include-path
+      packages/<pkg>/**`, шаблоном тегов пакета, `--latest --prepend` и коммитит только
+      этот файл. Полная регенерация с фильтром путей невозможна без порчи истории
+      `ranobelib`: 10 его коммитов до переезда в `packages/` (`ci:`/`fix:`/`feat:` в
+      `.github/`, `docs/`, `cliff.toml`…) не трогают `src/`, а те же пути после разделения
+      общие для всех пакетов — фильтр не отличил бы одно от другого (проверено скриптом по
+      истории). Поэтому в `cliff.toml` нет ни `tag_pattern`, ни футера со ссылками: старые
+      секции `ranobelib` сохраняют свои ссылки-определения, новые дают ссылку прямо в
+      заголовке, версия в нём без префикса (`ranobelib-v0.14.0` → `0.14.0`). Повторный
+      запуск для того же тега ничего не добавляет. `concurrency` сериализует пуши в `main`
+      от релизов разных пакетов. git-cliff — `uvx --from git-cliff==2.14.2`, та же версия,
+      что и при проверке. Заголовок `CHANGELOG.md` обновлён под новую схему — `--prepend`
+      узнаёт его только при побайтном совпадении с `header` в `cliff.toml` (с тем же
+      хвостом из пустой строки).
+    - **Проверено моделированием** (git-cliff `--unreleased --tag`, теги не создавались, LF
+      как на runner'е): `core-v1.0.0` → первая секция ядра только из коммитов ядра;
+      `ranobelib-v0.14.0` → +6 строк, одна новая секция только из коммита `ranobelib`, ссылка
+      `compare/v0.13.0..ranobelib-v0.14.0`, история нетронута.
+    - **CI `facade-vs-published-core`** — см. раздел CI. Бутстрап: пока `libsocial-core` ни
+      разу не публиковался на PyPI, тесты пропускаются с `::warning::` — иначе проверка была
+      бы красной в каждом PR, а опубликовать ядро можно только через `release.yml` после
+      мержа. После первого релиза ядра строгая. Механика проверена локально: колесо ядра
+      вместо PyPI через `--find-links`, тесты `ranobelib` — 432 passed.
+    - **Вручную, на стороне PyPI (может только владелец аккаунта)**: pending trusted
+      publisher для `libsocial-core` и `mangalib-python-sdk` — owner `LLIJIYAPNIK`, repo
+      `ranobelib-python-sdk`, workflow `release.yml`, environment `pypi`. Для
+      `ranobelib-python-sdk` существующий publisher подходит, если он на те же
+      repo/`release.yml`/`pypi` — имя файла и environment не менялись.
+    - **Порядок первых релизов**: `core-v1.0.0` (версия ядра уже 1.0.0) → после
+      публикации CI-проверка фасадов становится строгой → PR с поднятием версии `ranobelib`
+      до 0.14.0 → `ranobelib-v0.14.0`. `mangalib-v…` — после #90.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
