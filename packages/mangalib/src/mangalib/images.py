@@ -6,21 +6,52 @@ though: when checked, the DDoS-Guard edge in front of ``main``/``secondary`` ans
 request with an HTML 403 whatever the headers, while ``compress``/``download`` served the
 full-size image (see docs/api-notes.md, "MangaLib"). So downloads start from
 ``compress`` and fall back through the others.
+
+Requests to each image host are paced by the process-wide ``libsocial.shared_pacer`` for
+that host (not api.cdnlibs.org's), and a 429, a 5xx or a network error is retried with
+backoff on the same server before moving on to the next one: the image host rate-limits
+too (DDoS-Guard's HTML 429, without ``Retry-After``, see docs/api-notes.md).
 """
 
 from __future__ import annotations
 
+import asyncio
+from collections.abc import Awaitable, Callable
+
 import httpx
 
+from libsocial.pacing import shared_pacer
 from mangalib.exceptions import PageDownloadError
 from mangalib.models import ImageServer, Page
 
-__all__ = ["DEFAULT_SERVER_ORDER", "page_url"]
+__all__ = [
+    "DEFAULT_IMAGE_CONCURRENCY",
+    "DEFAULT_IMAGE_REQUEST_DELAY",
+    "DEFAULT_SERVER_ORDER",
+    "page_url",
+]
 
 DEFAULT_SERVER_ORDER = ("compress", "download", "main", "secondary")
 """Image servers tried, in this order, when no server is chosen. ``crop`` isn't one of
 them: it serves 310×450 previews, not the page itself — choose it explicitly if that's what
 you want."""
+
+DEFAULT_IMAGE_CONCURRENCY = 5
+"""Page requests in flight at once by default (``download_pages()``, ``export()``, size
+methods)."""
+
+DEFAULT_IMAGE_REQUEST_DELAY = 0.2
+"""Minimum time, in seconds, between the starts of two requests to the same image host,
+across every client in the process. With five at once, 300 full-size pages went through
+without a single 429 when checked; much denser request rates got DDoS-Guard's 429."""
+
+_MAX_RETRIES = 3
+"""Retries of one request on the same server (429, 5xx, network error) before falling back
+to the next server."""
+
+_RETRY_BASE_DELAY = 1.0
+"""Backoff before the first retry, in seconds, doubled per retry. The 429 sends no
+``Retry-After``; when checked, the host let requests through again a minute or two later."""
 
 
 def page_url(page: Page, server: ImageServer) -> str:
@@ -62,28 +93,91 @@ def server_order(servers: list[ImageServer], server: str | None) -> list[ImageSe
     return order
 
 
-async def download_page(client: httpx.AsyncClient, page: Page, servers: list[ImageServer]) -> bytes:
-    """Download ``page`` from the first of ``servers`` that serves it (not public API).
+class ImageFetcher:
+    """Paced, retried requests for page images, falling back across servers (not public API).
 
-    A server fails over to the next one on a network error, a non-2xx status, or a response
-    that isn't an image — DDoS-Guard's refusal is an HTML page.
-
-    Raises:
-        PageDownloadError: If every server failed.
+    Args:
+        client: The HTTP client to send requests with (browser headers, ``Accept: image/*``).
+        request_delay: See ``DEFAULT_IMAGE_REQUEST_DELAY``.
+        sleep: Sleep function for pacing and backoff. Overridable for tests.
     """
-    failures: list[tuple[str, str]] = []
-    for server in servers:
-        url = page_url(page, server)
-        try:
-            response = await client.get(url)
-        except httpx.HTTPError as exc:
-            failures.append((url, f"{type(exc).__name__}: {exc}"))
-            continue
-        content_type = response.headers.get("Content-Type", "")
-        if not response.is_success:
-            failures.append((url, f"HTTP {response.status_code} ({content_type or 'no type'})"))
-        elif not content_type.lower().startswith("image/"):
-            failures.append((url, f"not an image ({content_type or 'no type'})"))
-        else:
-            return response.content
-    raise PageDownloadError(failures)
+
+    def __init__(
+        self,
+        client: httpx.AsyncClient,
+        *,
+        request_delay: float = DEFAULT_IMAGE_REQUEST_DELAY,
+        sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
+    ) -> None:
+        self._client = client
+        self._request_delay = request_delay
+        self._sleep = sleep
+
+    async def download(self, page: Page, servers: list[ImageServer]) -> bytes:
+        """Download ``page`` from the first of ``servers`` that serves it.
+
+        A server is given up on after a non-retryable error (a 4xx other than 429, or a
+        response that isn't an image — DDoS-Guard's refusal is an HTML page) or once its
+        retries run out.
+
+        Raises:
+            PageDownloadError: If every server failed.
+        """
+        response = await self._first_image(page, servers, "GET")
+        return response.content
+
+    async def size(self, page: Page, servers: list[ImageServer]) -> int:
+        """The size in bytes of ``page``'s image, from a ``HEAD`` request's ``Content-Length``.
+
+        The image servers answer ``HEAD`` with the exact length of the file (checked against
+        the downloaded body), so this costs no image traffic. A server that sends no
+        ``Content-Length`` is treated like one that failed.
+
+        Raises:
+            PageDownloadError: If no server gave a size.
+        """
+        response = await self._first_image(page, servers, "HEAD", needs_length=True)
+        return int(response.headers["Content-Length"])
+
+    async def _first_image(
+        self, page: Page, servers: list[ImageServer], method: str, *, needs_length: bool = False
+    ) -> httpx.Response:
+        failures: list[tuple[str, str]] = []
+        for server in servers:
+            url = page_url(page, server)
+            outcome = await self._request(method, url)
+            if isinstance(outcome, str):
+                failures.append((url, outcome))
+                continue
+            length = outcome.headers.get("Content-Length", "")
+            if needs_length and not length.isdigit():
+                failures.append((url, "no Content-Length"))
+                continue
+            return outcome
+        raise PageDownloadError(failures)
+
+    async def _request(self, method: str, url: str) -> httpx.Response | str:
+        """One server's answer: an image response, or why it failed (after any retries)."""
+        pacer = shared_pacer(httpx.URL(url).host)
+        attempt = 0
+        while True:
+            await pacer.wait(self._request_delay, sleep=self._sleep)
+            try:
+                response = await self._client.request(method, url)
+            except httpx.TransportError as exc:
+                # Includes a connection DDoS-Guard broke by sending a body with its 429 to a
+                # HEAD request: the next response on it can't be parsed (see api-notes).
+                reason = f"{type(exc).__name__}: {exc}"
+                retryable = True
+            else:
+                content_type = response.headers.get("Content-Type", "")
+                if response.is_success:
+                    if content_type.lower().startswith("image/"):
+                        return response
+                    return f"not an image ({content_type or 'no type'})"
+                reason = f"HTTP {response.status_code} ({content_type or 'no type'})"
+                retryable = response.status_code == 429 or response.status_code >= 500
+            if not retryable or attempt >= _MAX_RETRIES:
+                return reason
+            await self._sleep(_RETRY_BASE_DELAY * (2**attempt))
+            attempt += 1
