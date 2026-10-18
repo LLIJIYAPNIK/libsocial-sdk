@@ -7,35 +7,31 @@ on:
 permissions:
   contents: write
 
+# No `concurrency` group: Actions keeps only one pending run per group, so a third release in
+# quick succession would replace the second's pending run and that changelog would never be
+# written. Runs go in parallel instead, and update_changelog.py rides out the race: each
+# attempt starts from the latest main, and a push rejected because main moved on is retried.
 jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
       # Check out `main` explicitly (not `github.ref`, which for a `release: published`
-      # event is the detached tag ref) — regenerating and pushing back requires a branch.
+      # event is the detached tag ref) — updating and pushing back requires a branch.
       - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
           fetch-tags: true
+      - uses: astral-sh/setup-uv@v9.0.0
 
-      - name: Regenerate packages/ranobelib/CHANGELOG.md
-        uses: orhun/git-cliff-action@v4
-        with:
-          config: cliff.toml
-          args: --verbose
+      # Adds only this release's section, only from commits touching this package, to the
+      # package's own CHANGELOG.md, and pushes it — see the script's docstring.
+      - name: Add the release to its package's CHANGELOG.md
         env:
-          OUTPUT: packages/ranobelib/CHANGELOG.md
+          GIT_CLIFF: uvx --from git-cliff==2.14.2 git-cliff
+          # Feeds remote.github.owner/repo in cliff.toml's links.
           GITHUB_REPO: ${{ github.repository }}
-
-      - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/ranobelib/CHANGELOG.md
-          if git diff --cached --quiet; then
-            echo "CHANGELOG.md already up to date, nothing to commit"
-            exit 0
-          fi
-          git commit -m "docs: regenerate CHANGELOG.md for ${{ github.event.release.tag_name }}"
-          git push origin HEAD:main
+          uv run --no-project python .github/scripts/update_changelog.py "$GITHUB_REF_NAME"

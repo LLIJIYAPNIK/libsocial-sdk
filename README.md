@@ -30,6 +30,21 @@ uv build --package libsocial-core
 uv build --package ranobelib-python-sdk
 ```
 
+## Releasing
+
+Each package is released on its own, by publishing a GitHub Release from `main` tagged
+`<package>-vX.Y.Z` — `core-vX.Y.Z` (`libsocial-core`), `ranobelib-vX.Y.Z`
+(`ranobelib-python-sdk`; its releases before the monorepo are the plain `vX.Y.Z` tags),
+`mangalib-vX.Y.Z`:
+
+1. Bump `version` in the package's `pyproject.toml` through a PR, as usual.
+2. `gh release create ranobelib-v0.14.0 --target main --generate-notes`
+
+`release.yml` checks the tag's version against `pyproject.toml`, builds that package and
+publishes it to PyPI; `changelog.yml` adds the release's section to that package's
+`CHANGELOG.md`. If a package needs a new core, release the core first: CI tests every
+package against the newest `libsocial-core` actually on PyPI.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
