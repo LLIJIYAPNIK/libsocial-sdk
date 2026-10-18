@@ -1,0 +1,77 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/constants?fields%5B%5D=imageServers
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA72Tz26DMAzGX2XKuUoLofvDdY+w46imQAJEIglK6Kap4t3nmB0YYx1T6S6WY1n6
+        fba/nIjgHSfpiSjNK/kk3at0nqTPUBAkJZorQzak4bls4Jkdd0lUhsj2ISY7zGPMc8wfoP3oQnPd
+        da1Ps222VbqKKYRG5VSZ0kKLV518USKgog079JtPoJeFNYK79yl1YGBkcsTGnF1ILaxunfR+Ao0j
+        HOkWI46aDALuUUA5PyqjhTAwqqfWVWdGFfbNNJaLeSgfQe8wRygbBAx7F6P6/jIxhbPtSMgjPG9a
+        cERYyfScoddTzU3Fw0W1hJ6f7rmigWppOq5gt9/3Gl/PQMuoKxtoGfSfDLRMzO8G+uqS0cnW80hN
+        z4hNrmaSpdh1XbKY+uevPSxx7m/DDg99/wF7FFb0NgYAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:00:54 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=sdBQ9ddDU9gnk7vp; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:54 GMT
+      - __ddg10_=1792332054; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:54 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:54 GMT
+      - __ddg1_=zs3Begp1226gmY3UQjPv; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:00:54 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '82'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

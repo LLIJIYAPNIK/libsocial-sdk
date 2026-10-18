@@ -1,0 +1,100 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/7965--chainsaw-man/chapter?number=1&volume=1&branch_id=4667
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA9yVzY7jNgyAX6XQOXYkWf7LA/TY057aLAzZUmJ1HNm15cwOBvPupWR7ovV6BxsU
+        uwiagxJSlEh+IplXJLjh6PCKlEAHSiOa5Dt0aYVs0AFVNe+M7NEOXdtmvEhQERD0eClB6wvFIKtW
+        C96/LGpuzfXYNDs0NOPZqgO7UfZcV3Vh3bEkScEZ12fu5DRP4h2qesmNFAU3cIZikgWEBjj6RJJD
+        lB5wHGL3+RPukl861c+mkysbeW+PLymRHWp46bI5jpiRk10ZtmuUuVU4zaSnTiN/c1/VJLiVuTX2
+        DruVJd5FbjfK0Ru4VE9yKKp21BBZnjGW7ZAaCquGmE68GaRTXJV83tIUDR+Ml9aSqHnpgCreISP5
+        ZUCHv+YkaRq9Y9aq6ziaxGLsbeZ2PwiWjeV17R3vL4X+mHer9mrf9hWdVCPnvZiXVIpTGSQ5YwGr
+        uAzKiLCgoiQVlGAmyxiOmhpqQXNlL6+N6YbDcX/cuwvDSuhGlUPY9ufjfuyalovhuLchHPc2vNnu
+        uP8RX4XzFP7dncGrkCc+NuZn+5y9XcQvcQQ1dH1aXl+ooWp78S62Giq8gMcpG6942k7qYu7Y4lmZ
+        GupPG6lN8SRfbtamH+XbZ+jDUYtGur6brp0Ui9SNZaOG2qtBA407NNyoVhf/jLxR5qWAVlP6bKuF
+        Q378bIslDW2bz/LvbX+Z2nHWX1sjoXApNL7r0yXiwbVqxbW9U05hWtnIc9sre+T1qwh4VY09r+y4
+        yUNbfDA1BC+VCwt+dcbZue3UjgqhbKjFyQU0Re22gPQ4TBV/ywFvZmC12zHg7/vH277xGzie2tkb
+        sx04vLU1i9MUhgvMhcscFg47uKeXw1yNU8sTOyDgAs0b56+qR/00A53rwZ/uHw/YyB+wYyd8U8rA
+        LsDJJxKB3SH2TWupzjWYUWyH3bMSpoYIGIWJPg0h2y5u1kM31FzpgT8HIDvJVQD0SkCO+2+StEXW
+        2uzDJI8zeDCfTu7RIZt06CPRIRHG73SynNwNZ52jByeL2ddwGPbg0E040SPBATY3OBTj/G466yQ9
+        OkmerugQj060SYc9Eh2SEHqjQy2qO+msk1zokDBK2KqxGPXosE068UPR+a+Ntc7xw8aKPDjxJpzk
+        fwVnneOHcJgHJ9mEkz4wnORuOOscfTg5XcGJPTjpJpzsgeHc/2e+ztGHk8UrOIkHJ9uEkz8wnPv/
+        rtY5Ojj/AgAA///c2GsKwzAMA+ATDaJsed3/YoONUdV2DV7+mB5BIlG/9FvOgixnUDnLdmBJ3M4r
+        3I4MyUdnyI85KRkXSk7F5N1JViHdSSYlw4YgMjO5httxIDi72ORGTIYNQaRy8u4oq5DeKDdiMmwI
+        IpeTN3dHhfR2pxGTYUsQt3KyCuntTiMnw6YgMkM5frM8C6qbRVCGbUFklnLYOyqk551GUoaNQdyK
+        yiqke3aIylgP+88XMms5vjw6prs949SQrZ6aWczjj4Yc96xSRENk5mqbuSY283xG+1EhqZ0hX+qN
+        zFw/B+9oJbGVZwm38gvHbfR1bqMXauPiLiU28nwDAAD//9yaUY7DMAhEr5QCid37X2w3H63GhiDB
+        16hHmJGBN+Byt3Ei0Z2dAi9gZIkThBAz8ih3GicS3bFrcwcYWWytJGY2nmVXzFfS+9gW6xcwscSJ
+        QXiZ+F0/OziR6I7o5g4wscSJQZiZuF5JSWJwE/sCJpY4MQgvE3feTpYY3NsBJpY4MQgvEXfcyfbH
+        zh3gYYn3x3r8lDvJ/ti7AyysMQsrMQvX05QTmWWpC1hY46ypvEzceDtOZPZ2xgHuPHyz4GXjjjtZ
+        ynTuABtrzMZKzMaNysq263tlDWBjjbfrysvInbeTbNf92wFW1piV9adY2YlM3QFW1piVlZeVO+5k
+        rOzcAVbWmJWVl5U7fSf7auH6DrCyxqysvKzcyOZOZJbRB7Cyxqx8/62kdad8mXEis8vMAFa2Y9nn
+        GC8jN/rNV1zaZ4CNLWZj42XjRiU5kVkl3evorzsxGxsvG3fcSS8wuzvAxvbwBZmXjV9jlIeUU/mx
+        5/6DvJfWBDg2ezhyGi8eN4Z4IDMb41MXh2Rtxrxo3BhRIC8bThOg2M7VD14Yfo2zPp3OzY7/ErL9
+        b9sECrY4IxgxBddvvE5kduOdQMEWZwT7UPAfAAAA//8ahKFDRvFCSh/BAqkVbIK9jwBKtVQMHTMK
+        Q8fIGCl0yMhReNdjG6KFDnIrGHsfwZS6reGBDh28fQT00EFqFZtiH083pW6rGH/oAAAAAP//o3no
+        YHgSX+hYGiCFDvZmjSl1W8UDHTr4+gwYoYPUKrawQKnCTanbGqY0VAxAAwWwKtzAhOTiGO47RHBY
+        mpmhLZ+wRGoFW+IoaKjbBqY0WIxAIYFo2ZC8EhLDl4gWjomhCbAOj62tBQAu2U6duUIAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:00:47 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=f7qxgVSUdGsTyCbl; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:47 GMT
+      - __ddg10_=1792332047; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:47 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:47 GMT
+      - __ddg1_=F8wNYE493HFfXdrMFTNQ; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:00:47 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Origin, Accept-Encoding
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '92'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,244 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/226780--online-game-god-level-assassin-i-am-the-shadow/chapters
+  response:
+    body:
+      string: !!binary |
+        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
+        Ta8h9/7hEavdEybRmAEA
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:00:53 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=exVu5R8BVN0wwvai; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      - __ddg10_=1792332053; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      - __ddg1_=bkYmquU6rVuryeEYplwF; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:00:53 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Origin, Accept-Encoding
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '84'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=exVu5R8BVN0wwvai; __ddg10_=1792332053; __ddg9_=31.77.198.108; __ddg1_=bkYmquU6rVuryeEYplwF
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/226780--online-game-god-level-assassin-i-am-the-shadow/chapter?number=73&volume=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA7xTTY/bIBT8KyvOccyH7Ti+rlSp95Uqta4QBpzQEGwZSBpF+98LON71SnvopY2i
+        57xhPMMLwx0I5hho7kAJ0JC6InhXbsB5EFKDBvAjG52cwAZcBu3PMkAoNMafu4A2YEfeOmolH4xg
+        020hscQPv6z2h5V4NzHDjzQaYkIwDHbMHNgM4GpXB4RPkjkpKHNBAkNcZgiH7wssmhI3Zb2F6fM9
+        qMvfo5pW1CqDKEP1C9pHKoQrahxrirrLwGgDNOvSqK2HBepjLWCspE5VJGTGcULkU3rwuUm1SLVc
+        vZxqUa2E0irZg9dgqU7SUj54E7aMCKk2QFka0bClnmkrE3BR8voZQjWzLo1rvNbvf4C7jTKN5CQ7
+        W9D8mGesYLHHyyGAq+ozrpl5HAv1Uxw+cbJstbgkIGq9H+a3r1+enmcCHy4xAnfQKy0fy0juIEJd
+        laGeFFlREpQxhklW7EVfSw4J64rwqjuGxBimov7RudE2bd7mSXDLhdGqs9thOrS5H/XAhG3zuIs2
+        T7t8ENv8b8xostr+Gg/BVsieee3+uenD7iz+j1MI1OW0ZEEoy4dJvLWDCXGn4Xw6HaPkJh+SNIzS
+        0MfVplfljiGLxknj6EnePpJff4b76o3QMl3PWXUGlu4PAAAA///Mld2O2jAQhd+F+9n1/08foE+x
+        FZrYTojKJpSErqqKd+84gSahW2lzsQiJC4ONPfP5nOPDqdjX3W4myJ4M3u2xr9tm++OE+7r/tSXb
+        1U2V9YLUHlZZLpYoXb59bY+vozE39okNedMn0jBZYzDstdxuEHjAJm+Yrg0FGlftsc7/+L04HkM4
+        HTEMmZS3pViJWNRDSTQ69MOy62yKda5yWw7VjAXnGUJ86ka1T9Wzd6vPv75fAPv/6ez9o9mZDh5d
+        PUviY+r6Yx0ylJwHQ5R123ynVxwHms5JoFeFY4Y6KONWEZcEoloO1OsULMIo5rxzFE2vIxJjmfFB
+        IURvEJQzDhwKByoJLWOwGDx7OjTV3zeB5wqprQb3A4WwOzXfu8tw1OfiXbp9FpbtaD5r53SIH126
+        S3W1o2VeeTrjrY79bvPFMSpiTMds3+GJenluyb5NgoryDqo2wj79THvArqNP3UAN+Ar9LkG3w9i+
+        kZkvsn15vvRANv84pGyaNovqiTklSYYL8H4Cr5IsTeQWgvEJlNEJUNARaG3hRFkkY8QCvHgs8DbD
+        /mzwKyDNwQt9A96zCXwphMNURBAJC1BW0mUGYcEJr4qCLk1wtwAvHwu8l3cAvwLSHDwzt+D5BN7a
+        5EJhI3hHV6gMbVxERyMWEorClKGUC/DqocA76+4QNSsgzcB7zm/Biwl8oF2kix68LT2oyDV4hg7o
+        knlpXYkx4QK8fijwXto7gF8Baa54fZvxXk7gJfMlGo1ghWeggtKAjEyVSs+FJ4dpnxbgzWOBt+oO
+        4FdAWmT8P4pXE3h6GjQvhj017ekKBYVUDLg1XHOMnJll1NiHAi+lNp8PfgWkCbyQTm3O387nPwAA
+        AP//AwBT+stfhxAAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:00:54 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=o5IYTEnROZCL8JTq; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      - __ddg10_=1792332053; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        14:20:53 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Origin, Accept-Encoding
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '83'
+    status:
+      code: 200
+      message: OK
+version: 1

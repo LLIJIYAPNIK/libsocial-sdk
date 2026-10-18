@@ -23,7 +23,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - run: uv run mypy packages/core/src packages/ranobelib/src
+      - run: uv run mypy packages/core/src packages/ranobelib/src packages/mangalib/src
 
   test:
     runs-on: ubuntu-latest
@@ -49,6 +49,7 @@ jobs:
       # list every package's tests, which a package that doesn't depend on another can't
       # import.
       - run: uv run --package libsocial-core --python ${{ matrix.python-version }} pytest packages/core/tests --cov=libsocial --cov-fail-under=95
+      - run: uv run --package mangalib-python-sdk --python ${{ matrix.python-version }} pytest packages/mangalib/tests --cov=mangalib --cov-fail-under=95 --record-mode=none
       # Last, so .coverage (uploaded below) holds this package's data, as before.
       - run: uv run --package ranobelib-python-sdk --python ${{ matrix.python-version }} pytest packages/ranobelib/tests --cov=ranobelib --cov-report=xml --cov-fail-under=95 --record-mode=none
       # One upload, not three: the matrix runs the same suite on 3.11/3.12/3.13, and
@@ -69,6 +70,7 @@ jobs:
           enable-cache: true
       - run: uv build --package libsocial-core
       - run: uv build --package ranobelib-python-sdk
+      - run: uv build --package mangalib-python-sdk
 
   # The tests above use the workspace's libsocial-core, which is always "released enough".
   # This installs each facade the way a user would, with the newest libsocial-core on PyPI
@@ -80,7 +82,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [ranobelib]
+        package: [ranobelib, mangalib]
     steps:
       - uses: actions/checkout@v7
       - name: Install WeasyPrint system dependencies

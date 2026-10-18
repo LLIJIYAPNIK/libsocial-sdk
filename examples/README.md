@@ -28,6 +28,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`13_chapter_footnotes.py`](13_chapter_footnotes.py) | `Chapter.footnotes` — translator footnotes, separate from the text |
 | [`14_chapter_images.py`](14_chapter_images.py) | `chapter_image_urls()` / `rewrite_image_urls()` — listing and rewriting a chapter's image URLs |
 | [`15_chapter_paragraphs.py`](15_chapter_paragraphs.py) | `chapter_paragraphs()` — a chapter's top-level blocks as plain text, indexed like the DOM |
+| [`16_mangalib_pages.py`](16_mangalib_pages.py) | mangalib.me (`mangalib-python-sdk`): a chapter's pages, image servers, closed chapters |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/reference/)
 for every public class/method, including `AuthRequiredError` and `RateLimitError`, which

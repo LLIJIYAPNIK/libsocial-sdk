@@ -22,6 +22,7 @@ coverage.xml
 
 # SDK runtime cache
 .ranobelib_cache/
+.mangalib_cache/
 
 # Docs build
 site/
