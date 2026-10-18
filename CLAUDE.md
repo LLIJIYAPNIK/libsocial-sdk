@@ -264,10 +264,11 @@ ranobelib-python-sdk/
 │       │   ├── client.py          # ApiClient: закрытая глава → AuthRequiredError, imageServers
 │       │   ├── sdk.py             # MangaLib(TitleClient): серверы картинок, download_page(s)
 │       │   ├── models.py          # Chapter.pages/Page, ChapterBranch.restricted_view, base_names
-│       │   ├── images.py          # page_url(), порядок серверов и фоллбэк
+│       │   ├── images.py          # page_url(), порядок серверов, ImageFetcher (пейсинг, ретраи)
 │       │   ├── catalog.py         # Catalog(libsocial.Catalog) для mangalib.me
 │       │   ├── exceptions.py      # реэкспорт ядра, MangaLibError, PageDownloadError
-│       │   └── cache.py           # cache_stats/clear_cache с дефолтом .mangalib_cache
+│       │   ├── cache.py           # cache_stats/clear_cache с дефолтом .mangalib_cache
+│       │   └── exporters/         # Exporter + EXPORTERS, cbz.py, pdf.py (img2pdf, extra) — шаг 46
 │       ├── tests/                 # cassettes/, unit/, integration/ — как у ranobelib
 │       ├── pyproject.toml
 │       ├── README.md
@@ -294,7 +295,8 @@ ranobelib-python-sdk/
 │   ├── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
 │   ├── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
 │   ├── 15_chapter_paragraphs.py   # chapter_paragraphs() — см. шаг 38
-│   └── 16_mangalib_pages.py       # mangalib: страницы главы, серверы, закрытые главы — шаг 45
+│   ├── 16_mangalib_pages.py       # mangalib: страницы главы, серверы, закрытые главы — шаг 45
+│   └── 17_mangalib_export.py      # mangalib: export() в CBZ/PDF, размеры — шаг 46
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -1644,5 +1646,68 @@ owner/repo/workflow-file/environment) — это может сделать то�
       `release_package.py` уже знал префикс `mangalib`. `docs/mangalib-reference.md` —
       mkdocstrings-справочник, `examples/16_mangalib_pages.py` — прогнан вживую. Тег
       `mangalib-v0.1.0` — после регистрации trusted publisher на PyPI (#93).
+
+46. **Монорепозиторий, шаг 6: экспорт манги в CBZ/PDF, размеры, скачивание тайтла** (issue #91,
+    часть #85). Ядро снова не менялось. Новые находки об API — в `docs/api-notes.md`,
+    "Export, page sizes and the image host's rate limit".
+    - **`mangalib.exporters`** — тот же контракт, что у `ranobelib.exporters`: `Exporter`,
+      `@register`, `EXPORTERS`, автоимпорт модулей пакета. Отличие протокола:
+      экспортёр получает `fetch_pages(chapter) -> list[bytes]` от `MangaLib` и зовёт его
+      поглавно, так что серверы/пейсинг/ретраи живут в одном месте, а в памяти не держится
+      больше одной главы картинок (для CBZ). Запись — во временный файл рядом, который
+      заменяет целевой только при успехе (`_writing.atomic_output`): сбой посреди экспорта
+      не оставляет обрезанный файл и не затирает прошлый.
+    - **`cbz`** (stdlib `zipfile`, `ZIP_STORED` — JPEG уже сжаты): страницы подряд по всей
+      книге, `0001.jpg`... (ширина ≥4), расширение по байтам, а не по имени (`compress` шлёт
+      JPEG на `.png`). `ComicInfo.xml` (схема 2.1, элементы в порядке схемы): `Series`,
+      `Summary`, `Year` (если `release_date` — голый год), `Writer`/`Penciller`, `Translator`
+      (команды скачанных глав — для этого `Chapter.teams`, его отдаёт эндпоинт главы),
+      `Genre`/`Tags`, `Web`, `PageCount`, `LanguageISO=ru`; `Number`+`Title` для одной главы,
+      `Volume` если все главы из одного тома, `Manga=YesAndRightToLeft` только для типа
+      «Манга» (у манхвы/маньхуа поле не пишется, не гадаем). Начало каждой главы —
+      `Bookmark` на её первой странице в `<Pages>`.
+    - **`pdf`** — img2pdf, опциональный extra `mangalib-python-sdk[pdf]` (тянет pikepdf и
+      Pillow); без него `pdf` в `EXPORTERS` нет (как `pdf` у ranobelib без GTK). JPEG
+      встраивается без перекодирования (байт-в-байт), PNG с альфой и WebP img2pdf тоже
+      берёт, вебтун-полоса выше лимита PDF — одна страница с `/UserUnit`. Оглавление — по
+      пункту на главу (pikepdf), метаданные `title`/`author`. Сборка синхронная — в
+      `asyncio.to_thread`; PDF собирается в памяти, для целого длинного тайтла легче CBZ.
+    - **`MangaLib.export(chapters, *, fmt, path, server, concurrency, on_chapter)`**:
+      `chapters` — глава, том или последовательность глав/томов (`download_title()` подходит
+      как есть). Всё проверяется до сети: формат, пустой список, глава без страниц (из
+      оглавления), неизвестный `server`, `concurrency < 1`. `on_chapter(completed, total)` —
+      та же форма, что у `download_title()`, плюс прогресс-бар `verbosity`. Имя главы в
+      закладках — имя скачанного перевода, а не из списка глав (разные переводы называют
+      главу по-разному, бывает `null`).
+    - **Картинки**: `images.ImageFetcher` (не публичный) — пейсинг через ядро
+      `shared_pacer(хост картинки)` (не `api.cdnlibs.org`), `DEFAULT_IMAGE_REQUEST_DELAY=0.2`
+      (300 полноразмерных страниц при 5 параллельно — без 429), ретраи на 429/5xx/
+      `httpx.TransportError` — 3 раза, 1/2/4 с, — потом следующий сервер; отказ (403, не
+      картинка) — сразу следующий. 429 хоста — HTML DDoS-Guard без `Retry-After`; на HEAD
+      он ещё и шлёт тело, ломая keep-alive (`RemoteProtocolError`) — поэтому ретраится любая
+      `TransportError`. Параллельность — `concurrency=` (дефолт 5) на `download_pages()`,
+      `export()` и методах размера.
+    - **Размеры**: `chapter_size()`/`volume_size()` — точно, сумма `Content-Length` из HEAD
+      (совпадает с телом; картинки не качаются), поэтому это async-методы `MangaLib`, а не
+      функции модуля, как `ranobelib.sizing`. `estimate_title_size(sample_size, branch_id,
+      translation_index, server, concurrency)` — выборка глав по всему тайтлу, HEAD их
+      страниц, среднее × число глав, которые скачал бы `download_title()` (в списке глав нет
+      числа страниц, так что выборка оценивает и число страниц, и их вес).
+    - **Закрытые главы в операциях над всем тайтлом**: `MangaLib._plan_chapters()` (точка
+      расширения ядра) работает только по открытым переводам — `download_title()` и
+      `estimate_title_size()` пропускают главы, где все переводы закрыты (лог при
+      `verbosity="full"`), `translation_index` считает только открытые,
+      `MultipleTitleTranslationsError` перечисляет только открытые, а единственный открытый
+      из нескольких запрашивается по `branch_id` (иначе API может выбрать свой дефолт —
+      закрытый). Это закрывает оговорку шага 45. `get_chapters()`/`get_volume()`/
+      `get_volumes()` по-прежнему бросают `AuthRequiredError` на закрытой главе — им главы
+      заданы явно, тихо выкидывать запрошенное нельзя. Вживую: `226780--...` — 132 из 134
+      глав, две в раннем доступе пропущены.
+    - **Тесты**: экспортёры (структура zip/ComicInfo, PDF: страницы, оглавление, JPEG
+      байт-в-байт, отсутствие img2pdf), fetcher (ретраи, фоллбэк, пейсинг, HEAD),
+      методы `MangaLib` на поддельном API (пропуск закрытых, `concurrency`, оценка, экспорт и
+      его валидация до сети) и две кассеты с HEAD-запросами к настоящему `compress`
+      (`chapter_size`, `estimate_title_size`) — без тел картинок, поэтому кассеты маленькие.
+      Покрытие mangalib 100%. Версию поднимает отдельный PR (следующая — `0.2.0`).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
