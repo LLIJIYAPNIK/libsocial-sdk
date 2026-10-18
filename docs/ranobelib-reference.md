@@ -1,4 +1,4 @@
-# API reference
+# ranobelib API reference
 
 ## Entry point
 
@@ -37,6 +37,8 @@
 ::: ranobelib.VolumeNotFoundError
 
 ::: ranobelib.MultipleTranslationsError
+
+::: ranobelib.MultipleTitleTranslationsError
 
 ::: ranobelib.AuthRequiredError
 

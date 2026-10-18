@@ -1,4 +1,7 @@
-# ranobelib-python-sdk
+# ranobelib
+
+`ranobelib-python-sdk` (`import ranobelib`).
+
 
 Async Python SDK for [ranobelib.me](https://ranobelib.me): fetch title metadata, download
 chapters and volumes, and export to epub, fb2, txt, or pdf.
@@ -95,13 +98,13 @@ clear_cache(".cache", older_than=86400)  # Drop entries older than a day.
 
 ## Documentation
 
-- [API reference](reference.md) — generated from the source's own docstrings.
+- [API reference](ranobelib-reference.md) — generated from the source's own docstrings.
 - [API notes](api-notes.md) — a running log of what's been learned about ranobelib's
   undocumented API and the design decisions that followed from it (translation selection,
   rate limiting, why each exporter is built the way it is, and more).
-- The project's [CLAUDE.md](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/blob/main/CLAUDE.md)
+- The project's [CLAUDE.md](https://github.com/LLIJIYAPNIK/libsocial-sdk/blob/main/CLAUDE.md)
   documents the full architecture, public API contract, and roadmap.
 
 ## License
 
-MIT — see [LICENSE](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/blob/main/LICENSE).
+MIT — see [LICENSE](https://github.com/LLIJIYAPNIK/libsocial-sdk/blob/main/LICENSE).

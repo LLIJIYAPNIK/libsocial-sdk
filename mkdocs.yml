@@ -1,8 +1,8 @@
-site_name: ranobelib-python-sdk
-site_description: Async Python SDK for ranobelib.me
-site_url: https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/
-repo_url: https://github.com/LLIJIYAPNIK/ranobelib-python-sdk
-repo_name: LLIJIYAPNIK/ranobelib-python-sdk
+site_name: libsocial-sdk
+site_description: Async Python SDKs for the lib.social sites (ranobelib.me, mangalib.me)
+site_url: https://LLIJIYAPNIK.github.io/libsocial-sdk/
+repo_url: https://github.com/LLIJIYAPNIK/libsocial-sdk
+repo_name: LLIJIYAPNIK/libsocial-sdk
 edit_uri: edit/main/docs/
 
 theme:
@@ -25,8 +25,15 @@ theme:
 
 nav:
   - Home: index.md
-  - API reference: reference.md
-  - MangaLib API reference: mangalib-reference.md
+  - ranobelib:
+      - Guide: ranobelib.md
+      - API reference: ranobelib-reference.md
+  - mangalib:
+      - Guide: mangalib.md
+      - API reference: mangalib-reference.md
+  - libsocial-core:
+      - Overview: core.md
+      - API reference: core-reference.md
   - API notes: api-notes.md
 
 plugins:
