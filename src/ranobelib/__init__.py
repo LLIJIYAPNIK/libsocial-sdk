@@ -26,6 +26,7 @@ from ranobelib.models import (
     Title,
     Volume,
 )
+from ranobelib.paragraphs import chapter_paragraphs
 from ranobelib.sdk import RanobeLib
 from ranobelib.sizing import chapter_size, volume_size
 
@@ -53,6 +54,7 @@ __all__ = [
     "Volume",
     "VolumeNotFoundError",
     "chapter_image_urls",
+    "chapter_paragraphs",
     "chapter_size",
     "rewrite_image_urls",
     "volume_size",
