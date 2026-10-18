@@ -1012,6 +1012,158 @@ ask to reuse `Title`. Extra fields this endpoint sends that `Title` doesn't mode
 else in the SDK. `type` used to be in this list too, until issue #48 (see "Country/origin
 filter" above) — it's now `Title.country`.
 
+## MangaLib (`mangalib-python-sdk`, issue #90, checked 2026-10-18)
+
+mangalib.me sits on the same backend as ranobelib.me. Everything below was checked against
+the live API with `Site-Id: 1` and `Origin`/`Referer: https://mangalib.me` before the models
+were written. The starting point was the SDK's own code and the open-source
+[keiyoushi `lib-multisrc/libgroup`](https://github.com/keiyoushi/extensions-source/tree/main/lib-multisrc/libgroup)
+client, and the live API corrected it in a few places (image servers, closed chapters).
+
+### Same as ranobelib
+
+- `GET /manga/{slug}` with the same `fields[]` (`get_info()` uses ranobelib's list
+  unchanged), `GET /manga/{slug}/chapters`, `GET /manga/{slug}/chapter`, `GET /manga` with
+  `site_id[]=1`, `GET /constants`. A title of the other site answers 404 with the wrong
+  `Site-Id`, as described under "Site scoping".
+- The chapter list has the same shape, `branches[]` included. `number` holds the fraction
+  (344 of 11,523 chapters of 41 titles, e.g. `"6.5"`), and `number_secondary` equals
+  `volume` on all 20,596 chapters of 114 other titles (latest-updated and most-viewed), as
+  on ranobelib.
+- `Title.country` is the site's title type. For site 1 `/constants?fields[]=types` gives
+  `Манга`, `OEL-манга`, `Манхва`, `Маньхуа`, `Руманга`, `Комикс`. `fields[]=status` has the
+  same five statuses as ranobelib. `fields[]=genres` lists 49 genres for site 1.
+- **No reliable default branch.** On 12 chapters of four titles with competing translations
+  (`7965--chainsaw-man`, `3321--dorohedoro`, `105--fullmetal_alchemist`,
+  `18009--jujutsu-kaisen-0-...`), the branch the API picks without `branch_id` was the first
+  in the chapter list's `branches` in only 5 of them. Per title the pick was the same
+  `branch_id` each time, but that `branch_id` was the lowest of the title's ids in three
+  titles and the highest in the fourth. So `MangaLib` raises `MultipleTranslationsError` like
+  ranobelib does ("Translation selection").
+- Many of the most-viewed titles (`247--shingeki-no-kyojin`, `3601--unordinary_`, Solo
+  Leveling, ...) return an empty chapter list: licensed titles keep their page but not their
+  chapters. That's an empty table of contents, not an error.
+
+### Chapter pages
+
+A fetched chapter has `pages` instead of `content`:
+
+```json
+{"id": 4577438, "image": "00.png_res.jpg", "slug": 1, "external": 0, "chunks": 1,
+ "chapter_id": 223269, "created_at": "...", "updated_at": "...", "height": 2048,
+ "width": 1425, "url": "//manga/chainsaw-man/chapters/1-1/00.png_res.jpg", "ratio": "0.6958"}
+```
+
+- `slug` is the page's 1-based position, and `pages` comes in that order: `1..N` without
+  gaps on all 108 chapters (one per title, 1,497 pages) checked for it. `Page.number` is
+  this `slug`.
+- `url` started with `//` on all of those pages and on 510 more (41 chapters of 41 other
+  titles). It's relative to an image server. Neither the chapter nor the page says which server, because every server serves
+  every page under the same path.
+- `external` was `0` on every one of the 510 pages. `chunks` ranged from 0 to 5. On tall webtoon strips (690×38200)
+  the server still sends the whole image for the page URL, so `chunks` doesn't change how a
+  page is downloaded and isn't modelled. Non-ASCII file names occur (`1화_Dfpp.png`) and
+  download fine.
+- `width`/`height` matched the downloaded image's dimensions.
+
+### Image servers: `GET /constants?fields[]=imageServers`
+
+Not site-scoped by any parameter. Entries carry `site_ids` like the genre list:
+
+| `id` | site 1 (and 3) `url` | serves |
+|---|---|---|
+| `main` | `https://img2.imglib.info` | HTML 403 from DDoS-Guard on every attempt |
+| `secondary` | `https://img2.imglib.info` | same host as `main` |
+| `compress` | `https://img3.cdnlibs.org` | the full-size page (1425×2048 for the example above) |
+| `download` | `https://img3.cdnlibs.org` | same host as `compress` |
+| `crop` | `https://crops.mangalib.me` | a 310×450 preview; `400 Invalid path` on some pages |
+
+Sites 2 and 4 have their own hosts (`img2.hentaicdn.org`, ...), and site 2's `crop` has an
+empty `url`. `MangaLib.list_image_servers()` keeps the entries for site 1 that have a URL.
+
+`img2.imglib.info` was checked with no headers, with only `Referer`, with only a browser
+`User-Agent`, with `Accept: image/*`, with `Sec-Fetch-*`, with `Accept-Language`, and with
+all of them together, using fresh clients and a cookie-keeping client. Every request got
+DDoS-Guard's HTML 403, except a single 200 on the first request of one client, after which
+that client got 403s too. That host wants a browser that runs DDoS-Guard's JavaScript check.
+`img3.cdnlibs.org` and `crops.mangalib.me` served every combination, including no headers at all.
+
+Two more things about `compress`:
+
+- It sends JPEG (`Content-Type: image/jpeg`, JPEG bytes) even for `.png` file names, so a
+  file name's extension doesn't tell the format.
+- `server.url + page.url` gives a double slash (`https://img3.cdnlibs.org//manga/...`). The
+  single-slash form returns the same bytes on every server, and `mangalib.page_url()` uses it.
+
+So `MangaLib.download_page()` tries the servers in the order `compress`, `download`, `main`,
+`secondary` (`images.DEFAULT_SERVER_ORDER`), skips any server whose URL was already tried,
+and moves on after a network error, a non-2xx status or a non-image `Content-Type`.
+`server=` puts a server first; `crop` is only used when asked for. Image requests send
+`browser_headers_for("https://mangalib.me")` plus `Accept: image/*`, with the same
+`headers=` overrides as the API client. They don't send `Site-Id`.
+
+### Paid and early-access chapters: `restricted_view`
+
+Scanned on the chapter lists of 114 titles (the 60 latest-updated and 60 most-viewed, less
+duplicates and five with no chapters; 20,880 branches):
+
+- A restricted branch in the chapter list carries `restricted_view: {"is_open": false,
+  "expired_at": ..., "price": null}`: 1,868 branches. `expired_at` is when early access
+  ends (89 of them), and `null` for a chapter that stays paid (1,779). The list never had
+  `is_open: true`. A chapter that had been in early access and has since opened
+  (`226780--...`'s 1/73) has no `restricted_view` in the list, though fetching it returns
+  one with `is_open: true`.
+- Branches also carry `expired_type`: `0` on 17,972, `2` on exactly the 1,779 permanently
+  paid ones, `1` on 1,129, which are the 89 in early access plus chapters whose early
+  access ended long ago. So it doesn't say whether a chapter is readable now, and isn't
+  modelled.
+- Fetching a closed chapter without an account is **200, not 403**. The response has
+  `restricted_view: {"is_open": false, "price": 18, "expired_at": ...,
+  "can_open_with_content_key": false}` and no `pages` key at all. With or without
+  `branch_id` the answer is the same. A chapter whose early access has ended has
+  `restricted_view.is_open: true` and its `pages`.
+
+The SDK has no login. `ChapterBranch.restricted_view`/`is_open` come from the chapter list.
+On the chapter fetch, `mangalib.client.ApiClient.get_chapter()` raises `AuthRequiredError` when
+`restricted_view.is_open` is `false`. The check runs there and not on the parsed model, so that
+the refusal never reaches the disk cache. A cached refusal would keep failing after the
+chapter opens at `expired_at`. The chapter list isn't used to refuse early: a cached list
+can be older than the chapter's opening.
+
+`download_title()` and the other bulk methods hit the same error on a closed chapter. Since
+closed chapters are usually the newest ones, `download_title()` on a title with early
+access ends in `DownloadTitleInterruptedError` with everything before them. Skipping closed
+chapters in a whole-title download is part of #91.
+
+### Title names without a format marker (checked 2026-10-18)
+
+`Title.base_names` has the same job as ranobelib's (issue #79): names to look a title up
+by elsewhere, without a publication-format marker. The marker list was built the same way,
+by walking the whole catalog (`GET /api/manga`, `site_id[]=1`, `sort_by=created_at`, 691
+pages, 41,419 titles) and counting every bracketed tail of `rus_name`, `eng_name` and
+`name`.
+
+- **mangalib.me appends no marker of its own.** Only 2,061 names over the three fields of
+  41,419 titles end with a bracketed tail at all, and most of those tell titles apart: `(Doujinshi)` (88),
+  `(Colored)`, `(перезапуск)`, `(додзинси)`, `(Цветная версия)`, `(Oneshot)`,
+  `(Serialization)`, `(Genshin Impact)`, years, `(Vol 1)`, `(Remake)`, `(Артбук)`, authors.
+- Bare format markers were typed by hand on 49 names: `(webtoon)`/`[Webtoon]`/`(WEBTOON)`
+  (the most common, mostly on romanized Korean `name`s), `(вебтун)`/`[Вебтун]`, `(manhwa)`,
+  `(manga)`/`(Манга)`, `(Manhua)`, `(comic)`/`(comics)`/`(Комикс)`/`(комикс)`,
+  `(comic book)`, `(Webcomic)`. Two have no space before it (`...gibun-eun?(webtoon)`,
+  `Donghwa(webtoon)`).
+- Tails that mention a format but say more are kept, because they tell versions of a work
+  apart: `Вакфу: Великая Волна (манга-версия)` and `(вебтун-версия)` are two titles,
+  likewise `(Color Webtoon)`/`(цветная вебтун версия)` vs. the original, and
+  `(Fan Comics)`, `(Digital Colored Comics)`, `(Graphic Novel)`, `(Sonic The Comic)`,
+  `(мини-комиксы)`, `(Пролог к новелле)`. A bare `(novel)`/`(новелла)` was left too: on a
+  manga site it marks the one title that isn't manga (1 case).
+
+The rule is ranobelib's (bracketed marker at the very end, repeated, with `,`/`:`/`/` before
+it) with the list above. Over the full catalog it changes exactly those 49 names.
+`other_names` of a random 150 titles through `get_info()` (113 have some) had one bracketed
+tail, an author's name (`Love Planet (KISARAGI Sono)`), and no marker.
+
 ## Open questions
 
 See the "Что НЕ проверено" section of `CLAUDE.md` for the current list: how a fractional

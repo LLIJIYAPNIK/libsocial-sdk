@@ -26,6 +26,7 @@ theme:
 nav:
   - Home: index.md
   - API reference: reference.md
+  - MangaLib API reference: mangalib-reference.md
   - API notes: api-notes.md
 
 plugins:
@@ -33,7 +34,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [packages/ranobelib/src, packages/core/src]
+          paths: [packages/ranobelib/src, packages/mangalib/src, packages/core/src]
           options:
             docstring_style: google
             # RanobeLib/Catalog inherit most of their methods from libsocial-core, and many

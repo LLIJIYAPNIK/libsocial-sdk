@@ -13,9 +13,11 @@ each package under `packages/` is published to PyPI on its own.
 | Package | PyPI | Description |
 |---|---|---|
 | [`packages/ranobelib`](packages/ranobelib/) | [`ranobelib-python-sdk`](https://pypi.org/project/ranobelib-python-sdk/) | [ranobelib.me](https://ranobelib.me): title metadata, chapter/volume downloads, export to epub/fb2/txt/pdf |
+| [`packages/mangalib`](packages/mangalib/) | `mangalib-python-sdk` (not published yet) | [mangalib.me](https://mangalib.me): title metadata, chapters, translations, catalog, page images |
 | [`packages/core`](packages/core/) | `libsocial-core` (not published yet) | The site-independent core: api.cdnlibs.org client, shared pacing, cache, titles, chapters, catalog |
 
-Installation, quickstart and changelog: [`packages/ranobelib/README.md`](packages/ranobelib/README.md).
+Installation, quickstart and changelog: [`packages/ranobelib/README.md`](packages/ranobelib/README.md),
+[`packages/mangalib/README.md`](packages/mangalib/README.md).
 Runnable examples: [`examples/`](examples/). Full documentation:
 **<https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/>**.
 
@@ -24,10 +26,11 @@ Runnable examples: [`examples/`](examples/). Full documentation:
 ```bash
 uv sync                                         # all packages + dev tools, one shared uv.lock
 uv run ruff check . && uv run ruff format --check .
-uv run mypy packages/core/src packages/ranobelib/src
+uv run mypy packages/core/src packages/ranobelib/src packages/mangalib/src
 uv run pytest --cov                             # every package's tests
 uv build --package libsocial-core
 uv build --package ranobelib-python-sdk
+uv build --package mangalib-python-sdk
 ```
 
 ## Releasing
