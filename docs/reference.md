@@ -52,11 +52,13 @@
 
 ::: ranobelib.volume_size
 
-## Chapter images
+## Chapter content
 
 ::: ranobelib.chapter_image_urls
 
 ::: ranobelib.rewrite_image_urls
+
+::: ranobelib.chapter_paragraphs
 
 ## Exporters
 

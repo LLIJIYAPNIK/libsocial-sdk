@@ -27,6 +27,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`12_catalog_listing.py`](12_catalog_listing.py) | `Catalog.list_titles()` — browsing/searching the catalog |
 | [`13_chapter_footnotes.py`](13_chapter_footnotes.py) | `Chapter.footnotes` — translator footnotes, separate from the text |
 | [`14_chapter_images.py`](14_chapter_images.py) | `chapter_image_urls()` / `rewrite_image_urls()` — listing and rewriting a chapter's image URLs |
+| [`15_chapter_paragraphs.py`](15_chapter_paragraphs.py) | `chapter_paragraphs()` — a chapter's top-level blocks as plain text, indexed like the DOM |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/reference/)
 for every public class/method, including `AuthRequiredError` and `RateLimitError`, which
