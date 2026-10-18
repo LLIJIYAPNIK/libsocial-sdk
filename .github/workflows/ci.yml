@@ -70,6 +70,60 @@ jobs:
       - run: uv build --package libsocial-core
       - run: uv build --package ranobelib-python-sdk
 
+  # The tests above use the workspace's libsocial-core, which is always "released enough".
+  # This installs each facade the way a user would, with the newest libsocial-core on PyPI
+  # its constraint allows (--no-sources ignores [tool.uv.sources]), and runs its tests — so a
+  # facade that needs a core change not released yet fails here rather than after its own
+  # release.
+  facade-vs-published-core:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [ranobelib]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install WeasyPrint system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libcairo2
+      - uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+      # Bootstrap only: until libsocial-core's first release there is nothing to test
+      # against, and the release workflow that publishes it is what this check runs beside.
+      - name: Check libsocial-core is on PyPI
+        id: core
+        run: |
+          if curl -sf https://pypi.org/pypi/libsocial-core/json > /dev/null; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::libsocial-core isn't on PyPI yet, skipping until its first release (core-v1.0.0)."
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install the facade with libsocial-core from PyPI
+        if: steps.core.outputs.published == 'true'
+        run: |
+          uv venv --python 3.12 .venv-published
+          uv pip install --python .venv-published --no-sources \
+            "./packages/${{ matrix.package }}" \
+            --group "packages/${{ matrix.package }}/pyproject.toml:dev"
+          uv pip show --python .venv-published libsocial-core
+      - name: Test the facade
+        if: steps.core.outputs.published == 'true'
+        run: .venv-published/bin/python -m pytest "packages/${{ matrix.package }}/tests" --record-mode=none
+
+  release-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+      # prepend: the tests import release_package.py from their own directory.
+      - run: uv run pytest .github/scripts --import-mode=prepend
+
   docs:
     runs-on: ubuntu-latest
     steps:
