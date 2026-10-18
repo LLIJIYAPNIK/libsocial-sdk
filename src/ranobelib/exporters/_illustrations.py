@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import html
+from collections.abc import Callable
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -62,7 +63,7 @@ def extract_image_urls(html_fragment: str) -> list[str]:
 
 
 class _ImageSrcRewriter(HTMLParser):
-    """Re-emits chapter-content HTML with ``<img src="...">`` URLs replaced per a mapping.
+    """Re-emits chapter-content HTML with each ``<img src="...">`` passed through a function.
 
     Rebuilds the markup tag-by-tag (rather than a targeted regex substitution) for the same
     reason the txt/fb2 exporters use ``HTMLParser`` over regex: HTML-string-format chapters
@@ -71,15 +72,13 @@ class _ImageSrcRewriter(HTMLParser):
     for epub, WeasyPrint's own HTML parser for pdf) are lenient enough not to need strict
     XHTML here.
 
-    An ``<img>`` whose URL isn't in ``url_to_local`` (download failed or was never
-    attempted) is dropped entirely rather than kept pointing at the original external URL —
-    a dangling absolute-URL reference isn't a self-contained embed, just a broken-looking
-    image in most consumers, so "not embedded" reads as "not present" instead.
+    ``replace`` gets each ``<img>``'s ``src`` (``""`` if it has none) and returns the new
+    value, or ``None`` to drop that ``<img>`` entirely.
     """
 
-    def __init__(self, url_to_local: dict[str, str]) -> None:
+    def __init__(self, replace: Callable[[str], str | None]) -> None:
         super().__init__(convert_charrefs=True)
-        self._url_to_local = url_to_local
+        self._replace = replace
         self._output: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -90,10 +89,10 @@ class _ImageSrcRewriter(HTMLParser):
 
     def _emit(self, tag: str, attrs: list[tuple[str, str | None]], *, self_closing: bool) -> None:
         if tag == "img":
-            local_src = self._url_to_local.get(dict(attrs).get("src") or "")
-            if local_src is None:
+            new_src = self._replace(dict(attrs).get("src") or "")
+            if new_src is None:
                 return
-            attrs = [(name, local_src if name == "src" else value) for name, value in attrs]
+            attrs = [(name, new_src if name == "src" else value) for name, value in attrs]
 
         parts = [f"<{tag}"]
         for name, value in attrs:
@@ -115,11 +114,25 @@ class _ImageSrcRewriter(HTMLParser):
         return "".join(self._output)
 
 
-def rewrite_image_srcs(html_fragment: str, url_to_local: dict[str, str]) -> str:
-    """Rewrite ``<img src="...">`` URLs in ``html_fragment`` per ``url_to_local``."""
-    rewriter = _ImageSrcRewriter(url_to_local)
+def replace_image_srcs(html_fragment: str, replace: Callable[[str], str | None]) -> str:
+    """Pass every ``<img src="...">`` in ``html_fragment`` through ``replace``.
+
+    ``replace`` returns the new ``src``, or ``None`` to drop that ``<img>``.
+    """
+    rewriter = _ImageSrcRewriter(replace)
     rewriter.feed(html_fragment)
     return rewriter.get_html()
+
+
+def rewrite_image_srcs(html_fragment: str, url_to_local: dict[str, str]) -> str:
+    """Rewrite ``<img src="...">`` URLs in ``html_fragment`` per ``url_to_local``.
+
+    An ``<img>`` whose URL isn't in ``url_to_local`` (download failed or was never
+    attempted) is dropped entirely rather than kept pointing at the original external URL —
+    a dangling absolute-URL reference isn't a self-contained embed, just a broken-looking
+    image in most consumers, so "not embedded" reads as "not present" instead.
+    """
+    return replace_image_srcs(html_fragment, url_to_local.get)
 
 
 def pick_cover_url(cover: Cover) -> str | None:
