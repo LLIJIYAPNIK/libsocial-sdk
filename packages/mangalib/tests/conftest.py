@@ -39,3 +39,5 @@ def _no_request_pacing(monkeypatch: pytest.MonkeyPatch) -> None:
     itself is covered by libsocial-core's own tests.
     """
     monkeypatch.setattr("libsocial.client.DEFAULT_REQUEST_DELAY", 0.0)
+    # Same for page images: MangaLib reads the image delay when it creates its fetcher.
+    monkeypatch.setattr("mangalib.images.DEFAULT_IMAGE_REQUEST_DELAY", 0.0)

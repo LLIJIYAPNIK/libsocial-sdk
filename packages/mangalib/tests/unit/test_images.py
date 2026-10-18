@@ -1,4 +1,4 @@
-"""Unit tests for mangalib.images: page URLs, server order and fallback (no network)."""
+"""Unit tests for mangalib.images: page URLs, server order, pacing, retries, fallback."""
 
 from collections.abc import Callable
 
@@ -6,7 +6,7 @@ import httpx
 import pytest
 
 from mangalib import PageDownloadError, page_url
-from mangalib.images import DEFAULT_SERVER_ORDER, download_page, server_order
+from mangalib.images import DEFAULT_SERVER_ORDER, ImageFetcher, server_order
 from mangalib.models import ImageServer, Page
 
 MAIN = ImageServer(id="main", label="Первый", url="https://img2.imglib.info")
@@ -47,49 +47,159 @@ def test_no_known_server_raises_value_error() -> None:
         server_order([CROP], None)
 
 
-def _client(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+class _Sleeps:
+    """Records sleeps instead of waiting."""
+
+    def __init__(self) -> None:
+        self.delays: list[float] = []
+
+    async def __call__(self, delay: float) -> None:
+        self.delays.append(delay)
 
 
-async def test_download_page_returns_first_image_served() -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.host == "img3.cdnlibs.org"
-        return httpx.Response(200, content=JPEG, headers={"Content-Type": "image/jpeg"})
+def _fetcher(
+    handler: Callable[[httpx.Request], httpx.Response], *, request_delay: float = 0.0
+) -> tuple[ImageFetcher, _Sleeps]:
+    sleeps = _Sleeps()
+    client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    return ImageFetcher(client, request_delay=request_delay, sleep=sleeps), sleeps
 
-    async with _client(handler) as client:
-        assert await download_page(client, PAGE, [COMPRESS, MAIN]) == JPEG
+
+def _jpeg(request: httpx.Request) -> httpx.Response:
+    return httpx.Response(200, content=JPEG, headers={"Content-Type": "image/jpeg"})
 
 
-async def test_download_page_falls_back_past_html_403_and_network_errors() -> None:
+def _html_403(request: httpx.Request) -> httpx.Response:
+    return httpx.Response(
+        403, text="<html>403</html>", headers={"Content-Type": "text/html; charset=utf-8"}
+    )
+
+
+async def test_download_returns_first_image_served() -> None:
+    fetcher, sleeps = _fetcher(_jpeg)
+
+    assert await fetcher.download(PAGE, [COMPRESS, MAIN]) == JPEG
+    assert sleeps.delays == []
+
+
+async def test_download_falls_back_at_once_past_a_refusal() -> None:
     hosts: list[str] = []
 
     def handler(request: httpx.Request) -> httpx.Response:
         hosts.append(request.url.host)
-        if request.url.host == "img2.imglib.info":
-            return httpx.Response(
-                403, text="<html>403</html>", headers={"Content-Type": "text/html; charset=utf-8"}
-            )
-        if request.url.host == "crops.mangalib.me":
+        return _html_403(request) if request.url.host == "img2.imglib.info" else _jpeg(request)
+
+    fetcher, sleeps = _fetcher(handler)
+
+    assert await fetcher.download(PAGE, [MAIN, COMPRESS]) == JPEG
+    assert hosts == ["img2.imglib.info", "img3.cdnlibs.org"]
+    assert sleeps.delays == []  # a 403 isn't retried
+
+
+@pytest.mark.parametrize(
+    "failure",
+    [
+        lambda request: httpx.Response(429, text="<html>429</html>"),
+        lambda request: httpx.Response(503),
+    ],
+)
+async def test_download_retries_429_and_5xx_with_backoff_on_the_same_server(
+    failure: Callable[[httpx.Request], httpx.Response],
+) -> None:
+    calls = 0
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        return failure(request) if calls <= 2 else _jpeg(request)
+
+    fetcher, sleeps = _fetcher(handler)
+
+    assert await fetcher.download(PAGE, [COMPRESS]) == JPEG
+    assert sleeps.delays == [1.0, 2.0]
+
+
+async def test_download_retries_a_broken_connection() -> None:
+    calls = 0
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise httpx.RemoteProtocolError("illegal status line", request=request)
+        return _jpeg(request)
+
+    fetcher, _ = _fetcher(handler)
+
+    assert await fetcher.download(PAGE, [COMPRESS]) == JPEG
+
+
+async def test_download_falls_back_once_a_servers_retries_run_out() -> None:
+    hosts: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        hosts.append(request.url.host)
+        if request.url.host == "img3.cdnlibs.org":
             raise httpx.ConnectError("unreachable", request=request)
-        return httpx.Response(200, content=JPEG, headers={"Content-Type": "image/jpeg"})
+        return _jpeg(request)
 
-    async with _client(handler) as client:
-        assert await download_page(client, PAGE, [MAIN, CROP, COMPRESS]) == JPEG
-    assert hosts == ["img2.imglib.info", "crops.mangalib.me", "img3.cdnlibs.org"]
+    fetcher, sleeps = _fetcher(handler)
+
+    assert await fetcher.download(PAGE, [COMPRESS, MAIN]) == JPEG
+    assert hosts == ["img3.cdnlibs.org"] * 4 + ["img2.imglib.info"]
+    assert sleeps.delays == [1.0, 2.0, 4.0]
 
 
-async def test_download_page_raises_after_every_server_failed() -> None:
+async def test_download_raises_after_every_server_failed() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.host == "img2.imglib.info":
             return httpx.Response(200, text="<html>challenge</html>")
         return httpx.Response(404)
 
-    async with _client(handler) as client:
-        with pytest.raises(PageDownloadError) as exc_info:
-            await download_page(client, PAGE, [MAIN, COMPRESS])
+    fetcher, _ = _fetcher(handler)
+    with pytest.raises(PageDownloadError) as exc_info:
+        await fetcher.download(PAGE, [MAIN, COMPRESS])
 
     failures = exc_info.value.failures
     assert [url for url, _ in failures] == [page_url(PAGE, MAIN), page_url(PAGE, COMPRESS)]
     assert "not an image" in failures[0][1]
     assert failures[1][1] == "HTTP 404 (no type)"
     assert page_url(PAGE, COMPRESS) in str(exc_info.value)
+
+
+async def test_requests_are_paced_per_image_host() -> None:
+    host = "pacing-test.example"  # no other test uses it: its pacer starts idle
+    server = ImageServer(id="compress", label="x", url=f"https://{host}")
+    fetcher, sleeps = _fetcher(_jpeg, request_delay=10.0)
+
+    await fetcher.download(PAGE, [server])
+    await fetcher.download(PAGE, [server])
+
+    assert len(sleeps.delays) == 1
+    assert 9.0 < sleeps.delays[0] <= 10.0
+
+
+async def test_size_reads_content_length_from_a_head_request() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.method == "HEAD"
+        return httpx.Response(
+            200, headers={"Content-Type": "image/jpeg", "Content-Length": "478689"}
+        )
+
+    fetcher, _ = _fetcher(handler)
+
+    assert await fetcher.size(PAGE, [COMPRESS]) == 478689
+
+
+async def test_size_falls_back_when_a_server_sends_no_content_length() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == "img3.cdnlibs.org":
+            return httpx.Response(200, headers={"Content-Type": "image/jpeg"})
+        return httpx.Response(200, headers={"Content-Type": "image/jpeg", "Content-Length": "5"})
+
+    fetcher, _ = _fetcher(handler)
+
+    assert await fetcher.size(PAGE, [COMPRESS, MAIN]) == 5
+
+    with pytest.raises(PageDownloadError, match="no Content-Length"):
+        await fetcher.size(PAGE, [COMPRESS])
