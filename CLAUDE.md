@@ -233,6 +233,7 @@ ranobelib-python-sdk/
 │       ├── cache.py              # дисковый кэш сырых ответов API
 │       ├── numbering.py          # сортировка/сравнение номеров глав, парсинг URL тайтла
 │       ├── catalog.py            # класс Catalog — листинг/поиск по каталогу (не по тайтлу)
+│       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
 │       └── exporters/
 │           ├── __init__.py       # Protocol Exporter + реестр форматов
 │           ├── txt.py
@@ -260,7 +261,8 @@ ranobelib-python-sdk/
 │   ├── 10_export_formats.py
 │   ├── 11_error_handling.py       # рабочие, подробно закомментированные скрипты — см. шаг 19
 │   ├── 12_catalog_listing.py      # Catalog.list_titles() — см. шаг 24
-│   └── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
+│   ├── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
+│   └── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -1232,5 +1234,24 @@ owner/repo/workflow-file/environment) — это может сделать то�
     игнорирует, а `latest-updates` не фильтруется. Изменена только документация
     (докстринг `Title.chapter_count` и `docs/api-notes.md`), поведение SDK то же. Отдельный
     `get_info()` на каждую карточку (N+1) issue отверг сам.
+
+37. **Публичные хелперы для картинок главы** (issue #76, снова `ranobelib-companion` —
+    офлайн-чтение в PWA: картинки глав нужно отдать через свой same-origin прокси и знать
+    заранее, что кэшировать; cross-origin ответы service worker полезно сохранить не может).
+    - Новый модуль `images.py`: `chapter_image_urls(chapter) -> list[str]` — все `<img src>`
+      из `content`, затем из `footnotes`, в порядке документа, без повторов (первое
+      вхождение); `rewrite_image_urls(chapter, replace) -> Chapter` — копия
+      (`model_copy`, без повторной валидации — валидатор `Chapter` заново извлекал бы сноски)
+      с каждым `src` в `content`/`footnotes`, пропущенным через `replace`, значение
+      экранируется как атрибут. Оба кидают `ValueError` на `content is None`, как
+      `chapter_size()`. Сигнатуры — ровно как в issue.
+    - Парсинг не дублируется: приватный `_ImageSrcRewriter` в `exporters/_illustrations.py`
+      обобщён с маппинга на функцию (`replace_image_srcs()`; `None` из функции — выбросить
+      `<img>`), `rewrite_image_srcs()` для epub/pdf стал тонкой обёрткой над ним с прежним
+      поведением. Перечисление — тот же `extract_image_urls()`, что у `chapter_size()`.
+    - `replace` вызывается на каждый `<img>` (без кэширования по URL — дёшево и
+      предсказуемо); `<img>` без `src` остаётся как есть, функция для него не вызывается.
+    - Оба ре-экспортированы из `ranobelib/__init__.py` — тот же принцип, что
+      `chapter_size`/`volume_size` (шаг 22): обычный юзкейс поверх скачанной главы.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

@@ -14,6 +14,7 @@ from ranobelib.exceptions import (
     TitleNotFoundError,
     VolumeNotFoundError,
 )
+from ranobelib.images import chapter_image_urls, rewrite_image_urls
 from ranobelib.models import (
     CatalogPage,
     Chapter,
@@ -51,6 +52,8 @@ __all__ = [
     "TitleNotFoundError",
     "Volume",
     "VolumeNotFoundError",
+    "chapter_image_urls",
     "chapter_size",
+    "rewrite_image_urls",
     "volume_size",
 ]

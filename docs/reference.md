@@ -52,6 +52,12 @@
 
 ::: ranobelib.volume_size
 
+## Chapter images
+
+::: ranobelib.chapter_image_urls
+
+::: ranobelib.rewrite_image_urls
+
 ## Exporters
 
 Not re-exported from the top-level `ranobelib` package — import from `ranobelib.exporters`.
