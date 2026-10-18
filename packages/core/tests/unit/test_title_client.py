@@ -6,7 +6,7 @@ site.
 """
 
 import io
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -538,7 +538,7 @@ def test_plan_chapters_separates_resolved_and_unresolved(site: Site, tmp_path: P
     planned, unresolved = client._plan_chapters(toc, branch_id=6, translation_index=None)
 
     assert planned == [PlannedChapter("1", "1", None), PlannedChapter("1", "2", 6)]
-    assert [chapter.number for chapter in unresolved] == ["3"]
+    assert [chapter["number"] for chapter in unresolved] == ["3"]
     with pytest.raises(ValueError):
         client._plan_chapters(toc, branch_id=6, translation_index=0)
 
@@ -562,6 +562,23 @@ async def test_client_uses_its_site_and_merges_headers(site: Site, tmp_path: Pat
     assert sent["Site-Id"] == str(site.id)
     assert sent["Origin"] == site.origin
     assert sent.get_list("User-Agent") == ["Agent/1"]
+
+
+async def test_requests_go_through_the_client_the_subclass_creates(
+    site: Site, tmp_path: Path
+) -> None:
+    api = _FakeApi(site)
+
+    class Client(_client_class(site)):  # type: ignore[misc, valid-type]
+        def _create_client(self, headers: Mapping[str, str] | None) -> ApiClient:
+            return ApiClient(
+                self.site, headers=headers, transport=httpx.MockTransport(api), pacer=Pacer()
+            )
+
+    async with Client(SLUG, cache_dir=tmp_path, headers={"X-Extra": "yes"}) as client:
+        await client.get_info()
+
+    assert api.requests[0].headers["X-Extra"] == "yes"
 
 
 def test_client_uses_the_subclass_default_cache_dir(site: Site, tmp_path: Path) -> None:

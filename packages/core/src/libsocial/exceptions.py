@@ -154,6 +154,10 @@ class AuthRequiredError(LibSocialError):
         super().__init__(f"Authorization required to access: {url}")
 
 
+DEFAULT_HEADERS_HINT = "the client's headers= parameter"
+"""``AccessBlockedError``'s suggestion of where to pass headers, unless told otherwise."""
+
+
 class AccessBlockedError(LibSocialError):
     """Raised when the site's edge protection rejects a request before it reaches the API.
 
@@ -170,12 +174,19 @@ class AccessBlockedError(LibSocialError):
         url: The request URL that returned 403.
     """
 
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, *, headers_hint: str = DEFAULT_HEADERS_HINT) -> None:
+        """Initialize the error.
+
+        Args:
+            url: The request URL that returned 403.
+            headers_hint: Where to pass different headers, as the message suggests it — a
+                site package names its own entry points (see ``ApiClient.headers_hint``).
+        """
         self.url = url
         super().__init__(
             f"Request blocked by the site's protection (not an authorization issue): {url}. "
             "The site may have changed which requests it accepts: check for an SDK update, "
-            "or send different headers via the client's headers= parameter. "
+            f"or send different headers via {headers_hint}. "
             "If the same URL doesn't open in a browser on this network "
             "either, the IP itself is blocked and no header change will help."
         )

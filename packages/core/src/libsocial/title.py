@@ -140,11 +140,19 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
         """
         self._slug_url = parse_slug_url(url)
         self._headers = dict(headers) if headers is not None else None
-        self._client = ApiClient(self.site, headers=self._headers)
+        self._client = self._create_client(self._headers)
         self._cache = DiskCache(
             cache_dir if cache_dir is not None else self.default_cache_dir, ttl=cache_ttl
         )
         self._reporter = Reporter(verbosity)
+
+    def _create_client(self, headers: Mapping[str, str] | None) -> ApiClient:
+        """The ``ApiClient`` requests go through — a site package may return its own subclass.
+
+        Args:
+            headers: The ``headers`` passed to the constructor.
+        """
+        return ApiClient(self.site, headers=headers)
 
     @property
     def slug_url(self) -> str:
@@ -367,7 +375,19 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
             raw_chapters, branch_id=branch_id, translation_index=translation_index
         )
         if unresolved:
-            raise MultipleTitleTranslationsError(self._slug_url, chapters=unresolved)
+            raise MultipleTitleTranslationsError(
+                self._slug_url,
+                chapters=[
+                    AmbiguousChapter(
+                        volume=item["volume"],
+                        number=item["number"],
+                        branches=[
+                            ChapterBranch.model_validate(branch) for branch in item["branches"]
+                        ],
+                    )
+                    for item in unresolved
+                ],
+            )
 
         chapters: list[ChapterT] = []
         total = len(planned)
@@ -408,7 +428,7 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
         *,
         branch_id: int | None,
         translation_index: int | None,
-    ) -> tuple[list[PlannedChapter], list[AmbiguousChapter]]:
+    ) -> tuple[list[PlannedChapter], list[dict[str, Any]]]:
         """Decide which translation to fetch for every chapter of a title-wide operation.
 
         Chapters with a single translation are planned as-is; those with more are resolved
@@ -417,7 +437,9 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
         (``download_title()``) or just a chapter to skip (a size estimate).
 
         Returns:
-            The planned chapters, in the API's order, and the unresolved ones.
+            The planned chapters, in the API's order, and the unresolved ones as their raw
+            chapter-list entries — left unvalidated, so a caller that only skips them (a
+            size estimate) doesn't fail on a branch it was never going to use.
 
         Raises:
             ValueError: If both ``branch_id`` and ``translation_index`` are given — callers
@@ -427,7 +449,7 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
         self._check_translation_selectors(branch_id, translation_index)
 
         planned: list[PlannedChapter] = []
-        unresolved: list[AmbiguousChapter] = []
+        unresolved: list[dict[str, Any]] = []
         for item in raw_chapters:
             volume_str: str = item["volume"]
             number: str = item["number"]
@@ -442,13 +464,7 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
             if resolved:
                 planned.append(PlannedChapter(volume_str, number, selected))
             else:
-                unresolved.append(
-                    AmbiguousChapter(
-                        volume=volume_str,
-                        number=number,
-                        branches=[ChapterBranch.model_validate(branch) for branch in branches],
-                    )
-                )
+                unresolved.append(item)
         return planned, unresolved
 
     async def _build_volume(self, volume: int, raw_chapters: list[dict[str, Any]]) -> VolumeT:

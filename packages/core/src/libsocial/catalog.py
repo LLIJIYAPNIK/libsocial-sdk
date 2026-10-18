@@ -28,15 +28,15 @@ MAX_PER_PAGE = 60
 class Catalog(Generic[TitleT]):
     """Listing/searching one site's catalog.
 
-    Not used directly: a site package subclasses it, setting ``site`` and ``title_model``
+    Not used directly: a site package subclasses it, setting ``site`` and ``page_model``
     (and optionally ``default_cache_dir``) as class attributes — so its own ``Catalog``
-    keeps a plain constructor and returns its own ``Title`` model.
+    keeps a plain constructor and returns its own page and ``Title`` models.
 
     Example:
         ```python
         class RanobeLibCatalog(Catalog[Title]):
             site = Site(id=3, origin="https://ranobelib.me")
-            title_model = Title
+            page_model = CatalogPage[Title]
 
         async with RanobeLibCatalog() as catalog:
             page = await catalog.list_titles(query="dxd", genres=[34], statuses=[1])
@@ -46,12 +46,14 @@ class Catalog(Generic[TitleT]):
 
     Attributes:
         site: The site whose catalog is listed. Set by the subclass.
-        title_model: The model catalog items are validated as. Set by the subclass.
+        page_model: The model a listing page is validated as — ``CatalogPage[ItsTitle]``
+            or a subclass of it, which also decides the model of its items. Set by the
+            subclass.
         default_cache_dir: ``cache_dir`` used when none is passed.
     """
 
     site: Site
-    title_model: type[TitleT]
+    page_model: type[CatalogPage[TitleT]]
     default_cache_dir: Path = DEFAULT_CACHE_DIR
 
     def __init__(
@@ -74,10 +76,18 @@ class Catalog(Generic[TitleT]):
             headers: Extra HTTP headers merged over the SDK's defaults, same as
                 ``TitleClient(headers=...)`` — see there.
         """
-        self._client = ApiClient(self.site, headers=headers)
+        self._client = self._create_client(headers)
         self._cache = DiskCache(
             cache_dir if cache_dir is not None else self.default_cache_dir, ttl=cache_ttl
         )
+
+    def _create_client(self, headers: Mapping[str, str] | None) -> ApiClient:
+        """The ``ApiClient`` requests go through — a site package may return its own subclass.
+
+        Args:
+            headers: The ``headers`` passed to the constructor.
+        """
+        return ApiClient(self.site, headers=headers)
 
     async def __aenter__(self) -> Self:
         return self
@@ -154,8 +164,7 @@ class Catalog(Generic[TitleT]):
                 combination of parameters was already cached.
 
         Returns:
-            A ``CatalogPage``: the matching titles (as ``title_model`` models) plus whether a
-            next page exists.
+            A ``page_model`` page: the matching titles plus whether a next page exists.
 
         Raises:
             ValueError: If ``page`` is less than 1, ``per_page`` is outside
@@ -297,10 +306,13 @@ class Catalog(Generic[TitleT]):
         return _for_site(Label, data, self.site)
 
     def _build_page(self, data: dict[str, Any]) -> CatalogPage[TitleT]:
-        items = [self.title_model.model_validate(item) for item in data["data"]]
         meta = data["meta"]
-        return CatalogPage[TitleT](
-            items=items, page=meta["current_page"], has_next_page=meta["has_next_page"]
+        return self.page_model.model_validate(
+            {
+                "items": data["data"],
+                "page": meta["current_page"],
+                "has_next_page": meta["has_next_page"],
+            }
         )
 
 

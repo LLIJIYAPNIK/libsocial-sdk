@@ -1,6 +1,6 @@
 """Site-independent core of the lib.social SDKs (ranobelib.me, mangalib.me, ...)."""
 
-from libsocial._http import browser_headers
+from libsocial._http import browser_headers, browser_headers_for
 from libsocial.cache import CacheStats, cache_stats, clear_cache
 from libsocial.catalog import Catalog
 from libsocial.client import ApiClient
@@ -73,6 +73,7 @@ __all__ = [
     "Volume",
     "VolumeNotFoundError",
     "browser_headers",
+    "browser_headers_for",
     "cache_stats",
     "clear_cache",
     "parse_slug_url",

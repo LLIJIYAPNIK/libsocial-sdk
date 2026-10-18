@@ -726,3 +726,21 @@ async def test_site_id_and_origin_come_from_the_site(site: Site) -> None:
 
     assert seen[0].headers["Site-Id"] == str(site.id)
     assert seen[0].headers["Origin"] == site.origin
+
+
+async def test_access_blocked_message_names_where_to_pass_headers(site: Site) -> None:
+    class SiteClient(ApiClient):
+        headers_hint = "SiteSDK(..., headers=...)"
+
+    async with _client(site, _edge_403) as generic:
+        with pytest.raises(AccessBlockedError) as generic_error:
+            await generic.get_title("1--example")
+    site_client = SiteClient(
+        site, transport=httpx.MockTransport(_edge_403), sleep=_no_sleep, pacer=Pacer()
+    )
+    async with site_client:
+        with pytest.raises(AccessBlockedError) as site_error:
+            await site_client.get_title("1--example")
+
+    assert "via the client's headers= parameter." in str(generic_error.value)
+    assert "via SiteSDK(..., headers=...)." in str(site_error.value)
