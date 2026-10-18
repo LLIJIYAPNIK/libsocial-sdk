@@ -1,0 +1,3696 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/7965--chainsaw-man/chapter?number=1&volume=1&branch_id=4667
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA92cy3LjNhBFfyXFtSUTIPjSB2SZ1awSp1QQSVuMaUoRSXtcLv97GuBDPQ1YFciT
+        FMqz0AwpkcA96G5cUNC8BaXsZbB5C+oy2HAe8SS/CZ4OZdUEm6DYy2NfnYKb4PnQDE8VnGJw0A5P
+        OziLD7ZdVRzaUp5e59NSfbwdmuYm6JrhQZ1eqYt3J9kW+61qTiRJCo3J9kHq4zRP4pugOFWyr8qt
+        7OEaHrJsxfgqjL6xZBOlmzBeh/rP73Cv6vuxPk0fHZtSPT+py2dJ7CZo5E6ruRtCwe7VqwjVa5Tp
+        11KfGc9zfab6Rf9VjAf6VejXWL1OF+tbiESfH2+k343y4B2arB+rblschhZE5JkQALXutuo09Oxe
+        Nl2lTzzX1YvtzLaRXa8JjLJmof3rEaiGN0Ffyacu2PwxjhvjabRgbuvjUQIcRX07nNQ4qvdXq/mN
+        eXTVPdRo6pEKfpsuKw7Pamzfgvu6qab3YrnjVXm/WyW5ECtRyGq1i5hYFZylJWehqHYx3KnfQ2C0
+        slZN7vv+2G3ubu9u9Q3XRdk29a5bH04Pd7fDsTnIsru7VV24u1Xdmz53d/tv2trqltZ/HR+g1bK6
+        l0OjguU/bXNq7QnG739oCGLo+XHOn7LuisMJGh6DoTy0EOFbGJxdg4LncKza7ZSx25e630P8tX3V
+        9tvH6vX86f40VO9/Qh4ObdlUOu/G244n5kaOw66puz2KwR4St2tkXx/a7d+DbOr+dQupVreQ22+B
+        hKiRD6pCpGuV5tPxr4fT05iO0/nnQ19B4HJIfJ2nc4/hHKRqIVt1T7iN6qY67quHw6lWl7wFuAey
+        KIaTLFS5ydcq+KBqlHJX627Bv4697ql+O4W3q7JWXd3e6w6NvYYrU5WtQzdG/FlDaFWgztr7ABn5
+        Ufvwlq3t8B0aHtMZldkjIDyntYjTFKoUVIqnEW0Yro+g4VR1UzSOlRXAVd+hTrcSMg/aK/ZD+zgB
+        HSu4Hua5ul8usBEusMMRpodzLeYCCvEqTL6xaBPFmxh/dF/VD3vIQh4K6PFLXfZ7GFLBoaKPRUjV
+        Al3rIdX3sm47+bKCY32kZhkoBzBD3N0aIlWQHWAgw3WSxxkM2Fj0RjqqsM50mJUO94kOi0IYoIlO
+        lsPIOcKhGhGcLBY/whHQ1AKHW+HAtOFP6ACbMxwehjC2jnSoSEQnyVWuo9ARAH+hE1npCJ/osIRB
+        KE+hwwGPMx0qcqbD1lEiSGIJaGuhI6x0ILP9iZ1PJxbVOMOBqmMmFqTNAie2wkm+FByq8SIcyJoF
+        TmKFA5O/t5EDA+dYdKhGDCfnpOhA0ixwUiscmD29heM+mVONGE4WEzjAfoGTWeHAlOAtHPfpimpE
+        cHJG4UDSLHByKxwGU4K3dKAqOOYVFYnoZCmdzJFLZh+4ZK9s8mfnK0MkpmMYQeSSGfVI0xrCZ5sM
+        fXOLHUMkppOQmhwjm8yoR5roeOWTSew4F2VDJKZDi3KMbDKjJmmi45dP/nGJ5Vx3DJGYDq07MbLJ
+        jLqkic6X8smGSEyH1p0Y+WRGbdJEx2ej7J5ZVCSmY2QWMsqM+qSJjs9O2dnvGCIRHcPvxAB/9juM
+        GqWJzpeyyoZIRCczYgdZZZav6FOhiY/Pbtn50ZdFJiZk1B7kl+FSu+vhPjtmEODoekyZiFAehj8u
+        t2LkmbndM3OPPXMGk4sbH0MkopPSlXqMPDPX+QVP/8e84h575cz5seAiDtNI1NeY6GFpgjwy/yCX
+        PPbImXO1MURiOtQFJsgjc/sKgnvskVPnSmOIxHREQmIHeWSuVxDnTPLZG0N5dKwvszhEIw/Jg/UE
+        eWJuXzFwfz0xTCLOVKhITIdHJFaQJ+bUTE/V12dP7J5JVCSmQ2dstT1m9sTcvmLg/nria2KHisR0
+        jNhBnpjbVwzcX0d8DR0q8iIdCM0lduij1TGzIn/d8DV0qMiLdJAXjuxeOPLYC7tvJDBEIjrG951q
+        T+AcO5F9rRn564mviB1DJKKT07qTIm8c2b1x5K83voYOFXmRDvLGkd0bRx574ysyi4pEdIzMSpE3
+        juxP1yN/PfI1sUNFIjpmZiGvDPvSbHvfoi/llQ2RF+kgrxxRGznN6P565Wtih4q8SAd55YjayImO
+        v175iq2BhkhEx6w7yCtH1EZOdPz1ylnuvDY3RCI6xhpdPRBZ/A61kSMdtbfS270WMHJuTy4iKhLT
+        oTtRUuSVhfbKy/MctafSUypX1JtFHKZhuD/kjYXdG6u9lJ5SuSKTDJGYDn3apR5Hz5kkqG2cMslf
+        b3wNHSryIh3kjQW1jRMdf70xS1Pov1uhMVTOeNQeZJpaGTLH8LujD5LLX3t8xSRukTkTsm1EVt+B
+        Leklxi85z8XYX2uc5c5TFJDRqQXyEBFj20CGTLHQS4YzD3/NMEvVJjTHVJrVzTgghQTd25YhFyyo
+        fZ4qjMcu2P07XkPkTAfSx/iON0MuWNjXCOqXm97O3e7ll4pEdIw1QoZcsLCvEVTU/kQ6Cfpt7xU/
+        PWNcPcGef1x1RUZRkYhOztiP31Rl2AVT+zxmlto6+YXoUJEX6SBXHNufp6utk1+HjiHyEp0cueLY
+        bmvU1skvRIeKvEgHueJMp+Qyhcc/1w1/tt6E6kHB/FNX+M8FXKfwRd0ZR54kZPtEjlxwTnNwKjQ/
+        1wN/FgtXJGYsqdrI6eZsDJUzHrYW8Ivi4P3P9/d/AIw35PO5QgAA
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:57:56 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=ti1TAuqfroqaktVA; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      - __ddg10_=1792335476; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      - __ddg1_=PryqbOwpW052F4cycHTr; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:56 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '99'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=ti1TAuqfroqaktVA; __ddg10_=1792335476; __ddg9_=31.77.198.108; __ddg1_=PryqbOwpW052F4cycHTr
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/constants?fields%5B%5D=imageServers
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA72Tz26DMAzGX2XKuUoLofvDdY+w46imQAJEIglK6Kap4t3nmB0YYx1T6S6WY1n6
+        fba/nIjgHSfpiSjNK/kk3at0nqTPUBAkJZorQzak4bls4Jkdd0lUhsj2ISY7zGPMc8wfoP3oQnPd
+        da1Ps222VbqKKYRG5VSZ0kKLV518USKgog079JtPoJeFNYK79yl1YGBkcsTGnF1ILaxunfR+Ao0j
+        HOkWI46aDALuUUA5PyqjhTAwqqfWVWdGFfbNNJaLeSgfQe8wRygbBAx7F6P6/jIxhbPtSMgjPG9a
+        cERYyfScoddTzU3Fw0W1hJ6f7rmigWppOq5gt9/3Gl/PQMuoKxtoGfSfDLRMzO8G+uqS0cnW80hN
+        z4hNrmaSpdh1XbKY+uevPSxx7m/DDg99/wF7FFb0NgYAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:57:56 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=LpY0yQKDlkAzFoQe; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      - __ddg10_=1792335476; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:56 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '98'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/00.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '5632'
+      connection:
+      - keep-alive
+      content-length:
+      - '443530'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 13:24:06 GMT
+      ddg-cache-status:
+      - HIT
+      etag:
+      - '"64762515-6c48a"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 16:32:21 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=IoudoMIPxqs7EhZY; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg10_=1792335477; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg1_=xV5RdjlLBqSFKG5yAFsN; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:57 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/02.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '4697'
+      connection:
+      - keep-alive
+      content-length:
+      - '878867'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 13:39:40 GMT
+      ddg-cache-status:
+      - HIT
+      etag:
+      - '"647589e7-d6913"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:30:15 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=nP1fW4w3qyla4y2T; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg10_=1792335477; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg1_=mZY7ndgjmP30VddRHFyb; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:57 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/01.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '4697'
+      connection:
+      - keep-alive
+      content-length:
+      - '268038'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 13:39:40 GMT
+      ddg-cache-status:
+      - HIT
+      etag:
+      - '"64770f7c-41706"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 09:12:28 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=yARUUwhMQDyLz6Gr; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg10_=1792335477; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg1_=2IBTJQ8238M2HGMMoRUs; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:57 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/03.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '643630'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:57 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64770f81-9d22e"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 09:12:33 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=e8P62QOo4OBqDuBA; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg10_=1792335477; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg1_=7H4tfqVhZh1vb37DHvge; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:57 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/04.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '247910'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:57 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64768885-3c866"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 23:36:37 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=lHmJ6WEpOZKWKA5J; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg10_=1792335477; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:57 GMT
+      - __ddg1_=HXCjAul1YkaQoMGa6ohk; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:57:57 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=IoudoMIPxqs7EhZY; __ddg10_=1792335477; __ddg9_=31.77.198.108; __ddg1_=xV5RdjlLBqSFKG5yAFsN
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/05.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '236373'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64770f85-39b55"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 09:12:37 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=0qw8utAWS212eFaF; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=yARUUwhMQDyLz6Gr; __ddg10_=1792335477; __ddg9_=31.77.198.108; __ddg1_=2IBTJQ8238M2HGMMoRUs
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/07.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '262098'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758a35-3ffd2"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:31:33 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=epbzct1f9dWz3TJo; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=e8P62QOo4OBqDuBA; __ddg10_=1792335477; __ddg9_=31.77.198.108; __ddg1_=7H4tfqVhZh1vb37DHvge
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/08.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '291546'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758a57-472da"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:32:07 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=gxlTbmuKmR8X8I6E; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=lHmJ6WEpOZKWKA5J; __ddg10_=1792335477; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/09.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '309220'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758a63-4b7e4"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:32:19 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=DdstTZE1uIBQ1BER; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=nP1fW4w3qyla4y2T; __ddg10_=1792335477; __ddg9_=31.77.198.108; __ddg1_=mZY7ndgjmP30VddRHFyb
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/06.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '283481'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d782-45359"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:22 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=wdO6dTPh8bN9CbMM; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=epbzct1f9dWz3TJo; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/12.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '366267'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475e98f-596bb"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 12:18:23 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=NMT4JufYc4t7i63z; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=DdstTZE1uIBQ1BER; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/14.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '328279'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758aa5-50257"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:33:25 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=VZ8n0INY9fbD4T5N; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=gxlTbmuKmR8X8I6E; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/13.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '322233'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758a9d-4eab9"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:33:17 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=EfZx1H5qwt8OpBrP; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=wdO6dTPh8bN9CbMM; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/15.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '245701'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758aa9-3bfc5"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:33:29 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=hMJNBkemnQcSsWr4; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=0qw8utAWS212eFaF; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/10.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '346537'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d783-549a9"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:23 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=FO1akuisYO8mUwEn; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=NMT4JufYc4t7i63z; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/16.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '323414'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475e9b7-4ef56"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 12:19:03 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=MiljSElDmeT7zaC4; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=VZ8n0INY9fbD4T5N; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/17.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '227037'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475e9cc-376dd"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 12:19:24 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=AvSgX7j9uEM5q2dQ; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=EfZx1H5qwt8OpBrP; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/18.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '361513'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d784-58429"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:24 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=ZSOIOQA9iXF2VW6Q; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=hMJNBkemnQcSsWr4; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/19-1.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '272593'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:58 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758ad9-428d1"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:34:17 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Jpf74ecLPhagImbt; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg10_=1792335478; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:58 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=FO1akuisYO8mUwEn; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/19-2.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '236229'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477ee81-39ac5"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Thu, 01 Jun 2023 01:04:01 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=IZ7xGTeZe8GFwhkj; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=AvSgX7j9uEM5q2dQ; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/21.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '307261'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=C9FBjO1MmZkD1Tz1; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=AvSgX7j9uEM5q2dQ; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/20.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '315236'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d785-4cf64"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:25 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=HiDPqpFhIQYv7eaM; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=ZSOIOQA9iXF2VW6Q; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/22.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '304552'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d785-4a5a8"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:25 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=6VS3GCvggAGV7gU8; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=Jpf74ecLPhagImbt; __ddg10_=1792335478; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/23.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '350343'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d786-55887"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:26 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=VPjYOe4QJE6nNwex; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=IZ7xGTeZe8GFwhkj; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/24.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '363537'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=JptFcLheYzF609S3; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=C9FBjO1MmZkD1Tz1; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/25.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '244250'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477d1a0-3ba1a"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 23:00:48 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=YRNDRzt0KGS0Zsa8; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=VPjYOe4QJE6nNwex; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/28.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '310719'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758d42-4bdbf"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:44:34 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=3CtUlzmsZ7tZty9S; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=VPjYOe4QJE6nNwex; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/26.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '315978'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64758d2f-4d24a"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 05:44:15 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=XlIppMsjwNkKzgqH; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=VPjYOe4QJE6nNwex; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/27.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '312862'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6476214d-4c61e"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 16:16:13 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=zG2ybdw18uEUqU92; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=JptFcLheYzF609S3; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/29.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '241597'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d786-3afbd"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:26 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=hIGFQhw8mRW4ryRm; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=YRNDRzt0KGS0Zsa8; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/30.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '234473'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477d1c7-393e9"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 23:01:27 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=GkVRiF79ozAoiiCk; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=3CtUlzmsZ7tZty9S; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/31.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '347852'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475ae81-54ecc"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 08:06:25 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=5i4ECUtl2eUMjuNA; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=zG2ybdw18uEUqU92; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/33.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '253413'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d787-3dde5"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:27 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=uawZ3acb1Zu3kH4x; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=XlIppMsjwNkKzgqH; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/32.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '286198'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647779ee-45df6"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 16:46:38 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=l1YhX3o7qWVnmLIh; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=hIGFQhw8mRW4ryRm; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/34.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '201964'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647779f1-314ec"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 16:46:41 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=MmrH1cwNM8yocgv9; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=GkVRiF79ozAoiiCk; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/35.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '263125'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d788-403d5"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:28 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=rV6tYg23rVSxvgVe; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=5i4ECUtl2eUMjuNA; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/36.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '201428'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6476c00f-312d4"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 03:33:35 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=dNVblLUAktpZoHMM; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=uawZ3acb1Zu3kH4x; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/37.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '287139'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647740fb-461a3"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 12:43:39 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=ha0VG5p6OD1w4oSy; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=MmrH1cwNM8yocgv9; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/39.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '376408'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477873d-5be58"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 17:43:25 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=mBAJMgfsbBCDfHjy; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=rV6tYg23rVSxvgVe; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/40.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '411229'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=I5SzDXPw5W0U65w1; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=dNVblLUAktpZoHMM; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/41.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '364981'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647648f3-591b5"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 19:05:23 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=vMKNaC3eoeY0I68I; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=ha0VG5p6OD1w4oSy; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/42.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '2'
+      connection:
+      - keep-alive
+      content-length:
+      - '319576'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:57:59 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477d238-4e058"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 23:03:20 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Jk2yZ8oD37wO84L0; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg10_=1792335479; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:17:59 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=mBAJMgfsbBCDfHjy; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/43.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '636176'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647648f4-9b510"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 19:05:24 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Hz2SaLzaRmOS87ju; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=I5SzDXPw5W0U65w1; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/44-1.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '390511'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6476cee0-5f56f"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 04:36:48 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=wJCbtl67OXVbnjgw; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=vMKNaC3eoeY0I68I; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/44-2.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '443990'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=nkhva6sj4Zc2i8sV; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=l1YhX3o7qWVnmLIh; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/38.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '233129'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477d204-38ea9"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 23:02:28 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=oUNMxwXuaNZOa0No; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=Jk2yZ8oD37wO84L0; __ddg10_=1792335479; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/45.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '572202'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=w17m7WbqwfKhnxK9; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=Hz2SaLzaRmOS87ju; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/46.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '204402'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647785fb-31e72"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 17:38:03 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Yto9StFw6C9MFTSh; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=nkhva6sj4Zc2i8sV; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/48.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '295161'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d789-480f9"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:29 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=niGBp9zLCr2TJIh4; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=wJCbtl67OXVbnjgw; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/47.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '230384'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"647785fb-383f0"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 17:38:03 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=DcgRmBoUltY0oP9z; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=w17m7WbqwfKhnxK9; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/50.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '226834'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6476ced9-37612"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Wed, 31 May 2023 04:36:41 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=84X30oXrhsPbGQlo; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=oUNMxwXuaNZOa0No; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/49.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '242353'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"64766f89-3b2b1"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 21:50:01 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Pxi4IHneGPtEElif; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=Yto9StFw6C9MFTSh; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/51.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '260983'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6475d789-3fb77"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Tue, 30 May 2023 11:01:29 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=3vwgVSaJZ1pfqlcP; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=niGBp9zLCr2TJIh4; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/88.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '269651'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=t8EJMT80OmBlIe04; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=DcgRmBoUltY0oP9z; __ddg10_=1792335480; __ddg9_=31.77.198.108; __ddg1_=HXCjAul1YkaQoMGa6ohk
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/chainsaw-man/chapters/1-1/99.png_res.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '428899'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:00 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6477ee89-68b63"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Thu, 01 Jun 2023 01:04:09 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=fcry3wlMKdpPwU62; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg10_=1792335480; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:00 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+version: 1

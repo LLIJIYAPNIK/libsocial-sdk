@@ -156,6 +156,9 @@ class Chapter(_core.Chapter):
     # invariant, so mypy flags the narrower item type, which pydantic itself is fine with.
     branches: list[ChapterBranch] = Field(default_factory=list)  # type: ignore[assignment]
     pages: list[Page] = Field(default_factory=list)
+    teams: list[Team] = Field(default_factory=list)
+    """The teams credited for the fetched translation (empty on the chapter list's entries,
+    where each of ``branches`` has its own)."""
     restricted_view: RestrictedView | None = None
     """Set on a fetched chapter whose translation is (or was) paid or in early access."""
 

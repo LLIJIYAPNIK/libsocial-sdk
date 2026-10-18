@@ -34,6 +34,29 @@ the API returns for MangaLib is in [API notes](api-notes.md#mangalib-mangalib-py
 
 ::: mangalib.images.DEFAULT_SERVER_ORDER
 
+::: mangalib.images.DEFAULT_IMAGE_CONCURRENCY
+
+::: mangalib.images.DEFAULT_IMAGE_REQUEST_DELAY
+
+## Exporters
+
+Not re-exported from the top-level `mangalib` package — import from `mangalib.exporters`.
+A new format is a new module in `mangalib/exporters/` implementing `Exporter`, decorated
+with `@register`. `"pdf"` is registered only when the `pdf` extra (img2pdf) is installed.
+
+::: mangalib.exporters.Exporter
+
+::: mangalib.exporters.register
+
+::: mangalib.exporters.EXPORTERS
+    options:
+      show_root_heading: false
+      show_root_toc_entry: false
+
+::: mangalib.exporters.cbz.CbzExporter
+
+::: mangalib.exporters.pdf.PdfExporter
+
 ## Exceptions
 
 `MangaLibError` is the base class of every error the SDK raises, the same class as

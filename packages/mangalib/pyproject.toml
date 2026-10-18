@@ -26,6 +26,10 @@ dependencies = [
     "pydantic>=2.7",
 ]
 
+[project.optional-dependencies]
+# PDF export. Without it, "pdf" just isn't one of the export formats.
+pdf = ["img2pdf>=0.5"]
+
 [project.urls]
 Homepage = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk"
 Repository = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk"
@@ -47,6 +51,8 @@ libsocial-core = { workspace = true }
 # mangalib-python-sdk` installs the package's own groups, not the root's.
 [dependency-groups]
 dev = [
+    "img2pdf>=0.5",
+    "pypdf>=6.14.2",
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
     "pytest-cov>=5.0",

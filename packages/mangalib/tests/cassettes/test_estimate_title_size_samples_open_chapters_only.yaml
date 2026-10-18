@@ -1,0 +1,1167 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/226780--online-game-god-level-assassin-i-am-the-shadow/chapters
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:58:01 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=WxH2ID7dF3A3b6Ih; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:01 GMT
+      - __ddg10_=1792335481; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:01 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:01 GMT
+      - __ddg1_=S1YJtUTMCO9tRdWaenna; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:01 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Origin, Accept-Encoding
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '97'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=WxH2ID7dF3A3b6Ih; __ddg10_=1792335481; __ddg9_=31.77.198.108; __ddg1_=S1YJtUTMCO9tRdWaenna
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/226780--online-game-god-level-assassin-i-am-the-shadow/chapter?number=3&volume=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA81W3a7iNhB+lZWvMSS288cD9KLXe9Wyihx7QrwEJ00czqIj3r1jG/ZAeyoVaXd1
+        EDJ4PJmfb+Yb55Vo6STZvhKjyZYXjKcpW5HjoKEnW6I6OTqYyIqchn45AopS3Njl2KB0S/j3TT2D
+        GqyW0/mmI4M6Ksz9sr+z3UzSqq72/hjnLEFv0u5lFLC8KFGiJpAOdC0dWmMJy2hS0jT5nFZbzres
+        Wifh8wdah2+jma6qdun7GPzkH7+lla5IL5uQ0G5JRNr6VSR+5WVYdZBEOQsS+BR+VNyEVYQ18+v1
+        4WBC5EEeDYVTXpELujQHmGs1LBaTSKuqXBEz116KgbWynyEITgZe3pPUvZxdACBmdcvTnUcsA2Lk
+        QB5nsv0zlo6VqShuWJOvcnHnA/Uq1wLUy+QLGtQofTy/VfuqbmPlfg82Pn2ONtRw8hV/Ja3pIWrE
+        uFyHzWCl8dY758Z5u9vsNkF9rbTtTTOvh2m/28xOOqN2G3OUe5h3m7GXCrqh1zDhbplhquUJm3Fa
+        j3aPUWto5dL7BvihZo+I/o+0iJU+HR5Mng5rNRx3mwiyz8TMapjQb0RMDxa7s0YUm/6u8sMItr4S
+        rn4xrsPesQ6sqw9wftN20wKXLyvSLFb3EFgTzUbBzcm4NL2Zu7sGcsi7uccaDLb+a5G9cecaaWIQ
+        bCyrxPJiXTCRAiO+7n4bpmMkEinWCcpPgwPsOWzlQLBbuChCjilpvUG04WP0ewf7YTL+iVdy714q
+        tUxS+VFRrSu0i3TXsjEhJvw3+lYZLB6n3ito48Os2xBOjNifIPS+bR7D9w/8O3wvfT8CZNJ/ecej
+        91wnF3QcaXg3IEff1W90zBirRMKR4r7dMZNWCJCCJVTyQlFRAdCyaSqq8qxlLVQlZLD+OvrOjwMT
+        EYVvOHytRGphKKpb7AE9hL9hLIfif5/ZT8zMZcSp///Gawdm3yEJeZ7m6PnFaNdhtXECIviTJ72n
+        e5jgu82AdLdA9zhA6H7QtIcT9FTOM36NpYbKI3Ud0LmTenjBKRGvF6T/NYvd5gmYfPMOGECyTnhV
+        YjdcJ2GEXrxBnzOpWVFIWiRpRoVmglaaAU2ypBAJpEKW7AF6vAE/EvRV4m/Jnw79EzDdQ5/72+4B
+        +uwN+lQmWosSL28lGyqYELTMsRJCMAmyYS3PxQP0yJiPBH2Zpb8C+idguoe+EP+EPn+Dvi0hzcoM
+        KM9KTUXWZFQWVUsbjXOpVEVV8eIBemTMB4Je+De8X9D1T8B0D33ur5+Hrse3r9usL7VOdZaltGxL
+        TgXHrm9yrmmLbzxFxVRTMf4APTLmA0HPWC6wGX76wHkCpjvoc56Ty5fL5W/P3GBruwwAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:58:02 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=5Q65C1aGA0IUPiTr; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      - __ddg10_=1792335482; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '96'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=5Q65C1aGA0IUPiTr; __ddg10_=1792335482; __ddg9_=31.77.198.108; __ddg1_=S1YJtUTMCO9tRdWaenna
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/constants?fields%5B%5D=imageServers
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAACA72T206EMBCGX8X0mrCc1gO3PoKXsjEDHaAJbUnb1ZgN725bTCQrIkZ2b/5MJ9P5
+        ppO/J0LBAMlPhHFo8AnVKypN8meboCQnHJggAemgxM4ei2OUxbXTdO80i3yc+Lj08YMtPypX3BrT
+        67zYFTvGmyS00rEyZKKWtkQzgy+MOlQcpIch+ARqrKSgoN7PqSPDa4oTNm5BrSTvFWp9Bk1i3/zW
+        azQZ4N7H9Tw0DSsqLFSHUjULUCrfRCeBzkNhAr37go67HvMpneT3/xumUrKfDPJojze9dYSeaetq
+        dchBNOB2y3Gh74YGalEYYPY535+SXM5A66gbG2gd9EoGWrmBXw3049XtPNIuDZtdzCRrsdu6ZDX1
+        z1977Dv3t23bwzB8AHsUVvQ2BgAA
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:58:02 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=yO5IHr71v3SjytxO; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      - __ddg10_=1792335482; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:02 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '95'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3723112/8dd1d551-8f83-4344-b63d-face792cb923.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '1124956'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6898f59d-112a5c"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Sun, 10 Aug 2025 19:40:13 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=tm2szd2x1eltVXKx; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg1_=Qdy6HKCfLVUWdkpzI99r; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:03 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3723112/62ad277a-7015-4d24-9d2e-050740e14a82.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '2162784'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6898f456-210060"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Sun, 10 Aug 2025 19:34:46 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=wt8gtBNYZSKQPFca; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg1_=IPI2GYYqtNrm0WdYAtqB; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:03 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3723112/1a0dd488-1cab-4244-867a-442aeab2f364.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '2129202'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6898f4ef-207d32"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Sun, 10 Aug 2025 19:37:19 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=VDfae75wvrKRfKbj; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg1_=i0r9l9d7WlSzj3ozYqp2; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:03 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3723112/f8e1585e-358d-45b5-a79f-bd4038c79937.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '2223118'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6898f55e-21ec0e"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Sun, 10 Aug 2025 19:39:10 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=di8WXuiyHbmQkJSl; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg1_=4Kx0CnixQYeWl139Nncf; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:03 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3723112/f44ea420-a37c-49ee-8bb9-c65f2fe98e5e.jpg
+  response:
+    body:
+      string: ''
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      connection:
+      - keep-alive
+      content-length:
+      - '1661486'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      ddg-cache-status:
+      - MISS
+      etag:
+      - '"6898f456-195a2e"'
+      keep-alive:
+      - timeout=60
+      last-modified:
+      - Sun, 10 Aug 2025 19:34:46 GMT
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=roaHy207ONb1bVHo; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg1_=ScoRfVaHYdAkySiE3dYr; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Mon,
+        18-Oct-2027 14:58:03 GMT
+      x-frame-options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=yO5IHr71v3SjytxO; __ddg10_=1792335482; __ddg9_=31.77.198.108; __ddg1_=S1YJtUTMCO9tRdWaenna
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/226780--online-game-god-level-assassin-i-am-the-shadow/chapter?number=67&volume=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA81X23KjOBD9lSk9R7ZuCOG3eZkvmKddT1G6YdhgYLk4k0r537clYGJnslvrh6Sc
+        SimoJbpbp08fkRfk9KjR7gVVDu24kkTJ7AEdW+drtEO21N3oe/SATm09HT2YKEya6WjAukMy/TXL
+        B2/bxun+ed2k437YMNTT4cK56XVjyzwEZJwzAuF0c9CzgclUgcX2Xo/e5XoEb4ywBFOGKf1Osl2i
+        doRuSPz5A7z7n13VL1ubqa7n7Pvw+nou+oBqbeKJ9hMRtAijIGHkKo4uWmY7ixb/Jf6x8ySOIo5J
+        GJeXowsho312FFd5hs4Qsnr0Q27bqYFDUEEgi2rIgxUSK3Q9+Gg4Vf7pPUte62GMAMynWs85PndQ
+        B8Bo9Po4oN2fc+0klVKsWCPdQJgehy1LAfKpDxWN2zC+Xl/LvWxv5sp9jT6+fJ992PYUSv6Ciqr2
+        yw4puWPaGGydU1hoYnDmCcNSeU5lSrOESwg/lsCXRlchfjmO3bDbb/fb6HBjXVNXZti0/WG/nbq6
+        1W7Yb0Mi+23MddkIs/8RLI+hNn91BwjrfKGnOhDoY4Mu4Y5Q1c+IBMw6PaLdTApXDbbtIfIybRvg
+        fQ71MXXg1NhPQLK2802+tHL+VI0lkLIZfTPmj/75evP5xwMyU+NqH9tx9job1hjdZOpqKC+YOUJD
+        D7Ueq7bJ/550XY3POfRf1UDXvyANvNGHIB1BLJbZt7Y/zh2K0g0B+6kdPZA5fUCxc9d0wQRtY3UT
+        HIKP+UAWng9tX4U3XtBleG3t1GsbNSi4BRlx2lQxJXjqxpgl5ELDqndVyDIvYjZzwmEFIJ6Gme2v
+        2YcXfs8+WN9PADr036LD0nuhyRkCz+19obwdgPfa5kwKylgGGl0dZ1SNFDxVimLHODQhVwxrQTxW
+        GTMJTa2iNtl0UItVHABQ/xNUvdHQkJCKLafmESLEx6j3sfa/LoO3WiwxoZhmQYup2jF2ocVTB9fJ
+        hWz/x9bSV4cSmjNLUwj8VLmxRDtF4HkWqiAR8V7Yb1uQiMbjA8gSPrQO1/7ka6yHAX6rBldYH/FY
+        ejyU2rVPIBjzrQU6spxhv70BpMDcFhhCNkTRIOSzvkbgechvBb6ggqYEkNaSF1hQn+Cs0Bwr57im
+        0nphsivg2V0BryRPPh74G0C6AD5j8i3w4fZcGK+tJ56aFFsjKRbOMaw8ybAuXOp95jUtiivg+V0B
+        nwn+CYy/AaQL4JVQb4EH1q7AWyc5Sa3AzAmPBVz9WOmUYia848QkylF2BTx8kNyR1NDwzfjxlL8B
+        pUvkSbh3rrQGaLsi770HUZcGS2lBa7xRoDWgOlTIzGqoteLyCnlo7TtCPkvJJ2jNDSBdAs/EW+CB
+        tivwxPFMUOMwhQJgkQLwWjuPaWIIT7hLM3ct8vK+gP8Ukb8BpEvg+W+MB5KswEtqsiIhHDteGPjf
+        ArRGyyLBheBes0zqJL3WGvh0vCPGS55BQh/9WXMDSK/AU5ZQdP5xPv8DzJLNFP0PAAA=
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Sun, 18 Oct 2026 14:58:03 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=1JWyPUrKjUjreHxr; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg10_=1792335483; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:03 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '94'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=roaHy207ONb1bVHo; __ddg10_=1792335483; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/eeea406b-66cf-4eb8-9f3f-1469caace836.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '543326'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=CQQxhPPK0f9eb3Hh; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=roaHy207ONb1bVHo; __ddg10_=1792335483; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/cd6307c4-2d4e-42ab-8a71-24ed30b58d12.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '667911'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Xf36KQkh6w3pTcbJ; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=roaHy207ONb1bVHo; __ddg10_=1792335483; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/f141700e-a63f-41e5-9fa3-8dd3a16ce4b9.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '716959'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=FR7SqgL8G0lztz2B; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=roaHy207ONb1bVHo; __ddg10_=1792335483; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/b6437881-d238-4382-a40e-892b517c81c5.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '741368'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=kplr8EEuWxmdaKlu; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=roaHy207ONb1bVHo; __ddg10_=1792335483; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/ace0e1b7-cb61-4dd2-8e09-afd7ee9ea1ff.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '612459'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=bwOdKheR1NVRpFsB; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=CQQxhPPK0f9eb3Hh; __ddg10_=1792335484; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/0d3941bd-1ea4-47b8-aade-15b0353d79d9.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '566310'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=DlbVP37KXlokC14q; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - image/*
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      cookie:
+      - __ddg8_=Xf36KQkh6w3pTcbJ; __ddg10_=1792335484; __ddg9_=31.77.198.108; __ddg1_=ScoRfVaHYdAkySiE3dYr
+      host:
+      - img3.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: HEAD
+    uri: https://img3.cdnlibs.org/manga/online-game-god-level-assassin-i-am-the-shadow/chapters/3860869/61b9f503-d3fb-4aab-a6f5-f43ea296a572.png
+  response:
+    body:
+      string: ''
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '0'
+      cache-control:
+      - max-age=4320000
+      connection:
+      - keep-alive
+      content-length:
+      - '338709'
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - image/jpeg
+      date:
+      - Sun, 18 Oct 2026 14:58:04 GMT
+      ddg-cache-status:
+      - MISS
+      keep-alive:
+      - timeout=60
+      pragma:
+      - public
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=0jxAo93vjTHU2e9P; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg10_=1792335484; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      - __ddg9_=31.77.198.108; Domain=.cdnlibs.org; Path=/; Expires=Sun, 18-Oct-2026
+        15:18:04 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: OK
+version: 1
