@@ -31,7 +31,7 @@ quote-style = "double"
 [tool.mypy]
 python_version = "3.11"
 strict = true
-files = ["packages/core/src", "packages/ranobelib/src"]
+files = ["packages/core/src", "packages/ranobelib/src", "packages/mangalib/src"]
 
 [[tool.mypy.overrides]]
 # ebooklib and weasyprint ship no type stubs / py.typed marker.
@@ -40,13 +40,13 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["packages/core/tests", "packages/ranobelib/tests"]
+testpaths = ["packages/core/tests", "packages/ranobelib/tests", "packages/mangalib/tests"]
 # Each package has its own tests/, with the same conftest.py and test_*.py names in both,
 # which the default "prepend" import mode can't tell apart.
 addopts = ["--import-mode=importlib"]
 
 [tool.coverage.run]
-source = ["libsocial", "ranobelib"]
+source = ["libsocial", "ranobelib", "mangalib"]
 
 [tool.coverage.report]
 fail_under = 95
