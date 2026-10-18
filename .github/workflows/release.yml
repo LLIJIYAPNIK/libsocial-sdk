@@ -1,5 +1,9 @@
 name: Publish to PyPI
 
+# One workflow for every package: the release's tag says which one, <prefix>-vX.Y.Z
+# (core-v1.0.0, ranobelib-v0.14.0, mangalib-v1.0.0) — see .github/scripts/release_package.py.
+# A tag with an unknown prefix, or whose version differs from the package's pyproject.toml,
+# fails the job before anything is built.
 on:
   release:
     types: [published]
@@ -11,13 +15,28 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # The same environment for every package: PyPI's trusted publishers for
+    # ranobelib-python-sdk, libsocial-core and mangalib-python-sdk all name this repository,
+    # release.yml and the "pypi" environment.
     environment:
       name: pypi
-      url: https://pypi.org/project/ranobelib-python-sdk/
+      url: https://pypi.org/project/${{ steps.package.outputs.name }}/${{ steps.package.outputs.version }}/
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - run: uv build --package ranobelib-python-sdk
+      - name: Resolve the package from the tag
+        id: package
+        run: uv run --no-project python .github/scripts/release_package.py "$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+      # Releases are cut from main: refuse a tag on a commit that isn't on it.
+      - name: Check the tag is on main
+        run: |
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::$GITHUB_REF_NAME points at a commit that isn't on main."
+            exit 1
+          fi
+      - run: uv build --package "${{ steps.package.outputs.name }}"
       - run: uv publish --trusted-publishing automatic

@@ -7,35 +7,62 @@ on:
 permissions:
   contents: write
 
+# Releases of different packages published close together would otherwise race to push to
+# main; one at a time, each checks out the main the previous one pushed.
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
 jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
       # Check out `main` explicitly (not `github.ref`, which for a `release: published`
-      # event is the detached tag ref) — regenerating and pushing back requires a branch.
+      # event is the detached tag ref) — updating and pushing back requires a branch.
       - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
           fetch-tags: true
+      - uses: astral-sh/setup-uv@v9.0.0
 
-      - name: Regenerate packages/ranobelib/CHANGELOG.md
-        uses: orhun/git-cliff-action@v4
-        with:
-          config: cliff.toml
-          args: --verbose
+      # Which package the tag releases (see .github/scripts/release_package.py). No version
+      # check: main may already have moved past the released version.
+      - name: Resolve the package from the tag
+        id: package
+        run: uv run --no-project python .github/scripts/release_package.py "$GITHUB_REF_NAME" --no-version-check >> "$GITHUB_OUTPUT"
+
+      # Only this release's section, only from commits touching this package, on top of the
+      # package's own CHANGELOG.md — earlier sections are never regenerated (see cliff.toml).
+      # Re-running for the same tag must not prepend the section a second time.
+      - name: Add the release to the package's CHANGELOG.md
         env:
-          OUTPUT: packages/ranobelib/CHANGELOG.md
+          CHANGELOG: ${{ steps.package.outputs.directory }}/CHANGELOG.md
+          VERSION: ${{ steps.package.outputs.version }}
+          # Feeds remote.github.owner/repo in cliff.toml's links.
           GITHUB_REPO: ${{ github.repository }}
+        run: |
+          if grep -qF -- "## [$VERSION]" "$CHANGELOG"; then
+            echo "$CHANGELOG already has $VERSION, nothing to add"
+            exit 0
+          fi
+          uvx --from git-cliff==2.14.2 git-cliff \
+            --config cliff.toml \
+            --include-path "${{ steps.package.outputs.directory }}/**" \
+            --tag-pattern "${{ steps.package.outputs.tag_pattern }}" \
+            --latest \
+            --prepend "$CHANGELOG"
 
       - name: Commit and push if changed
+        env:
+          CHANGELOG: ${{ steps.package.outputs.directory }}/CHANGELOG.md
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/ranobelib/CHANGELOG.md
+          git add "$CHANGELOG"
           if git diff --cached --quiet; then
-            echo "CHANGELOG.md already up to date, nothing to commit"
+            echo "$CHANGELOG already up to date, nothing to commit"
             exit 0
           fi
-          git commit -m "docs: regenerate CHANGELOG.md for ${{ github.event.release.tag_name }}"
+          git commit -m "docs: update $CHANGELOG for ${{ github.event.release.tag_name }}"
           git push origin HEAD:main
