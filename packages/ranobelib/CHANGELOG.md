@@ -9,6 +9,16 @@ package follows [Semantic Versioning](https://semver.org/). Entries are generate
 `main` whenever a GitHub Release of this package is published — don't hand-edit released
 sections, fix the underlying commit message/PR title instead.
 
+## [0.14.0](https://github.com/LLIJIYAPNIK/libsocial-sdk/compare/v0.13.0..ranobelib-v0.14.0) - 2026-10-18
+
+### Added
+
+- Build ranobelib on libsocial-core
+
+### Changed
+
+- Release each package by its own prefixed tag
+
 ## [0.13.0] - 2026-10-18
 
 ### Added
