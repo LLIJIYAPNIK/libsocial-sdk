@@ -16,8 +16,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     # The same environment for every package: PyPI's trusted publishers for
-    # ranobelib-python-sdk, libsocial-core and mangalib-python-sdk all name this repository,
-    # release.yml and the "pypi" environment.
+    # ranobelib-python-sdk, libsocial-core and mangalib-python-sdk all name this repository
+    # (LLIJIYAPNIK/libsocial-sdk — renamed from ranobelib-python-sdk, which the publishers
+    # had to be updated for), release.yml and the "pypi" environment.
     environment:
       name: pypi
       url: https://pypi.org/project/${{ steps.package.outputs.name }}/${{ steps.package.outputs.version }}/

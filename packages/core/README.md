@@ -43,6 +43,6 @@ async with MySite("https://ranobelib.me/ru/book/6712--high-school-dxd-novel") as
 ```
 
 Repository, documentation and the site packages:
-<https://github.com/LLIJIYAPNIK/ranobelib-python-sdk>.
+<https://github.com/LLIJIYAPNIK/libsocial-sdk>.
 
 MIT licensed.

@@ -29,10 +29,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk"
-Repository = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk"
-Issues = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/issues"
-Changelog = "https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/blob/main/packages/ranobelib/CHANGELOG.md"
+Homepage = "https://github.com/LLIJIYAPNIK/libsocial-sdk"
+Repository = "https://github.com/LLIJIYAPNIK/libsocial-sdk"
+Issues = "https://github.com/LLIJIYAPNIK/libsocial-sdk/issues"
+Changelog = "https://github.com/LLIJIYAPNIK/libsocial-sdk/blob/main/packages/ranobelib/CHANGELOG.md"
 
 [build-system]
 requires = ["uv_build>=0.11.26,<0.12.0"]

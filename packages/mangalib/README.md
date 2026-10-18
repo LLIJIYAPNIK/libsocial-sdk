@@ -1,9 +1,9 @@
 # mangalib-python-sdk
 
 [![PyPI](https://img.shields.io/pypi/v/mangalib-python-sdk)](https://pypi.org/project/mangalib-python-sdk/)
-[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/ranobelib-python-sdk)](../../LICENSE)
+[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/libsocial-sdk)](../../LICENSE)
 [![Python versions](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)](pyproject.toml)
-[![CI](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml)
+[![CI](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml)
 
 Async Python SDK for [mangalib.me](https://mangalib.me): title metadata, table of contents,
 translations, catalog search, chapter pages as images, and export to CBZ or PDF.
@@ -77,7 +77,7 @@ async with Catalog() as catalog:
 
 ## Documentation
 
-Full API reference: **<https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/>**. What the API
+Full API reference: **<https://LLIJIYAPNIK.github.io/libsocial-sdk/>**. What the API
 returns for MangaLib, and what was checked: the "MangaLib" section of
 [`docs/api-notes.md`](../../docs/api-notes.md). [`CHANGELOG.md`](CHANGELOG.md) lists what
 changed in each release.

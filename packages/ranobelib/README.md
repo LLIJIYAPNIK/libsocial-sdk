@@ -1,11 +1,11 @@
 # ranobelib-python-sdk
 
 [![PyPI](https://img.shields.io/pypi/v/ranobelib-python-sdk)](https://pypi.org/project/ranobelib-python-sdk/)
-[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/ranobelib-python-sdk)](../../LICENSE)
+[![License: MIT](https://img.shields.io/github/license/LLIJIYAPNIK/libsocial-sdk)](../../LICENSE)
 [![Python versions](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)](pyproject.toml)
-[![CI](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/ci.yml)
+[![CI](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/LLIJIYAPNIK/ranobelib-python-sdk/badge.svg?branch=main)](https://coveralls.io/github/LLIJIYAPNIK/ranobelib-python-sdk?branch=main)
-[![Docs](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/docs.yml/badge.svg)](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/actions/workflows/docs.yml)
+[![Docs](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/docs.yml/badge.svg)](https://github.com/LLIJIYAPNIK/libsocial-sdk/actions/workflows/docs.yml)
 
 Async Python SDK for [ranobelib.me](https://ranobelib.me): fetch title metadata, download
 chapters and volumes, and export to epub, fb2, txt, or pdf.
@@ -76,7 +76,7 @@ copy-pasteable code.
 
 ## Documentation
 
-Full API reference and guides: **<https://LLIJIYAPNIK.github.io/ranobelib-python-sdk/>**
+Full API reference and guides: **<https://LLIJIYAPNIK.github.io/libsocial-sdk/>**
 (built with `mkdocs-material` + `mkdocstrings`, deployed on push to `main`). `CLAUDE.md`
 documents the full architecture, public API contract, and the reasoning behind the SDK's
 design decisions. [`CHANGELOG.md`](CHANGELOG.md) lists what changed in each release.
