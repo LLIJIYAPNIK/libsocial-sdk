@@ -7,12 +7,10 @@ on:
 permissions:
   contents: write
 
-# Releases of different packages published close together would otherwise race to push to
-# main; one at a time, each checks out the main the previous one pushed.
-concurrency:
-  group: changelog
-  cancel-in-progress: false
-
+# No `concurrency` group: Actions keeps only one pending run per group, so a third release in
+# quick succession would replace the second's pending run and that changelog would never be
+# written. Runs go in parallel instead, and update_changelog.py rides out the race: each
+# attempt starts from the latest main, and a push rejected because main moved on is retried.
 jobs:
   changelog:
     runs-on: ubuntu-latest
@@ -26,43 +24,14 @@ jobs:
           fetch-tags: true
       - uses: astral-sh/setup-uv@v9.0.0
 
-      # Which package the tag releases (see .github/scripts/release_package.py). No version
-      # check: main may already have moved past the released version.
-      - name: Resolve the package from the tag
-        id: package
-        run: uv run --no-project python .github/scripts/release_package.py "$GITHUB_REF_NAME" --no-version-check >> "$GITHUB_OUTPUT"
-
-      # Only this release's section, only from commits touching this package, on top of the
-      # package's own CHANGELOG.md — earlier sections are never regenerated (see cliff.toml).
-      # Re-running for the same tag must not prepend the section a second time.
-      - name: Add the release to the package's CHANGELOG.md
+      # Adds only this release's section, only from commits touching this package, to the
+      # package's own CHANGELOG.md, and pushes it — see the script's docstring.
+      - name: Add the release to its package's CHANGELOG.md
         env:
-          CHANGELOG: ${{ steps.package.outputs.directory }}/CHANGELOG.md
-          VERSION: ${{ steps.package.outputs.version }}
+          GIT_CLIFF: uvx --from git-cliff==2.14.2 git-cliff
           # Feeds remote.github.owner/repo in cliff.toml's links.
           GITHUB_REPO: ${{ github.repository }}
         run: |
-          if grep -qF -- "## [$VERSION]" "$CHANGELOG"; then
-            echo "$CHANGELOG already has $VERSION, nothing to add"
-            exit 0
-          fi
-          uvx --from git-cliff==2.14.2 git-cliff \
-            --config cliff.toml \
-            --include-path "${{ steps.package.outputs.directory }}/**" \
-            --tag-pattern "${{ steps.package.outputs.tag_pattern }}" \
-            --latest \
-            --prepend "$CHANGELOG"
-
-      - name: Commit and push if changed
-        env:
-          CHANGELOG: ${{ steps.package.outputs.directory }}/CHANGELOG.md
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$CHANGELOG"
-          if git diff --cached --quiet; then
-            echo "$CHANGELOG already up to date, nothing to commit"
-            exit 0
-          fi
-          git commit -m "docs: update $CHANGELOG for ${{ github.event.release.tag_name }}"
-          git push origin HEAD:main
+          uv run --no-project python .github/scripts/update_changelog.py "$GITHUB_REF_NAME"

@@ -1,10 +1,12 @@
-# One config for every package's CHANGELOG.md. .github/workflows/changelog.yml runs git-cliff
-# per release with the package's own tag pattern and --include-path (from
-# .github/scripts/release_package.py) and --latest --prepend: each release adds its section on
-# top of that package's file, and history is never regenerated — path filtering can't tell
+# One config for every package's CHANGELOG.md. .github/scripts/update_changelog.py (run by
+# .github/workflows/changelog.yml) has git-cliff render one release's section — the package's
+# commits between its previous release tag and this one — and puts it right under this
+# header in that package's file; history is never regenerated — path filtering can't tell
 # ranobelib's pre-monorepo commits (src/, .github/, ...) from later shared ones, so a full
 # regeneration would empty its old sections. Hence no tag_pattern and no link footer here:
 # the old sections keep their own link definitions, new ones link from the heading.
+# CHANGELOG_PREVIOUS_TAG/CHANGELOG_DATE come from the script: it knows the previous release
+# and the release's date even where --include-path hides them from git-cliff.
 [changelog]
 header = """
 # Changelog
@@ -24,10 +26,12 @@ body = """
 {% if version %}\
     {% set number = version | split(pat="-v") | last | trim_start_matches(pat="v") %}\
     {% set repo = "https://github.com/" ~ remote.github.owner ~ "/" ~ remote.github.repo %}\
-    {% if previous.version %}\
-        ## [{{ number }}]({{ repo }}/compare/{{ previous.version }}..{{ version }}) - {{ timestamp | date(format="%Y-%m-%d") }}
+    {% set previous_tag = get_env(name="CHANGELOG_PREVIOUS_TAG", default=previous.version | default(value="")) %}\
+    {% set day = get_env(name="CHANGELOG_DATE", default=timestamp | date(format="%Y-%m-%d")) %}\
+    {% if previous_tag %}\
+        ## [{{ number }}]({{ repo }}/compare/{{ previous_tag }}..{{ version }}) - {{ day }}
     {% else %}\
-        ## [{{ number }}]({{ repo }}/tree/{{ version }}) - {{ timestamp | date(format="%Y-%m-%d") }}
+        ## [{{ number }}]({{ repo }}/tree/{{ version }}) - {{ day }}
     {% endif %}\
 {% else %}\
     ## [Unreleased]

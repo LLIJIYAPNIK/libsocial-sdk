@@ -54,6 +54,8 @@ class Release:
     directory: str
     name: str
     tag_pattern: str
+    tag_globs: tuple[str, ...]
+    """The package's tags as ``git describe --match`` globs (the regex above, roughly)."""
 
     def outputs(self) -> str:
         """``key=value`` lines for ``$GITHUB_OUTPUT``."""
@@ -75,6 +77,13 @@ def tag_pattern(prefix: str) -> str:
     if legacy is None:
         return f"^{prefix}-v{_VERSION}$"
     return f"^({prefix}-v|{legacy}){_VERSION}$"
+
+
+def tag_globs(prefix: str) -> tuple[str, ...]:
+    """``tag_pattern(prefix)`` as globs, for ``git describe --match``."""
+    legacy = LEGACY_TAG_PREFIXES.get(prefix)
+    own = f"{prefix}-v[0-9]*"
+    return (own,) if legacy is None else (own, f"{legacy}[0-9]*")
 
 
 def resolve(tag: str, *, check_version: bool = True, root: Path = REPO_ROOT) -> Release:
@@ -113,6 +122,7 @@ def resolve(tag: str, *, check_version: bool = True, root: Path = REPO_ROOT) -> 
         directory=directory,
         name=project["name"],
         tag_pattern=tag_pattern(prefix),
+        tag_globs=tag_globs(prefix),
     )
 
 
