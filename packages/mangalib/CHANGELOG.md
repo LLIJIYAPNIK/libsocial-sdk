@@ -9,6 +9,12 @@ package follows [Semantic Versioning](https://semver.org/). Entries are generate
 `main` whenever a GitHub Release of this package is published — don't hand-edit released
 sections, fix the underlying commit message/PR title instead.
 
+## [0.2.0](https://github.com/LLIJIYAPNIK/libsocial-sdk/compare/mangalib-v0.1.0..mangalib-v0.2.0) - 2026-10-18
+
+### Added
+
+- Export manga to CBZ and PDF, size pages, skip closed chapters title-wide
+
 ## [0.1.0](https://github.com/LLIJIYAPNIK/ranobelib-python-sdk/tree/mangalib-v0.1.0) - 2026-10-18
 
 ### Added
