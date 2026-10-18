@@ -1724,7 +1724,7 @@ wheels = [
 
 [[package]]
 name = "ranobelib-python-sdk"
-version = "0.13.0"
+version = "0.14.0"
 source = { editable = "packages/ranobelib" }
 dependencies = [
     { name = "ebooklib" },
