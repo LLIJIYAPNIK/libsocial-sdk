@@ -234,6 +234,7 @@ ranobelib-python-sdk/
 │       ├── numbering.py          # сортировка/сравнение номеров глав, парсинг URL тайтла
 │       ├── catalog.py            # класс Catalog — листинг/поиск по каталогу (не по тайтлу)
 │       ├── images.py             # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│       ├── paragraphs.py         # chapter_paragraphs() — см. шаг 38
 │       └── exporters/
 │           ├── __init__.py       # Protocol Exporter + реестр форматов
 │           ├── txt.py
@@ -262,7 +263,8 @@ ranobelib-python-sdk/
 │   ├── 11_error_handling.py       # рабочие, подробно закомментированные скрипты — см. шаг 19
 │   ├── 12_catalog_listing.py      # Catalog.list_titles() — см. шаг 24
 │   ├── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
-│   └── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│   ├── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│   └── 15_chapter_paragraphs.py   # chapter_paragraphs() — см. шаг 38
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -1253,5 +1255,23 @@ owner/repo/workflow-file/environment) — это может сделать то�
       предсказуемо); `<img>` без `src` остаётся как есть, функция для него не вызывается.
     - Оба ре-экспортированы из `ranobelib/__init__.py` — тот же принцип, что
       `chapter_size`/`volume_size` (шаг 22): обычный юзкейс поверх скачанной главы.
+
+38. **`chapter_paragraphs(chapter)` — текст блоков верхнего уровня, с DOM-индексами**
+    (issue #77, снова `ranobelib-companion`: комментарии читалки привязаны к индексу абзаца
+    — позиции среди `content.children` в браузере, и модерации в админке нужно показать
+    текст этого абзаца).
+    - Новый модуль `paragraphs.py`. Главное в контракте — индекс: запись *i* = *i*-й
+      элемент верхнего уровня `Chapter.content`. Поэтому запись даёт **каждый** элемент
+      верхнего уровня, включая `<hr />` и `<img>` (`""`, а не пропуск — иначе индексы
+      поплывут относительно DOM). Голый текст вне элементов на верхнем уровне записью не
+      считается (в DOM это текстовый узел, не элемент), как и просил issue.
+    - Текст: сущности декодированы, пробелы схлопнуты, `<br />` внутри блока — разделитель
+      слов. Сноски не входят — их и так нет в `content` (шаг 30).
+    - Отдельный `HTMLParser`, считающий глубину, а не переиспользование
+      санитайзера из `models.py`: `content` уже санитайзен, нужен лишь подсчёт элементов
+      верхнего уровня. Контракт сверен с независимым парсером (`lxml.html`, дочерние
+      элементы фрагмента + `text_content()`) на всех 80 главах из кассет — 0 расхождений.
+    - `ValueError` на `content is None`, как у `chapter_size()`; ре-экспортирован из
+      `ranobelib/__init__.py` по тому же принципу, что хелперы шага 37.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
