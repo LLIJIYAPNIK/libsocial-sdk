@@ -320,7 +320,13 @@ libsocial-sdk/
 │   │   ├── 13_disk_caching.py     # кэш, refresh, cache_ttl, cache_stats/clear_cache — шаг 55
 │   │   └── 14_error_handling.py   # MangaLibError и подклассы, headers= — шаг 55
 │   └── core/
-│       └── README.md              # пока без примеров
+│       ├── README.md              # индекс: файл → фича; сайт без пакета — slashlib.me (id 2)
+│       ├── 01_urls_and_sites.py   # parse_slug_url, Site, browser_headers — шаг 56
+│       ├── 02_raw_api_client.py   # ApiClient напрямую, сырой JSON — шаг 56
+│       ├── 03_custom_site_client.py  # свой TitleClient (slashlib.me), _plan_chapters — шаг 56
+│       ├── 04_custom_catalog.py   # свой Catalog, справочники по сайту — шаг 56
+│       ├── 05_pacing_and_console.py  # shared_pacer/Pacer, Reporter — шаг 56
+│       └── 06_both_sites.py       # ranobelib + mangalib, общие модели и исключения — шаг 56
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -1862,5 +1868,23 @@ owner/repo/workflow-file/environment) — это может сделать то�
     `07_download_title.py`. `AccessBlockedError` — через `headers={"Referer": ""}`, как в
     ranobelib. Сервер `main` (`img2.imglib.info`) на отсутствующий файл отвечает то 404, то
     HTML-403 DDoS-Guard от прогона к прогону — оговорено в `Expected output`.
+
+56. **Примеры libsocial-core** (issue #111, шаг 9 вехи #102). `examples/core/01–06`, каждое
+    имя из `libsocial.__all__` встречается хотя бы в одном. Сайт без своего пакета для 03/04 —
+    slashlib.me (`Site(2, "https://slashlib.me")`): API отвечает без авторизации так же, как
+    для mangalib (каталог, список глав, глава со `pages`). `03_custom_site_client.py` —
+    `SlashLib(TitleClient)` со своими `Chapter` (`pages`, `teams`)/`Volume[...]`,
+    `info_fields`, `default_cache_dir`, `_create_client()` (свой `ApiClient` с `headers_hint`)
+    и `_plan_chapters()`, предпочитающим команду по имени, на
+    `96466--old-clothes-collection-bin-of-love` (6+, завершён): у главы 1–9 ветка 14369 —
+    команда VISS, у 10–11 та же ветка — другая команда, поэтому выбор «VISS, где она есть»
+    не выражается ни `branch_id`, ни `translation_index`. `05_pacing_and_console.py`
+    измеряет общий пейсинг через `transport=` (время старта каждого запроса): два клиента
+    двух сайтов — промежутки 0.19–0.22 с, с отдельными `Pacer()` — от 0.00 с. Замечено:
+    `browser_headers_for()` принимает `origin`, а не `Site` (как было в issue); у
+    `11407--solo-leveling` на ranobelib.me список глав теперь пустой, поэтому
+    `02_raw_api_client.py` — на DxD; `import ranobelib` на Windows без GTK печатает
+    предупреждение WeasyPrint в stdout (оговорено в `06_both_sites.py`). Ссылки на примеры —
+    в `docs/core.md` и `packages/core/README.md`.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
