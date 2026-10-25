@@ -1081,6 +1081,14 @@ Not site-scoped by any parameter. Entries carry `site_ids` like the genre list:
 Sites 2 and 4 have their own hosts (`img2.hentaicdn.org`, ...), and site 2's `crop` has an
 empty `url`. `MangaLib.list_image_servers()` keeps the entries for site 1 that have a URL.
 
+**Changed by 2026-10-25** (found while writing `examples/mangalib/08_page_images.py`):
+`secondary` is now its own host, `https://img3.cdnrulib.link`, and serves the full-size page
+(the same bytes as `compress`) with no headers at all; `main` is unchanged, still HTML 403
+with or without browser headers. The SDK's server order wasn't changed: `secondary` is last,
+so it's only reached when `compress`/`download` fail. A file that doesn't exist comes back
+as `HTTP 502` (`text/plain`) from both `img3.cdnlibs.org` and `img3.cdnrulib.link`, not a
+404 — so it's retried as a server error before the next server is tried.
+
 `img2.imglib.info` was checked with no headers, with only `Referer`, with only a browser
 `User-Agent`, with `Accept: image/*`, with `Sec-Fetch-*`, with `Accept-Language`, and with
 all of them together, using fresh clients and a cookie-keeping client. Every request got

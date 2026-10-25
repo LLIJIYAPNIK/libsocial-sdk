@@ -312,7 +312,7 @@ libsocial-sdk/
 │   │   ├── 01_title_metadata.py … 05_volumes.py   # тайтл, оглавление, главы, тома — шаг 50
 │   │   ├── 06_translations.py     # переводы, RestrictedView, AuthRequiredError — шаг 51
 │   │   ├── 07_download_title.py   # download_title(), пропуск закрытых глав — шаг 51
-│   │   ├── 08_page_images.py      # страницы главы, серверы, закрытые главы — шаг 45
+│   │   ├── 08_page_images.py      # серверы картинок, page_url(), скачивание страниц — шаги 45, 52
 │   │   └── 09_export_formats.py   # export() в CBZ/PDF, размеры — шаг 46
 │   └── core/
 │       └── README.md              # пока без примеров
@@ -1802,5 +1802,18 @@ owner/repo/workflow-file/environment) — это может сделать то�
     `DownloadTitleInterruptedError.volumes` типизирован базовым `Volume[Any]` ядра, так что
     у `MangaLib`/`RanobeLib` mypy не даёт присвоить его в `list[mangalib.Volume]` без
     приведения — возможное будущее улучшение типизации ядра, не исправлялось.
+
+52. **Пример mangalib 08 переработан под картинки страниц** (issue #107, шаг 5 вехи #102).
+    Переводы и закрытые главы из бывшего `16_mangalib_pages.py` уже есть в
+    `06_translations.py`, так что `08_page_images.py` теперь только про картинки, на главе
+    6.5 тайтла Gundam из шага 50 (5 страниц, один перевод). Показаны
+    `list_image_servers()`, `page_url()`, фолбэк `server="main"` → `compress` (те же байты),
+    превью `crop`, `download_pages(concurrency=...)` с сохранением во временную директорию
+    (расширение — по байтам), `PageDownloadError.failures` на несуществующей странице,
+    `ValueError` на неверные `server`/`concurrency`. Найдено при прогоне и записано в
+    `docs/api-notes.md`: `secondary` переехал на свой хост `img3.cdnrulib.link` и отдаёт
+    полноразмерные страницы без заголовков (раньше — тот же хост, что `main`, с 403);
+    отсутствующий файл на хостах img3 — `HTTP 502`, а не 404, поэтому его ретраят как 5xx.
+    Порядок серверов (`DEFAULT_SERVER_ORDER`) не менялся: `secondary` идёт после `main`.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
