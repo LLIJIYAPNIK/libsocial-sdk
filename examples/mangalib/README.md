@@ -29,8 +29,8 @@ you've read the ranobelib ones.
 | [`10_sizing.py`](10_sizing.py) | `chapter_size()` / `volume_size()` / `estimate_title_size()` — exact sizes from HEAD requests, no image traffic |
 | [`11_custom_exporter.py`](11_custom_exporter.py) | your own export format: `Exporter`, `register()`, `EXPORTERS`, `fetch_pages` |
 | [`12_catalog_listing.py`](12_catalog_listing.py) | `Catalog` — `list_titles()` filters (AND/OR), `list_genres()` / `list_countries()` (title types) / `list_statuses()`, pagination, a listed title in `MangaLib`, `refresh=True` |
-| `13_disk_caching.py` | disk cache + `refresh=True`, `cache_stats()` / `clear_cache()` *(planned)* |
-| `14_error_handling.py` | `MangaLibError` and its subclasses *(planned)* |
+| [`13_disk_caching.py`](13_disk_caching.py) | disk cache: `cache_dir`, `cache_ttl`, `refresh=True`, hits/misses via `verbosity="full"`, `cache_stats()` / `CacheStats` / `clear_cache()`; what isn't cached (page images, closed chapters) |
+| [`14_error_handling.py`](14_error_handling.py) | `MangaLibError` and its subclasses, each reproduced live except `RateLimitError`; `AccessBlockedError` and `headers=` |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/libsocial-sdk/mangalib-reference/)
 for every public class/method.

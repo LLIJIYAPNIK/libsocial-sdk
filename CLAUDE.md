@@ -308,7 +308,7 @@ libsocial-sdk/
 │   │   ├── 18_custom_exporter.py  # свой формат через exporters.register() — шаг 49
 │   │   └── 19_bulk_errors.py      # VolumeNotFoundError, MultipleTitleTranslationsError — шаг 49
 │   ├── mangalib/
-│   │   ├── README.md              # индекс; номера 01–14 зафиксированы, ещё не написанные — "planned"
+│   │   ├── README.md              # индекс; таблица файл → фича, 01–14
 │   │   ├── 01_title_metadata.py … 05_volumes.py   # тайтл, оглавление, главы, тома — шаг 50
 │   │   ├── 06_translations.py     # переводы, RestrictedView, AuthRequiredError — шаг 51
 │   │   ├── 07_download_title.py   # download_title(), пропуск закрытых глав — шаг 51
@@ -316,7 +316,9 @@ libsocial-sdk/
 │   │   ├── 09_export_formats.py   # export() в CBZ/PDF — шаги 46, 53
 │   │   ├── 10_sizing.py           # chapter_size()/volume_size()/estimate_title_size() — шаг 53
 │   │   ├── 11_custom_exporter.py  # свой формат (html) через exporters.register() — шаг 53
-│   │   └── 12_catalog_listing.py  # Catalog: фильтры, справочники, пагинация — шаг 54
+│   │   ├── 12_catalog_listing.py  # Catalog: фильтры, справочники, пагинация — шаг 54
+│   │   ├── 13_disk_caching.py     # кэш, refresh, cache_ttl, cache_stats/clear_cache — шаг 55
+│   │   └── 14_error_handling.py   # MangaLibError и подклассы, headers= — шаг 55
 │   └── core/
 │       └── README.md              # пока без примеров
 ├── .github/workflows/
@@ -1844,5 +1846,21 @@ owner/repo/workflow-file/environment) — это может сделать то�
     возвращает `mangalib.CatalogPage` — mypy не даёт аннотировать результат классом фасада
     (то же, что `DownloadTitleInterruptedError.volumes` в шаге 51); в примере класс показан
     через `isinstance`, типизация ядра не исправлялась.
+
+55. **Примеры mangalib 13–14: дисковый кэш и ошибки** (issue #110, шаг 8 вехи #102).
+    `13_disk_caching.py` — Gundam (шаг 50) с пустой временной директорией: промахи/попадания
+    через `verbosity="full"` (`[api]`/`[cache]`), `refresh=True`, `cache_ttl` (свежая запись
+    через `refresh=True`, сразу — кэш, после TTL — API), `CacheStats`, `clear_cache(older_than=...)`.
+    Что не кэшируется — через неизменный `cache_stats()`: два скачивания одной страницы
+    добавляют одну запись (список серверов картинок), закрытая глава husband-thief — ни
+    одной. Замечено: `get_chapter(refresh=True)` без `branch_id` перезапрашивает и список
+    глав (по нему проверяется неоднозначность перевода); второе скачивание картинки быстрее
+    первого (соединение и список серверов уже есть), поэтому некэшируемость показана
+    записями, а не временем. `14_error_handling.py` — все исключения `mangalib.__all__`
+    вживую, кроме `RateLimitError` (описан, и его обработчик стоит перед общим
+    `except MangaLibError`, но не срабатывает) и whole-title-ошибок, показанных в
+    `07_download_title.py`. `AccessBlockedError` — через `headers={"Referer": ""}`, как в
+    ranobelib. Сервер `main` (`img2.imglib.info`) на отсутствующий файл отвечает то 404, то
+    HTML-403 DDoS-Guard от прогона к прогону — оговорено в `Expected output`.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
