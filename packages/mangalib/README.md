@@ -75,6 +75,15 @@ async with Catalog() as catalog:
 - `chapter_size()` / `volume_size()` give the exact size of the page images, from `HEAD`
   requests; `estimate_title_size()` extrapolates from a sample of chapters.
 
+## Examples
+
+Complete, runnable scripts for every feature above — title metadata, table of contents,
+chapters and volumes, translations and closed chapters, whole-title download, page images
+and image servers, export to CBZ/PDF and to a format of your own, sizes, the catalog, disk
+caching and error handling — live in
+**[`examples/mangalib/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/mangalib)**,
+one heavily commented file per feature.
+
 ## Documentation
 
 Full API reference: **<https://LLIJIYAPNIK.github.io/libsocial-sdk/>**. What the API

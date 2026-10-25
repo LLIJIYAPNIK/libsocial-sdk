@@ -61,6 +61,9 @@ leaves closed chapters out.
 
 ## More
 
+- [Examples](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/mangalib): a
+  complete, commented script for every feature, from metadata to export, the catalog,
+  caching and error handling.
 - [API reference](mangalib-reference.md).
 - [API notes](api-notes.md#mangalib-mangalib-python-sdk-issue-90-checked-2026-10-18): what
   the API returns for mangalib.me, and how it was checked.

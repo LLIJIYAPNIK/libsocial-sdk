@@ -72,7 +72,7 @@ Complete, runnable scripts for every feature above — title metadata, table of 
 single/bulk chapter and volume downloads, translation selection, whole-title bulk download,
 disk caching, export to all four formats and to a format of your own, size estimates,
 console progress output, the catalog, footnotes, images, paragraphs, and error handling —
-live in **[`examples/ranobelib/`](../../examples/ranobelib/)**, one heavily commented file
+live in **[`examples/ranobelib/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/ranobelib)**, one heavily commented file
 per feature. Start there for copy-pasteable code.
 
 ## Documentation

@@ -336,7 +336,8 @@ libsocial-sdk/
 │   ├── release_package.py         # тег релиза → пакет, версия, шаблон тегов (шаг 44)
 │   ├── update_changelog.py        # секция релиза в CHANGELOG.md пакета + пуш с повтором
 │   ├── test_release_package.py
-│   └── test_update_changelog.py
+│   ├── test_update_changelog.py
+│   └── test_examples.py           # каждое имя __all__ есть в примерах, примеры импортируются — шаг 57
 ├── cliff.toml                     # общий конфиг git-cliff для CHANGELOG.md всех пакетов
 ├── pyproject.toml                 # корень workspace: members + ruff/mypy/pytest/coverage + dev-группы
 ├── uv.lock                        # один общий на весь workspace
@@ -569,6 +570,11 @@ false }` (значение по умолчанию из официального
   PR с падающими проверками.
 - Каждый PR с новой фичей включает: код, тесты (держащие общее покрытие ≥95%), обновление
   докстрингов/документации, при необходимости — обновление `docs/api-notes.md`.
+- **Новое публичное имя → пример + строка в README примеров.** Имя, попавшее в `__all__`
+  пакета (или его `exporters`), должно встречаться в `examples/<пакет>/` — новый скрипт или
+  дополнение существующего, прогнанное вживую, с `Expected output` — и в таблице
+  `examples/<пакет>/README.md`. CI это проверяет (`.github/scripts/test_examples.py`, шаг
+  57); исключение — только строкой в `NOT_IN_EXAMPLES` этого теста с причиной.
 
 ## CI (GitHub Actions)
 
@@ -607,6 +613,12 @@ CI не нужен.
   не публиковалось, джоба пропускает тесты с `::warning::` (см. шаг 44).
 - job `release-scripts`: тесты `.github/scripts/release_package.py`
   (`--import-mode=prepend`: тест импортирует скрипт из своего каталога).
+- job `examples` (шаг 57): примеры не запускаются (им нужен живой сайт), но
+  `uv run mypy --strict examples/<пакет>` — по директории за раз (одноимённые
+  `01_title_metadata.py` у ranobelib и mangalib mypy счёл бы одним модулем), затем
+  `.github/scripts/test_examples.py`: каждый пример импортируется без запуска `main()` (он
+  под `if __name__ == "__main__":`), каждое имя из `__all__` пакетов и их `exporters`
+  встречается в примерах своего пакета.
 
 `.github/workflows/docs.yml`: отдельный workflow (не блокирует PR, только `push` в `main` +
 `workflow_dispatch`), деплоит через официальный Pages-flow (`actions/upload-pages-artifact` +
@@ -1886,5 +1898,35 @@ owner/repo/workflow-file/environment) — это может сделать то�
     `02_raw_api_client.py` — на DxD; `import ranobelib` на Windows без GTK печатает
     предупреждение WeasyPrint в stdout (оговорено в `06_both_sites.py`). Ссылки на примеры —
     в `docs/core.md` и `packages/core/README.md`.
+
+57. **Примеры в CI и ссылки в документации** (issue #112, шаг 10 — последний — вехи #102).
+    - Каждый пример вызывает `main()` только под `if __name__ == "__main__":`, так что его
+      можно импортировать без сети. `.github/scripts/test_examples.py`: каждый
+      `examples/*/*.py` импортируется (ловит переименованный/удалённый импорт и
+      использование API на уровне модуля — подклассы, константы), и каждое имя из `__all__`
+      `libsocial`, `ranobelib`, `mangalib` и их `exporters` встречается в примерах своего
+      пакета; исключения — `NOT_IN_EXAMPLES` с причиной (сейчас пусто), устаревшее исключение
+      тоже роняет тест. Мутационно проверено: сломанный импорт в примере — красный тест.
+    - Изменения внутри вызовов (переименованный метод, параметр) ловит mypy: CI-джоба
+      `examples` — `mypy --strict` по каждой директории примеров, затем тест выше.
+      `release-scripts` запускает теперь только свои два теста. В четырёх старых примерах
+      ranobelib mypy ругался на `chapter.content` (`str | None`) — исправлено `or ""`.
+    - `__all__` добавлен в `ranobelib.exporters` (`EXPORTERS`, `Exporter`, `register`) и
+      `mangalib.exporters` (+ `FetchPages`), чтобы тест опирался на явный контракт;
+      `ExporterT` — внутренний `TypeVar`, не в нём. Поведение пакетов не менялось.
+    - Ссылки на примеры своего пакета (абсолютные, на GitHub-дерево — README видны на PyPI):
+      README всех трёх пакетов (у ranobelib была относительная, на PyPI битая), `docs/index.md`,
+      `docs/ranobelib.md`, `docs/mangalib.md`, `docs/core.md`; `examples/README.md` — обзор,
+      «с чего начать», как примеры держатся в соответствии с API.
+    - Перепрогон всех 39 примеров 2026-10-25, каждый в пустой временной директории, вывод
+      сравнён пословно с `Expected output`. Подряд без пауз API отвечает 429 — прогон шёл с
+      паузой 45 с между примерами. Устаревшими оказались пять, остальное — оговорённый в
+      заголовках дрейф (время, метки `rich`, выдача каталога, размер кэша на байты) или
+      старые переносы строк: `ranobelib/03`, `04` — `content` теперь санитайзенный HTML
+      (шаг 31, блоки писались до него); `07` — у Solo Leveling на ranobelib.me пропали главы,
+      пример переведён на `113306--bungou-stray-dogs-gaiden-...` (главы 0–2 с двумя
+      переводами, тот же тайтл, что во второй части `08`); `08` — у `40195--enbizaka-...`
+      стало 6 глав; `10` — без GTK падал на `pdf`, теперь пропускает формат, которого нет в
+      `EXPORTERS`.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

@@ -96,6 +96,13 @@ print(cache_stats(".cache"))  # CacheStats(entries=..., bytes=...)
 clear_cache(".cache", older_than=86400)  # Drop entries older than a day.
 ```
 
+## Examples
+
+[`examples/ranobelib/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/ranobelib)
+has a complete, commented script for every feature: metadata, chapters and volumes,
+translations, whole-title download, caching, export to all four formats and to your own,
+sizes, console output, the catalog, footnotes, images, paragraphs and error handling.
+
 ## Documentation
 
 - [API reference](ranobelib-reference.md) — generated from the source's own docstrings.

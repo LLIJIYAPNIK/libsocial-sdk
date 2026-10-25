@@ -31,8 +31,11 @@ than each at its full rate, and `except LibSocialError` (alias `RanobeLibError` 
 `MangaLibError`) catches errors from either.
 
 Each package is versioned and released on its own — see its changelog in the
-[repository](https://github.com/LLIJIYAPNIK/libsocial-sdk). Runnable examples:
-[`examples/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples).
+[repository](https://github.com/LLIJIYAPNIK/libsocial-sdk). Runnable examples, one directory
+per package:
+[`ranobelib`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/ranobelib),
+[`mangalib`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/mangalib),
+[`libsocial-core`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/core).
 
 ## License
 
