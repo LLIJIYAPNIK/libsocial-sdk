@@ -47,4 +47,9 @@ and export for mangalib. It can override `_create_client()` (its own `ApiClient`
 and `_plan_chapters()` (which chapters a whole-title operation takes, as mangalib does to
 leave out closed ones).
 
+[`examples/core/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/core) has
+the snippet above grown into a working client for slashlib.me (a site with no package of its
+own) with both overrides, plus scripts for the raw `ApiClient`, a site's `Catalog`, shared
+pacing and console output, and ranobelib and mangalib used together.
+
 See the [API reference](core-reference.md).

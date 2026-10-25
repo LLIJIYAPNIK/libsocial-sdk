@@ -42,6 +42,10 @@ async with MySite("https://ranobelib.me/ru/book/6712--high-school-dxd-novel") as
     info = await client.get_info()
 ```
 
+Working, commented scripts — the raw API client, a client and a catalog for a site without a
+package of its own, shared pacing, both site packages together — are in
+[`examples/core/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/core).
+
 Repository, documentation and the site packages:
 <https://github.com/LLIJIYAPNIK/libsocial-sdk>.
 
