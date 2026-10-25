@@ -71,13 +71,18 @@ async def main() -> None:
         print([chapter.number for chapter in volumes[0].chapters])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
-# Expected output (real run against the live site):
+# Expected output (real run against the live site on 2026-10-25):
 #
-# progress: 1/2
-# progress: 2/2
-# 1 ['0', '1']
+# progress: 1/6
+# progress: 2/6
+# progress: 3/6
+# progress: 4/6
+# progress: 5/6
+# progress: 6/6
+# 1 ['0', '1', '2.1', '2.2', '2.3', '2.4']
 # 3 ambiguous chapter(s):
 #   1 0 [12954, 12955]
 #   1 1 [12955, 12954]

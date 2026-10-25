@@ -18,12 +18,14 @@ async def main() -> None:
         chapters = await lib.get_chapters([(1, "1"), (1, "2")])
 
         for chapter in chapters:
-            print(chapter.volume, chapter.number, len(chapter.content))
+            print(chapter.volume, chapter.number, len(chapter.content or ""))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
-# Expected output (real run against the live site):
+# Expected output (real run against the live site on 2026-10-25; the lengths are of the
+# sanitized HTML in `content`):
 #
-# 1 1 30722
-# 1 2 22747
+# 1 1 28089
+# 1 2 21019

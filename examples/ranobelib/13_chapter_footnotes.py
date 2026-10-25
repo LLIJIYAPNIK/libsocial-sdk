@@ -18,7 +18,7 @@ async def main() -> None:
 
         # The footnote paragraphs are gone from `content`: its last paragraph is the story's
         # last line, not a translator note.
-        print(chapter.content[-120:])
+        print((chapter.content or "")[-120:])
         print()
 
         # Each footnote's `content` is sanitized inline HTML (same tags as Chapter.content,
@@ -35,7 +35,8 @@ async def main() -> None:
         # chapter's text (see 10_export_formats.py).
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site):
 #
