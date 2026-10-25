@@ -25,7 +25,8 @@ async def main() -> None:
             print(f"volume {volume.number}: {len(volume.chapters)} chapters, {pages} pages")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site):
 #

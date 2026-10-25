@@ -121,7 +121,8 @@ async def main() -> None:
         print(f"\n5 newest titles: {[title.name for title in newest_page.items[:5]]}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site; new titles are added constantly and the
 # genre list can change too, so the exact ids/names here will drift over time — that's the

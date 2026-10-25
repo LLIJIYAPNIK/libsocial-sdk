@@ -85,7 +85,8 @@ async def main() -> None:
         print("left:", cache_stats(cache_dir))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25, starting from an empty cache
 # directory; rich timestamps the log lines and adds where they came from on the right. The

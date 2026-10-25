@@ -118,7 +118,8 @@ async def main() -> None:
                 print(f"chapter {number}: {type(exc).__name__}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25. The main server answers a
 # missing file with a 404 or a DDoS-Guard 403 from run to run; chapter 6 of Husband Thief opens

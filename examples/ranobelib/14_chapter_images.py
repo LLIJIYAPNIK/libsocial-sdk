@@ -37,7 +37,8 @@ async def main() -> None:
         # (content is None) they raise ValueError, same as chapter_size().
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site; the last line is wrapped here, it's a single
 # line in the real output):

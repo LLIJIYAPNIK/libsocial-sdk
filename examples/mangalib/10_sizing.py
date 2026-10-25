@@ -51,7 +51,8 @@ async def main() -> None:
         print(f"2-chapter estimate off by {estimate_2 / exact - 1:+.0%}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25, while chapters 6-11 were in
 # early access; as they open, the estimates and the exact figure grow):

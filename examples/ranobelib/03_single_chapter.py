@@ -20,14 +20,16 @@ async def main() -> None:
         # `content` is raw HTML straight from the API (paragraphs, formatting tags, etc.),
         # not plain text — that's why it's sliced here rather than printed whole; export()
         # is what turns this HTML into txt/fb2/epub/pdf (see 10_export_formats.py).
-        print(chapter.content[:200])
+        print((chapter.content or "")[:200])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
-# Expected output (real run against the live site):
+# Expected output (real run against the live site on 2026-10-25; `content` is the SDK's
+# sanitized HTML — plain <p>/<strong>/<em>/<br />/<hr />/<img>, with entities escaped):
 #
 # Глава 1
-# <p data-paragraph-index="1">"Наконец, я наконец-то могу вернуться." - говорю я с широкой
-# улыбкой на лице, хотя по моим щекам текут слезы. Прошло слишком много времени с тех пор,
-# как я застрял в этом м
+# <p>&quot;Наконец, я наконец-то могу вернуться.&quot; - говорю я с широкой улыбкой на лице,
+# хотя по моим щекам текут слезы. Прошло слишком много времени с тех пор, как я застрял в этом
+# месте, я больше

@@ -87,7 +87,8 @@ async def main() -> None:
             print("ValueError:", exc)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site; the page URL is wrapped here):
 #

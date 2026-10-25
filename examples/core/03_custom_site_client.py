@@ -186,7 +186,8 @@ async def main() -> None:
             )
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against slashlib.me on 2026-10-25; the title is completed, but new
 # translations can still be added to it):

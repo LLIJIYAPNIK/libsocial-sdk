@@ -36,7 +36,8 @@ async def main() -> None:
         print(chapter.pages[0].url)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site; the last line is wrapped here):
 #

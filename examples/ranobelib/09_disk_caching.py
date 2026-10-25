@@ -49,7 +49,8 @@ async def main() -> None:
     print(clear_cache(".ranobelib_cache"))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site, starting from an empty cache directory —
 # your exact timings will vary, but the gap between the two calls won't; the byte count is

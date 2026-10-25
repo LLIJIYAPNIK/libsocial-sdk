@@ -17,6 +17,8 @@ from typing import ClassVar, Protocol, TypeVar, runtime_checkable
 
 from mangalib.models import Chapter, Title
 
+__all__ = ["EXPORTERS", "Exporter", "FetchPages", "register"]
+
 FetchPages = Callable[[Chapter], Awaitable[list[bytes]]]
 """Downloads a chapter's page images, in reading order — ``MangaLib.download_pages()``."""
 

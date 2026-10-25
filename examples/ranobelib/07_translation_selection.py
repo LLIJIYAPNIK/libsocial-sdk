@@ -14,8 +14,10 @@ from ranobelib import MultipleTranslationsError, RanobeLib
 
 
 async def main() -> None:
-    # This particular title is known to have two competing translations of its prologue.
-    async with RanobeLib("https://ranobelib.me/ru/book/11407--solo-leveling") as lib:
+    # Chapters 0-2 of this title each have two competing translations (also used title-wide
+    # in 08_download_title.py).
+    slug = "113306--bungou-stray-dogs-gaiden-ayatsuji-yukito-vs-kyogoku-natsuhiko"
+    async with RanobeLib(f"https://ranobelib.me/ru/book/{slug}") as lib:
         # get_translations() lists the available branches for one chapter without
         # downloading any chapter content — use it to show the user their options.
         branches = await lib.get_translations(volume=1, number="0")
@@ -33,15 +35,15 @@ async def main() -> None:
         # Passing branch_id (a stable id for one specific "translation line", not tied to a
         # team's own id — see docs/api-notes.md) resolves the ambiguity explicitly.
         chapter = await lib.get_chapter(volume=1, number="0", branch_id=branches[0].branch_id)
-        print(chapter.content[:60])
+        print((chapter.content or "")[:60])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
-# Expected output (real run against the live site):
+# Expected output (real run against the live site on 2026-10-25):
 #
-# 2251 ['BerkuD13']
-# 635 ['Неизвестный']
-# ambiguous, pick one: [2251, 635]
-# <p data-paragraph-index="1">Прокачка уровня в одиночку</p><p data-paragraph-index="2">0 .
-# Пролог</p
+# 12954 ['K&F']
+# 12955 ['ChelkaDostaTrans']
+# ambiguous, pick one: [12954, 12955]
+# <p><strong>«Все беспорядки последнего времени — это моих рук

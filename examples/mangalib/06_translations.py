@@ -75,7 +75,8 @@ async def main() -> None:
             print("new cache entries:", cache_stats(cache_dir).entries - entries)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25; chapter 6 leaves early
 # access on 2026-10-31, after which it reads "open" and fetching it succeeds):

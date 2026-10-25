@@ -46,7 +46,8 @@ async def main() -> None:
             await lib.get_chapter(volume=1, number="1", refresh=True)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site; rich draws the bar across the terminal's
 # width, timestamps the log lines and adds where they came from on the right):

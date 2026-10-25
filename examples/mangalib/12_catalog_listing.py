@@ -182,7 +182,8 @@ async def main() -> None:
             print()
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25; titles are added and
 # updated constantly, so the listings drift over time — that's the site changing, not a bug;

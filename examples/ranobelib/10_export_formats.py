@@ -15,6 +15,7 @@ ValueError the other three formats would raise for a typo, not an import-time cr
 import asyncio
 
 from ranobelib import RanobeLib
+from ranobelib.exporters import EXPORTERS
 
 
 async def main() -> None:
@@ -22,6 +23,11 @@ async def main() -> None:
         chapters = await lib.get_chapters([(1, "1"), (1, "2")])
 
         for fmt in ("txt", "fb2", "epub", "pdf"):
+            # EXPORTERS lists what's registered; pdf is missing without WeasyPrint's native
+            # libraries, and export(fmt="pdf") would raise ValueError.
+            if fmt not in EXPORTERS:
+                print(fmt, "-> not available here:", ", ".join(sorted(EXPORTERS)))
+                continue
             path = f"output.{fmt}"
             # export() returns the Path it wrote to (the same `path` passed in), which is
             # handy when path is left to a default or built dynamically.
@@ -29,12 +35,13 @@ async def main() -> None:
             print(fmt, "->", result)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
-# Expected output (real run against the live site — file sizes from that run; if WeasyPrint's
-# native dependencies aren't installed, the "pdf" iteration raises
-# `ValueError: Unknown export format 'pdf'. Available: epub, fb2, txt` instead of the line
-# shown below):
+# Expected output (real run against the live site; the sizes in parentheses are notes on the
+# files from an earlier run with WeasyPrint's native libraries installed, not printed. Without
+# them the last line reads `pdf -> not available here: epub, fb2, txt`, as in a run on Windows
+# on 2026-10-25):
 #
 # txt -> output.txt      (84,044 bytes)
 # fb2 -> output.fb2      (87,691 bytes)
