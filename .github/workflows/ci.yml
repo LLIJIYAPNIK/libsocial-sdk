@@ -133,9 +133,27 @@ jobs:
           enable-cache: true
       # prepend: the tests import the scripts from their own directory. GIT_CLIFF is the same
       # command changelog.yml uses — without it the update_changelog tests would skip.
-      - run: uv run pytest .github/scripts --import-mode=prepend -rs
+      - run: >-
+          uv run pytest .github/scripts/test_release_package.py
+          .github/scripts/test_update_changelog.py --import-mode=prepend -rs
         env:
           GIT_CLIFF: uvx --from git-cliff==2.14.2 git-cliff
+
+  # The examples run against the live sites, so CI doesn't run them. It checks they still
+  # match the API instead: mypy over each directory (renamed methods, changed signatures —
+  # one directory per run, as both site packages have e.g. an 01_title_metadata.py), every
+  # file imports without running main(), and every public name has an example.
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+      - run: uv run mypy --strict examples/core
+      - run: uv run mypy --strict examples/ranobelib
+      - run: uv run mypy --strict examples/mangalib
+      - run: uv run pytest .github/scripts/test_examples.py --import-mode=prepend
 
   docs:
     runs-on: ubuntu-latest
