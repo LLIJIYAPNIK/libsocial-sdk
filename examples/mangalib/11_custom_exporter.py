@@ -54,16 +54,27 @@ class HtmlExporter:
         fetch_pages: FetchPages,
         on_chapter: Callable[[], None] | None = None,
     ) -> Path:
+        # Written as it goes, chapter by chapter, so memory holds one chapter's images at
+        # most — not the whole book. And to a temporary file next to the target, moved into
+        # place only once complete, like the built-in exporters: a failure halfway leaves no
+        # truncated file and doesn't clobber an earlier export.
         name = html.escape(title.rus_name or title.name)
-        parts = [f"<!doctype html><meta charset='utf-8'><title>{name}</title><h1>{name}</h1>"]
-        for chapter in chapters:
-            parts.append(f"<h2>Том {chapter.volume}, глава {chapter.number}</h2>")
-            for data in await fetch_pages(chapter):
-                uri = f"data:{mime_type(data)};base64,{base64.b64encode(data).decode()}"
-                parts.append(f"<img src='{uri}' style='display:block;max-width:100%'>")
-            if on_chapter is not None:
-                on_chapter()
-        output_path.write_text("\n".join(parts), encoding="utf-8")
+        temporary = output_path.with_name(output_path.name + ".part")
+        try:
+            with temporary.open("w", encoding="utf-8") as stream:
+                stream.write(f"<!doctype html><meta charset='utf-8'><title>{name}</title>\n")
+                stream.write(f"<h1>{name}</h1>\n")
+                for chapter in chapters:
+                    stream.write(f"<h2>Том {chapter.volume}, глава {chapter.number}</h2>\n")
+                    for data in await fetch_pages(chapter):
+                        encoded = base64.b64encode(data).decode()
+                        stream.write(f"<img src='data:{mime_type(data)};base64,{encoded}'")
+                        stream.write(" style='display:block;max-width:100%'>\n")
+                    if on_chapter is not None:
+                        on_chapter()
+            temporary.replace(output_path)
+        finally:
+            temporary.unlink(missing_ok=True)
         return output_path
 
 
