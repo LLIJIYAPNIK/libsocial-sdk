@@ -313,7 +313,9 @@ libsocial-sdk/
 │   │   ├── 06_translations.py     # переводы, RestrictedView, AuthRequiredError — шаг 51
 │   │   ├── 07_download_title.py   # download_title(), пропуск закрытых глав — шаг 51
 │   │   ├── 08_page_images.py      # серверы картинок, page_url(), скачивание страниц — шаги 45, 52
-│   │   └── 09_export_formats.py   # export() в CBZ/PDF, размеры — шаг 46
+│   │   ├── 09_export_formats.py   # export() в CBZ/PDF — шаги 46, 53
+│   │   ├── 10_sizing.py           # chapter_size()/volume_size()/estimate_title_size() — шаг 53
+│   │   └── 11_custom_exporter.py  # свой формат (html) через exporters.register() — шаг 53
 │   └── core/
 │       └── README.md              # пока без примеров
 ├── .github/workflows/
@@ -1815,5 +1817,18 @@ owner/repo/workflow-file/environment) — это может сделать то�
     полноразмерные страницы без заголовков (раньше — тот же хост, что `main`, с 403);
     отсутствующий файл на хостах img3 — `HTTP 502`, а не 404, поэтому его ретраят как 5xx.
     Порядок серверов (`DEFAULT_SERVER_ORDER`) не менялся: `secondary` идёт после `main`.
+
+53. **Примеры mangalib 09–11: экспорт, размеры, свой экспортёр** (issue #108, шаг 6 вехи
+    #102). Экспорт и свой экспортёр — на `267618--07-sedai-no-omoide-zukuri`: завершён, 3 тома
+    по одной главе, 61 страница, ~20 МБ — самый лёгкий тайтл с несколькими томами из
+    просмотренных, потому что примеры экспорта реально качают картинки. `09_export_formats.py`
+    показывает одну главу, весь `download_title()` (pdf при наличии extra, иначе cbz) и
+    смешанный список «том + глава», содержимое CBZ/`ComicInfo.xml` (закладки глав), оглавление
+    PDF через `pikepdf` (ставится с extra) и `ValueError` до сети. `10_sizing.py` — на
+    husband-thief из шага 51: там только HEAD-запросы, а `branch_id`/`translation_index`
+    имеют смысл; без выбора перевода оценка равна 0 (все открытые главы неоднозначны), а не
+    ошибке. `11_custom_exporter.py` — формат `html`: один файл со страницами в `data:`-URI,
+    показан `FetchPages`. Все файлы пишутся во временную директорию (прежний
+    `17_mangalib_export.py` писал в текущую).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
