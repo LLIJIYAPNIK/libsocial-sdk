@@ -309,6 +309,7 @@ libsocial-sdk/
 │   │   └── 19_bulk_errors.py      # VolumeNotFoundError, MultipleTitleTranslationsError — шаг 49
 │   ├── mangalib/
 │   │   ├── README.md              # индекс; номера 01–14 зафиксированы, ещё не написанные — "planned"
+│   │   ├── 01_title_metadata.py … 05_volumes.py   # тайтл, оглавление, главы, тома — шаг 50
 │   │   ├── 08_page_images.py      # страницы главы, серверы, закрытые главы — шаг 45
 │   │   └── 09_export_formats.py   # export() в CBZ/PDF, размеры — шаг 46
 │   └── core/
@@ -1779,5 +1780,14 @@ owner/repo/workflow-file/environment) — это может сделать то�
     на 35–39% — весь вес в картинках нескольких глав, выборка их не задела. Это свойство
     выборки, а не баг; в примере это показано и объяснено. Новые примеры проходят
     `mypy --strict` при запуске по одному файлу.
+
+50. **Примеры mangalib 01–05: метаданные, оглавление, главы, тома** (issue #105, шаг 3 вехи
+    #102). Тайтл — `262329--kidou-senshi-gundam-battle-operation-code-fairy`: завершён (данные
+    не поплывут), 2 тома, 12 глав, дробная `6.5`, по одному открытому переводу на главу, так
+    что `branch_id` нигде не нужен. Для `base_names` и голого `{id}--{slug}` в
+    `01_title_metadata.py` — `212879--return-of-the-runebound-professor-webtoon` (суффикс
+    `(webtoon)` в `name`). Найдено при прогоне: у глав с одним переводом в списке глав
+    `branch_id` — `null`; `Chapter.pages` в оглавлении — пустой список, а не `None`; у
+    Runebound тип — «Комикс», хотя это вебтун.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

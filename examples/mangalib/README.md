@@ -17,11 +17,11 @@ you've read the ranobelib ones.
 
 | File | Feature |
 |---|---|
-| `01_title_metadata.py` | `get_info()` — title metadata, `Title.base_names` *(planned)* |
-| `02_table_of_contents.py` | `get_table_of_contents()` — volumes/chapters without pages *(planned)* |
-| `03_single_chapter.py` | `get_chapter()` — one chapter's pages *(planned)* |
-| `04_multiple_chapters.py` | `get_chapters()` — several chapters at once *(planned)* |
-| `05_volumes.py` | `get_volume()` / `get_volumes()` *(planned)* |
+| [`01_title_metadata.py`](01_title_metadata.py) | `get_info()` — title metadata, the type of work in `country`, `Title.base_names` |
+| [`02_table_of_contents.py`](02_table_of_contents.py) | `get_table_of_contents()` — volumes/chapters without pages |
+| [`03_single_chapter.py`](03_single_chapter.py) | `get_chapter()` — one chapter's pages |
+| [`04_multiple_chapters.py`](04_multiple_chapters.py) | `get_chapters()` — several chapters at once, in the requested order |
+| [`05_volumes.py`](05_volumes.py) | `get_volume()` / `get_volumes()` |
 | `06_translations.py` | `get_translations()`, `branch_id`, closed chapters *(planned)* |
 | `07_download_title.py` | `download_title()` — whole-title bulk download *(planned)* |
 | [`08_page_images.py`](08_page_images.py) | a chapter's pages, image servers, closed chapters |
