@@ -1,6 +1,6 @@
 [project]
 name = "ranobelib-python-sdk"
-version = "0.14.0"
+version = "0.14.1"
 description = "Async Python SDK for ranobelib.me: title metadata, chapter/volume downloads, and export to epub/fb2/txt/pdf"
 readme = "README.md"
 license = "MIT"
