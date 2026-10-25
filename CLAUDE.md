@@ -310,6 +310,8 @@ libsocial-sdk/
 │   ├── mangalib/
 │   │   ├── README.md              # индекс; номера 01–14 зафиксированы, ещё не написанные — "planned"
 │   │   ├── 01_title_metadata.py … 05_volumes.py   # тайтл, оглавление, главы, тома — шаг 50
+│   │   ├── 06_translations.py     # переводы, RestrictedView, AuthRequiredError — шаг 51
+│   │   ├── 07_download_title.py   # download_title(), пропуск закрытых глав — шаг 51
 │   │   ├── 08_page_images.py      # страницы главы, серверы, закрытые главы — шаг 45
 │   │   └── 09_export_formats.py   # export() в CBZ/PDF, размеры — шаг 46
 │   └── core/
@@ -1789,5 +1791,16 @@ owner/repo/workflow-file/environment) — это может сделать то�
     `(webtoon)` в `name`). Найдено при прогоне: у глав с одним переводом в списке глав
     `branch_id` — `null`; `Chapter.pages` в оглавлении — пустой список, а не `None`; у
     Runebound тип — «Комикс», хотя это вебтун.
+
+51. **Примеры mangalib 06–07: переводы, закрытые главы, `download_title()`** (issue #106,
+    шаг 4 вехи #102). Оба на `261420--husband-thief`: 12 глав, у глав 0–5 по два открытых
+    перевода (`branch_id` 26207/26208, в разном порядке у разных глав — отсюда разница
+    `branch_id` и `translation_index`), главы 6–11 — в раннем доступе до 2026-10-31…12-05.
+    Поэтому их `Expected output` датирован и со временем поплывёт (главы откроются) — это
+    оговорено в самих файлах. `DownloadTitleInterruptedError` в прогоне не возникает
+    (коротким скриптом не вызвать), показан обработчиком с комментарием. Замечено:
+    `DownloadTitleInterruptedError.volumes` типизирован базовым `Volume[Any]` ядра, так что
+    у `MangaLib`/`RanobeLib` mypy не даёт присвоить его в `list[mangalib.Volume]` без
+    приведения — возможное будущее улучшение типизации ядра, не исправлялось.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
