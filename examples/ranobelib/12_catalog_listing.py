@@ -9,7 +9,7 @@ listing endpoint doesn't send them.
 
 import asyncio
 
-from ranobelib import Catalog
+from ranobelib import Catalog, Country
 
 
 async def main() -> None:
@@ -77,7 +77,7 @@ async def main() -> None:
         # for ranobelib.me specifically — three real countries (Japan/Korea/China) plus three
         # non-national origin categories the site classifies the same way (original English,
         # original/non-translated, fanfiction) — see docs/api-notes.md.
-        countries = await catalog.list_countries()
+        countries: list[Country] = await catalog.list_countries()
         print(f"\n{len(countries)} countries available: {[country.name for country in countries]}")
         korea = next(country for country in countries if country.name == "Корея")
         japan = next(country for country in countries if country.name == "Япония")

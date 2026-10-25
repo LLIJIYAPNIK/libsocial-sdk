@@ -70,9 +70,10 @@ This is the full current public API — everything above is implemented and work
 
 Complete, runnable scripts for every feature above — title metadata, table of contents,
 single/bulk chapter and volume downloads, translation selection, whole-title bulk download,
-disk caching, export to all four formats, and error handling — live in
-**[`examples/ranobelib/`](../../examples/ranobelib/)**, one heavily commented file per feature. Start there for
-copy-pasteable code.
+disk caching, export to all four formats and to a format of your own, size estimates,
+console progress output, the catalog, footnotes, images, paragraphs, and error handling —
+live in **[`examples/ranobelib/`](../../examples/ranobelib/)**, one heavily commented file
+per feature. Start there for copy-pasteable code.
 
 ## Documentation
 
