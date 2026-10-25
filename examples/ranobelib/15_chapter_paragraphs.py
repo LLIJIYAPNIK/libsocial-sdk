@@ -33,7 +33,8 @@ async def main() -> None:
         # entries here (see 13_chapter_footnotes.py).
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site):
 #

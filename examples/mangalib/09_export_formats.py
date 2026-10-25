@@ -100,7 +100,8 @@ async def main() -> None:
             print("files left:", sorted(item.name for item in out.iterdir()))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site, with the pdf extra installed — without
 # it, the title is exported as title.cbz instead; the long ValueError is wrapped here):

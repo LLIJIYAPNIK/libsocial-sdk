@@ -89,7 +89,8 @@ async def main() -> None:
     print(len(chapter["footnotes"]), "footnotes, first:", chapter["footnotes"][0][:60])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site, on a machine without WeasyPrint's native
 # libraries — with them, "pdf" is in the list too):

@@ -78,7 +78,8 @@ async def main() -> None:
     Reporter(False).log("never printed")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run on 2026-10-25; the gaps vary by a few hundredths of a second with
 # network latency. rich timestamps the log lines and adds where they came from on the right):

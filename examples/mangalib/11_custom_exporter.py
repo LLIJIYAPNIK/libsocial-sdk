@@ -99,7 +99,8 @@ async def main() -> None:
             print(text[text.index("<h1>") : text.index("</h2>") + 5])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site, with the pdf extra installed — without
 # it, "pdf" isn't in the list):

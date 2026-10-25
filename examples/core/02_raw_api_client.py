@@ -91,7 +91,8 @@ async def main() -> None:
             print(f"as site {MANGALIB.id}: {type(exc).__name__}: {exc}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live API on 2026-10-25; the rating, views and listing
 # change over time):

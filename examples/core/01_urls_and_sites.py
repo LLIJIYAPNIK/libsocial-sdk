@@ -57,7 +57,8 @@ def main() -> None:
     print(dict(headers))
 
 
-main()
+if __name__ == "__main__":
+    main()
 
 # Expected output (no requests are made, so this doesn't change):
 #

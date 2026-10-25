@@ -133,7 +133,8 @@ async def main() -> None:
                 print(f"caught {type(exc).__name__}: {exc}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live sites on 2026-10-25; the searches, chapter counts
 # and teams change over time. On Windows without the GTK runtime, importing ranobelib first prints

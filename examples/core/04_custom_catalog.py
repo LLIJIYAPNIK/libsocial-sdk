@@ -94,7 +94,8 @@ async def main() -> None:
         print("all:", clear_cache(cache_dir), "->", cache_stats(cache_dir))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live API on 2026-10-25; the lookups and the listing
 # change as the sites add genres and titles):

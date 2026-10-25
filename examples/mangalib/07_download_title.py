@@ -83,7 +83,8 @@ async def main() -> None:
         print([chapter.teams[0].name for chapter in volumes[0].chapters])
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 
 # Expected output (real run against the live site on 2026-10-25, starting with an empty
 # cache). A second run logs "[cache]" instead of "[api]". Chapters 6-11 were in early access
