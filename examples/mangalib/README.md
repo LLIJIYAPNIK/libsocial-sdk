@@ -25,9 +25,9 @@ you've read the ranobelib ones.
 | [`06_translations.py`](06_translations.py) | `get_translations()`, `branch_id`, `MultipleTranslationsError`; closed chapters: `RestrictedView`, `AuthRequiredError` |
 | [`07_download_title.py`](07_download_title.py) | `download_title()` — the whole title; `branch_id` / `translation_index`, closed chapters skipped, `on_chapter`, `verbosity` |
 | [`08_page_images.py`](08_page_images.py) | `list_image_servers()`, `page_url()`, `download_page()` / `download_pages()`, server fallback, `PageDownloadError` |
-| [`09_export_formats.py`](09_export_formats.py) | `export()` to CBZ/PDF, `chapter_size()` / `estimate_title_size()` |
-| `10_sizing.py` | `chapter_size()` / `volume_size()` / `estimate_title_size()` *(planned)* |
-| `11_custom_exporter.py` | your own export format via `mangalib.exporters.register()` *(planned)* |
+| [`09_export_formats.py`](09_export_formats.py) | `export()` to CBZ/PDF — a chapter, a volume, a mix, a whole title; ComicInfo.xml, the `pdf` extra |
+| [`10_sizing.py`](10_sizing.py) | `chapter_size()` / `volume_size()` / `estimate_title_size()` — exact sizes from HEAD requests, no image traffic |
+| [`11_custom_exporter.py`](11_custom_exporter.py) | your own export format: `Exporter`, `register()`, `EXPORTERS`, `fetch_pages` |
 | `12_catalog_listing.py` | `Catalog.list_titles()` — browsing/searching the catalog *(planned)* |
 | `13_disk_caching.py` | disk cache + `refresh=True`, `cache_stats()` / `clear_cache()` *(planned)* |
 | `14_error_handling.py` | `MangaLibError` and its subclasses *(planned)* |
