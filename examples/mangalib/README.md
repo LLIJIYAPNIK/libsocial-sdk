@@ -28,7 +28,7 @@ you've read the ranobelib ones.
 | [`09_export_formats.py`](09_export_formats.py) | `export()` to CBZ/PDF — a chapter, a volume, a mix, a whole title; ComicInfo.xml, the `pdf` extra |
 | [`10_sizing.py`](10_sizing.py) | `chapter_size()` / `volume_size()` / `estimate_title_size()` — exact sizes from HEAD requests, no image traffic |
 | [`11_custom_exporter.py`](11_custom_exporter.py) | your own export format: `Exporter`, `register()`, `EXPORTERS`, `fetch_pages` |
-| `12_catalog_listing.py` | `Catalog.list_titles()` — browsing/searching the catalog *(planned)* |
+| [`12_catalog_listing.py`](12_catalog_listing.py) | `Catalog` — `list_titles()` filters (AND/OR), `list_genres()` / `list_countries()` (title types) / `list_statuses()`, pagination, a listed title in `MangaLib`, `refresh=True` |
 | `13_disk_caching.py` | disk cache + `refresh=True`, `cache_stats()` / `clear_cache()` *(planned)* |
 | `14_error_handling.py` | `MangaLibError` and its subclasses *(planned)* |
 

@@ -315,7 +315,8 @@ libsocial-sdk/
 │   │   ├── 08_page_images.py      # серверы картинок, page_url(), скачивание страниц — шаги 45, 52
 │   │   ├── 09_export_formats.py   # export() в CBZ/PDF — шаги 46, 53
 │   │   ├── 10_sizing.py           # chapter_size()/volume_size()/estimate_title_size() — шаг 53
-│   │   └── 11_custom_exporter.py  # свой формат (html) через exporters.register() — шаг 53
+│   │   ├── 11_custom_exporter.py  # свой формат (html) через exporters.register() — шаг 53
+│   │   └── 12_catalog_listing.py  # Catalog: фильтры, справочники, пагинация — шаг 54
 │   └── core/
 │       └── README.md              # пока без примеров
 ├── .github/workflows/
@@ -1830,5 +1831,18 @@ owner/repo/workflow-file/environment) — это может сделать то�
     ошибке. `11_custom_exporter.py` — формат `html`: один файл со страницами в `data:`-URI,
     показан `FetchPages`. Все файлы пишутся во временную директорию (прежний
     `17_mangalib_export.py` писал в текущую).
+
+54. **Пример mangalib 12: каталог и поиск** (issue #109, шаг 7 вехи #102).
+    `12_catalog_listing.py` — `Catalog` без фильтров и с `query`, справочники (49 жанров,
+    из них 2 `adult`; 6 «стран» — на mangalib.me это типы: Манга, OEL-манга, Манхва,
+    Маньхуа, Руманга, Комикс, id 1–9, не ranobelib-овские 10–15; 5 статусов), фильтры с
+    проверкой семантики на живых данных (жанры — И: неизвестный id обнуляет выдачу; типы и
+    статусы — ИЛИ: в выдаче оба варианта; теги — И, id взяты из `get_info().tags` Chainsaw
+    Man, т.к. `list_tags()` нет), `min_chapters`/`max_chapters`, `ValueError` до сети,
+    обход страниц по `has_next_page`, переход в `MangaLib(title.slug_url)`, кэш против
+    `refresh=True`. Замечено: `list_titles()` аннотирован `libsocial.CatalogPage[Title]`, а
+    возвращает `mangalib.CatalogPage` — mypy не даёт аннотировать результат классом фасада
+    (то же, что `DownloadTitleInterruptedError.volumes` в шаге 51); в примере класс показан
+    через `isinstance`, типизация ядра не исправлялась.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
