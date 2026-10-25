@@ -169,9 +169,9 @@ async def test_list_titles_rejects_invalid_chapter_bounds(bounds: dict[str, int]
 async def test_list_titles_chapter_bounds_are_inclusive() -> None:
     async with Catalog() as catalog:
         # 6712 (High School DxD, completed) has exactly 308 chapters — see
-        # examples/01_title_metadata.py's expected output. Catalog items don't carry a chapter
-        # count (see docs/api-notes.md), so a title known to sit exactly on both bounds is
-        # the check.
+        # examples/ranobelib/01_title_metadata.py's expected output. Catalog items don't carry
+        # a chapter count (see docs/api-notes.md), so a title known to sit exactly on both
+        # bounds is the check.
         page = await catalog.list_titles(min_chapters=308, max_chapters=308, per_page=60)
 
     assert any(item.id == 6712 for item in page.items)
