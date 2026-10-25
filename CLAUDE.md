@@ -302,7 +302,11 @@ libsocial-sdk/
 │   │   ├── 12_catalog_listing.py  # Catalog.list_titles() — см. шаг 24
 │   │   ├── 13_chapter_footnotes.py   # Chapter.footnotes — см. шаг 30
 │   │   ├── 14_chapter_images.py   # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
-│   │   └── 15_chapter_paragraphs.py  # chapter_paragraphs() — см. шаг 38
+│   │   ├── 15_chapter_paragraphs.py  # chapter_paragraphs() — см. шаг 38
+│   │   ├── 16_sizing.py           # estimate_title_size()/chapter_size()/volume_size() — шаг 49
+│   │   ├── 17_console_output.py   # verbosity — шаг 49
+│   │   ├── 18_custom_exporter.py  # свой формат через exporters.register() — шаг 49
+│   │   └── 19_bulk_errors.py      # VolumeNotFoundError, MultipleTitleTranslationsError — шаг 49
 │   ├── mangalib/
 │   │   ├── README.md              # индекс; номера 01–14 зафиксированы, ещё не написанные — "planned"
 │   │   ├── 08_page_images.py      # страницы главы, серверы, закрытые главы — шаг 45
@@ -1761,5 +1765,19 @@ owner/repo/workflow-file/environment) — это может сделать то�
     примерами (`see 10_export_formats.py`) — внутри одного пакета, остались верными. ruff
     проверяет `examples/` целиком, включая поддиректории; mypy примеры не проверял и не
     проверяет (`files` — только `src`) — проверка примеров в CI отложена до шага 10 (#112).
+
+49. **Примеры ranobelib: размеры, verbosity, свой экспортёр, ошибки массовой загрузки**
+    (issue #104, шаг 2 вехи #102). Новые `16_sizing.py`, `17_console_output.py`,
+    `18_custom_exporter.py` (JSON: абзацы через `chapter_paragraphs()` + сноски) и
+    `19_bulk_errors.py` — отдельным файлом, а не дописано в `11_error_handling.py`: тот про
+    одиночные запросы. `ChapterBranch`/`AmbiguousChapter`/`Footnote` показаны в новых
+    примерах, `Country` — аннотацией в `12_catalog_listing.py` (вывод не изменился). Теперь в
+    `examples/ranobelib/` встречается каждое имя из `ranobelib.__all__` и
+    `ranobelib.exporters` (`Exporter`, `register`, `EXPORTERS`); `AuthRequiredError` и
+    `RateLimitError` есть только в тексте, почему — в README примеров. Наблюдение из прогона
+    `16_sizing.py`: на иллюстрированном тайтле оценка `estimate_title_size()` занизила размер
+    на 35–39% — весь вес в картинках нескольких глав, выборка их не задела. Это свойство
+    выборки, а не баг; в примере это показано и объяснено. Новые примеры проходят
+    `mypy --strict` при запуске по одному файлу.
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

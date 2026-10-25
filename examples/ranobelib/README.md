@@ -31,8 +31,13 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`13_chapter_footnotes.py`](13_chapter_footnotes.py) | `Chapter.footnotes` — translator footnotes, separate from the text |
 | [`14_chapter_images.py`](14_chapter_images.py) | `chapter_image_urls()` / `rewrite_image_urls()` — listing and rewriting a chapter's image URLs |
 | [`15_chapter_paragraphs.py`](15_chapter_paragraphs.py) | `chapter_paragraphs()` — a chapter's top-level blocks as plain text, indexed like the DOM |
+| [`16_sizing.py`](16_sizing.py) | `estimate_title_size()` before downloading, `chapter_size()` / `volume_size()` after |
+| [`17_console_output.py`](17_console_output.py) | `verbosity` — progress bars and a cache/API log in the console |
+| [`18_custom_exporter.py`](18_custom_exporter.py) | your own export format: `Exporter`, `register()`, `EXPORTERS` |
+| [`19_bulk_errors.py`](19_bulk_errors.py) | `VolumeNotFoundError`, `MultipleTitleTranslationsError` / `AmbiguousChapter`, `except RanobeLibError` |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/libsocial-sdk/ranobelib-reference/)
-for every public class/method, including `AuthRequiredError` and `RateLimitError`, which
-aren't demonstrated here since they need conditions (paid content, sustained rate limiting)
-that aren't reliably reproducible in a short script.
+for every public class/method. Two exceptions aren't demonstrated, since a short script can't
+reproduce them reliably: `AuthRequiredError` (needs a paid or early-access chapter) and
+`RateLimitError` (needs sustained rate limiting). Their attributes are in the reference; 11_error_handling.py explains how
+`AuthRequiredError` differs from `AccessBlockedError`.
