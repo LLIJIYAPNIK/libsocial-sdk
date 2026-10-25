@@ -74,7 +74,7 @@ Checked against the live API on 2026-09-30, same IP, on `GET /api/manga/{slug}` 
 | `Origin: https://example.com` only | 403 HTML |
 
 Follow-up the same day (while reproducing `AccessBlockedError` for
-`examples/11_error_handling.py`), `GET /api/manga/{slug}` only:
+`examples/ranobelib/11_error_handling.py`), `GET /api/manga/{slug}` only:
 
 | Headers on top of `Site-Id` + `Accept` | Result |
 |---|---|
@@ -138,7 +138,7 @@ already fetched, like any other mid-download failure.
 
 Reproducible on demand — unlike `AuthRequiredError`, which needs a paywalled title — by
 sending an empty `Referer`: `RanobeLib(..., headers={"Referer": ""})` (that's what
-`examples/11_error_handling.py` does, against the live API).
+`examples/ranobelib/11_error_handling.py` does, against the live API).
 
 ### `get_info()` — verified `fields[]` list
 

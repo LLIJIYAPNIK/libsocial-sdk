@@ -22,7 +22,7 @@ Installation, quickstart and changelog: [`packages/ranobelib/README.md`](package
 [`packages/mangalib/README.md`](packages/mangalib/README.md), [`packages/core/README.md`](packages/core/README.md).
 This repository was called `ranobelib-python-sdk` until the mangalib package joined it; the
 old GitHub URLs redirect here, and the package names on PyPI haven't changed.
-Runnable examples: [`examples/`](examples/). Full documentation:
+Runnable examples, one directory per package: [`examples/`](examples/). Full documentation:
 **<https://LLIJIYAPNIK.github.io/libsocial-sdk/>**.
 
 ## Development

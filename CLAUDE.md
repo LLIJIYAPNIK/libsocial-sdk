@@ -284,25 +284,31 @@ libsocial-sdk/
 │   ├── core.md                    # обзор libsocial-core
 │   ├── core-reference.md          # mkdocstrings-справочник libsocial-core
 │   └── api-notes.md               # сюда складывать находки про недокументированный API
-├── examples/
-│   ├── README.md                  # индекс: файл → фича, со ссылками
-│   ├── 01_title_metadata.py
-│   ├── 02_table_of_contents.py
-│   ├── 03_single_chapter.py
-│   ├── 04_multiple_chapters.py
-│   ├── 05_single_volume.py
-│   ├── 06_multiple_volumes.py
-│   ├── 07_translation_selection.py
-│   ├── 08_download_title.py
-│   ├── 09_disk_caching.py
-│   ├── 10_export_formats.py
-│   ├── 11_error_handling.py       # рабочие, подробно закомментированные скрипты — см. шаг 19
-│   ├── 12_catalog_listing.py      # Catalog.list_titles() — см. шаг 24
-│   ├── 13_chapter_footnotes.py    # Chapter.footnotes — см. шаг 30
-│   ├── 14_chapter_images.py       # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
-│   ├── 15_chapter_paragraphs.py   # chapter_paragraphs() — см. шаг 38
-│   ├── 16_mangalib_pages.py       # mangalib: страницы главы, серверы, закрытые главы — шаг 45
-│   └── 17_mangalib_export.py      # mangalib: export() в CBZ/PDF, размеры — шаг 46
+├── examples/                      # по директории на пакет, нумерация своя в каждой — шаг 48
+│   ├── README.md                  # обзор: три пакета, ссылки на их README
+│   ├── ranobelib/
+│   │   ├── README.md              # индекс: файл → фича, со ссылками
+│   │   ├── 01_title_metadata.py
+│   │   ├── 02_table_of_contents.py
+│   │   ├── 03_single_chapter.py
+│   │   ├── 04_multiple_chapters.py
+│   │   ├── 05_single_volume.py
+│   │   ├── 06_multiple_volumes.py
+│   │   ├── 07_translation_selection.py
+│   │   ├── 08_download_title.py
+│   │   ├── 09_disk_caching.py
+│   │   ├── 10_export_formats.py
+│   │   ├── 11_error_handling.py   # рабочие, подробно закомментированные скрипты — см. шаг 19
+│   │   ├── 12_catalog_listing.py  # Catalog.list_titles() — см. шаг 24
+│   │   ├── 13_chapter_footnotes.py   # Chapter.footnotes — см. шаг 30
+│   │   ├── 14_chapter_images.py   # chapter_image_urls()/rewrite_image_urls() — см. шаг 37
+│   │   └── 15_chapter_paragraphs.py  # chapter_paragraphs() — см. шаг 38
+│   ├── mangalib/
+│   │   ├── README.md              # индекс; номера 01–14 зафиксированы, ещё не написанные — "planned"
+│   │   ├── 08_page_images.py      # страницы главы, серверы, закрытые главы — шаг 45
+│   │   └── 09_export_formats.py   # export() в CBZ/PDF, размеры — шаг 46
+│   └── core/
+│       └── README.md              # пока без примеров
 ├── .github/workflows/
 │   ├── ci.yml                     # появляется вместе с первым функциональным PR
 │   ├── docs.yml
@@ -675,7 +681,7 @@ owner/repo/workflow-file/environment) — это может сделать то�
     самодостаточному Python-файлу на фичу верхнего уровня (`get_info`, `get_table_of_contents`,
     `get_chapter(s)`, `get_volume(s)`, выбор перевода, `download_title`, кэш, `export()` во
     все 4 формата, обработка исключений), с префиксом `NN_` для порядка чтения
-    (`examples/01_title_metadata.py`, ...). Каждый файл — полностью рабочий скрипт (`import`ы,
+    (`examples/ranobelib/01_title_metadata.py`, ...). Каждый файл — полностью рабочий скрипт (`import`ы,
     `async def main()`, `asyncio.run(main())`, не голый `async with`) и **подробно
     закомментирован**: не просто что делает вызов (это видно по имени метода), а зачем этот
     параметр/паттерн нужен, какие есть нюансы — комментарии рассчитаны на то, что файл читают
@@ -1006,7 +1012,7 @@ owner/repo/workflow-file/environment) — это может сделать то�
     - `Catalog`/`CatalogPage` ре-экспортированы из `ranobelib/__init__.py` — обычный дневной
       юзкейс наравне с `RanobeLib`, не точка расширения, которую нужно прятать (см. решение
       по `chapter_size`/`volume_size` в шаге 22 для того же рассуждения от противного).
-    - `examples/12_catalog_listing.py` добавлен по тому же принципу, что и остальные примеры
+    - `examples/ranobelib/12_catalog_listing.py` добавлен по тому же принципу, что и остальные примеры
       (шаг 19) — реально прогнан против живого API.
 25. **`Catalog.list_genres()`** (issue #44, тот же запрос от `ranobelib-companion`, что и шаг
     24 — компаньону нужен список жанров с именами для чекбоксов фильтра на странице
@@ -1151,7 +1157,7 @@ owner/repo/workflow-file/environment) — это может сделать то�
     это на усмотрение реализации, но проект не держит неиспользуемые параллельные параметры
     ради обратной совместимости, см. общие принципы CLAUDE.md); `None`/пустой список — не
     применять фильтр по стране вообще, как и у `genres`/`tags`. Кэш-ключ `list_titles()`
-    обновлён (`countries` вместо `country`), `examples/12_catalog_listing.py` дополнен
+    обновлён (`countries` вместо `country`), `examples/ranobelib/12_catalog_listing.py` дополнен
     примером фильтра по двум странам сразу (реально прогнан против живого API, как и
     остальные примеры).
 
@@ -1650,8 +1656,9 @@ owner/repo/workflow-file/environment) — это может сделать то�
     - **CI/инфраструктура**: mypy/тесты/сборка/`facade-vs-published-core` включают mangalib
       (тесты пакета — отдельный прогон со своим порогом 95% и `--record-mode=none`);
       `release_package.py` уже знал префикс `mangalib`. `docs/mangalib-reference.md` —
-      mkdocstrings-справочник, `examples/16_mangalib_pages.py` — прогнан вживую. Тег
-      `mangalib-v0.1.0` — после регистрации trusted publisher на PyPI (#93).
+      mkdocstrings-справочник, `examples/mangalib/08_page_images.py` (тогда
+      `16_mangalib_pages.py`) — прогнан вживую. Тег `mangalib-v0.1.0` — после регистрации
+      trusted publisher на PyPI (#93).
 
 46. **Монорепозиторий, шаг 6: экспорт манги в CBZ/PDF, размеры, скачивание тайтла** (issue #91,
     часть #85). Ядро снова не менялось. Новые находки об API — в `docs/api-notes.md`,
@@ -1744,5 +1751,15 @@ owner/repo/workflow-file/environment) — это может сделать то�
       репозиторием `libsocial-sdk` (workflow `release.yml`, environment `pypi`), иначе
       следующий релиз не опубликуется. Старый можно удалить после первого успешного релиза.
     - ranobelib-companion: адрес репозитория SDK обновлён отдельным PR в его репозитории.
+
+48. **Примеры по пакетам** (issue #103, шаг 1 вехи #102 «примеры для всех пакетов SDK»).
+    `examples/` разложен на `ranobelib/`, `mangalib/`, `core/` (через `git mv`), у каждой
+    директории свой README-индекс и своя нумерация с `01`. Бывшие `16_mangalib_pages.py` и
+    `17_mangalib_export.py` — `mangalib/08_page_images.py` и `mangalib/09_export_formats.py`:
+    номера mangalib идут по плану шагов 3–8 вехи и зафиксированы в `examples/mangalib/README.md`
+    (ещё не написанные файлы — без ссылки, с пометкой *planned*). Перекрёстные ссылки между
+    примерами (`see 10_export_formats.py`) — внутри одного пакета, остались верными. ruff
+    проверяет `examples/` целиком, включая поддиректории; mypy примеры не проверял и не
+    проверяет (`files` — только `src`) — проверка примеров в CI отложена до шага 10 (#112).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
