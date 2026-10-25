@@ -1,74 +1,107 @@
-"""Read a manga chapter's pages with mangalib-python-sdk (`pip install mangalib-python-sdk`).
+"""Download a manga chapter's page images: image servers, page URLs, fallback, errors.
 
-mangalib.me runs on the same API as ranobelib.me, and `MangaLib` has the same methods as
-`RanobeLib` for titles, chapters and translations — what differs is the chapter itself: it's
-a list of page images (`Chapter.pages`) instead of text. Each page is a path relative to an
-image server; `download_page()`/`download_pages()` pick the server and fall back to the next
-one if it refuses. See the "MangaLib" section of docs/api-notes.md for how the servers and
-paid chapters were checked.
+A fetched chapter's `pages` (03_single_chapter.py) are paths, not images. The images live on
+several image servers, every one serving every page; `list_image_servers()` lists them
+(`ImageServer`: id, label, url). Not all of them let a script in: `main`/`secondary` sit
+behind a DDoS-Guard check, `crop` serves small previews. So downloads try `compress` (full
+size) first, then `download`, `main`, `secondary`, moving on when a server refuses —
+see the "MangaLib" section of docs/api-notes.md for how that was checked.
+
+- `page_url(page, server)`: the full URL, if something else should fetch the image (a web
+  frontend, an external downloader) rather than the SDK.
+- `download_page(page, server=...)`: one page as bytes; `server` is tried first.
+- `download_pages(chapter, concurrency=...)`: all pages, in reading order. Requests to one
+  image host are paced across the whole process (one start every 0.2 s by default), so a
+  higher `concurrency` mostly overlaps slow transfers; it doesn't raise the request rate.
+- `PageDownloadError`: a page no server would serve; `.failures` lists every attempt.
+
+Page images aren't cached on disk (the chapter's metadata is): download them once and keep
+the files.
 """
 
 import asyncio
+import tempfile
 from pathlib import Path
 
-from mangalib import AuthRequiredError, MangaLib
+from mangalib import ImageServer, MangaLib, Page, PageDownloadError, page_url
+
+
+def extension(data: bytes) -> str:
+    # The page's file name isn't a reliable guide to the format (the compress server sends
+    # JPEG for ".png" names), so look at the bytes.
+    if data.startswith(b"\x89PNG"):
+        return "png"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    return "jpg"
 
 
 async def main() -> None:
-    async with MangaLib("https://mangalib.me/ru/manga/7965--chainsaw-man") as lib:
-        # Chapter 1 has two translations. As on ranobelib, get_chapter() won't guess which
-        # one you want (the API's own default isn't predictable), so pick one explicitly.
-        branches = await lib.get_translations(volume=1, number="1")
-        for branch in branches:
-            # is_open: whether the translation can be read without an account. The SDK has
-            # no login, so a closed one can't be fetched through it.
-            print(branch.branch_id, [team.name for team in branch.teams], branch.is_open)
+    url = "https://mangalib.me/ru/manga/262329--kidou-senshi-gundam-battle-operation-code-fairy"
+    async with MangaLib(url) as lib:
+        # Cached on disk like the rest of the API's answers; refresh=True refetches.
+        servers: list[ImageServer] = await lib.list_image_servers()
+        for server in servers:
+            print(server.id, server.label, server.url)
 
-        chapter = await lib.get_chapter(volume=1, number="1", branch_id=branches[0].branch_id)
-        print(len(chapter.pages), "pages")
-        first = chapter.pages[0]
-        print(first.number, first.width, first.height, first.url)
+        chapter = await lib.get_chapter(volume=1, number="6.5")
+        page: Page = chapter.pages[0]
+        compress = next(server for server in servers if server.id == "compress")
+        print(page_url(page, compress))
 
-        # The servers mangalib.me lists. Not all of them let a script in: main/secondary sit
-        # behind a DDoS-Guard check, so downloads start from "compress" (full-size images).
-        servers = await lib.list_image_servers()
-        print([server.id for server in servers])
+        # main refuses scripts, so this falls back to the next server — same bytes as
+        # asking compress directly. crop is a preview: far fewer bytes.
+        via_main = await lib.download_page(page, server="main")
+        direct = await lib.download_page(page, server="compress")
+        preview = await lib.download_page(page, server="crop")
+        print(len(via_main), via_main == direct, len(preview))
 
-        # Pages come back as bytes, in reading order, a few at a time. Don't trust the file
-        # name's extension for the format: "compress" sends JPEG even for ".png" names.
-        images = await lib.download_pages(chapter.model_copy(update={"pages": chapter.pages[:3]}))
-        out = Path("chainsaw-man-1")
-        out.mkdir(exist_ok=True)
-        for page, data in zip(chapter.pages, images, strict=False):
-            (out / f"{page.number:03}.jpg").write_bytes(data)
-        print([len(data) for data in images])
+        # The whole chapter, then saved as 001.jpg, 002.jpg, ... with the real extension.
+        images = await lib.download_pages(chapter, concurrency=3)
+        with tempfile.TemporaryDirectory() as directory:
+            for item, data in zip(chapter.pages, images, strict=True):
+                path = Path(directory) / f"{item.number:03}.{extension(data)}"
+                path.write_bytes(data)
+            print(sorted(path.name for path in Path(directory).iterdir()))
 
-    # A chapter in early access (paid until its expired_at) is refused with
-    # AuthRequiredError — the API itself answers 200 with no pages for it.
-    async with MangaLib("226780--online-game-god-level-assassin-i-am-the-shadow") as lib:
-        volumes = await lib.get_table_of_contents()
-        closed = [
-            chapter
-            for volume in volumes
-            for chapter in volume.chapters
-            if not any(branch.is_open for branch in chapter.branches)
-        ]
-        if closed:
-            try:
-                await lib.get_chapter(volume=int(closed[0].volume), number=closed[0].number)
-            except AuthRequiredError:
-                print("closed:", closed[0].volume, closed[0].number)
+        # A page that isn't on any server: every one is tried, then PageDownloadError. In
+        # download_pages(), one such page cancels the downloads still running. (Takes a few
+        # seconds: the cdnlibs hosts answer a missing file with a 502, and a 5xx is retried
+        # with backoff before moving on. compress and download share a host, so it's asked
+        # once.)
+        missing = page.model_copy(update={"url": "//manga/no-such-title/chapters/1/01.jpg"})
+        try:
+            await lib.download_page(missing)
+        except PageDownloadError as exc:
+            for attempt_url, reason in exc.failures:
+                print(attempt_url.split("/manga/")[0], "->", reason)
+
+        # Bad arguments fail before any request.
+        try:
+            await lib.download_pages(chapter, server="nope")
+        except ValueError as exc:
+            print("ValueError:", exc)
+        try:
+            await lib.download_pages(chapter, concurrency=0)
+        except ValueError as exc:
+            print("ValueError:", exc)
 
 
 asyncio.run(main())
 
-# Expected output (real run against the live site, 2026-10-18; the closed chapter changes as
-# early access ends):
+# Expected output (real run against the live site; the page URL is wrapped here):
 #
-# 4667 ['Nippa'] True
-# 4666 ['Japit Comics'] True
-# 55 pages
-# 1 1425 2048 //manga/chainsaw-man/chapters/1-1/00.png_res.jpg
-# ['main', 'secondary', 'compress', 'download', 'crop']
-# [443530, 268038, 878867]
-# closed: 1 132
+# main Первый https://img2.imglib.info
+# secondary Второй https://img3.cdnrulib.link
+# compress Сжатия https://img3.cdnlibs.org
+# download Скачивание https://img3.cdnlibs.org
+# crop Crop pages https://crops.mangalib.me
+# https://img3.cdnlibs.org/manga/kidou-senshi-gundam-battle-operation-code-fairy/chapters/
+#   4293241/1d411e81-4a45-4ede-971b-b046151e7ace.jpg
+# 301735 True 59191
+# ['001.jpg', '002.jpg', '003.jpg', '004.jpg', '005.jpg']
+# https://img3.cdnlibs.org -> HTTP 502 (text/plain; charset=utf-8)
+# https://img2.imglib.info -> HTTP 403 (text/html; charset=utf-8)
+# https://img3.cdnrulib.link -> HTTP 502 (text/plain; charset=utf-8)
+# ValueError: Unknown image server 'nope'. Available: compress, crop, download, main, secondary
+# ValueError: concurrency must be at least 1, got 0.
