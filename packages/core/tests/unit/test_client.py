@@ -145,6 +145,8 @@ def _edge_403(request: httpx.Request) -> httpx.Response:
         pytest.param(lambda client: client.list_genres(), id="genres"),
         pytest.param(lambda client: client.list_countries(), id="countries"),
         pytest.param(lambda client: client.list_statuses(), id="statuses"),
+        pytest.param(lambda client: client.get_relations("1--example"), id="relations"),
+        pytest.param(lambda client: client.list_relation_types(), id="relation-types"),
     ],
 )
 async def test_html_403_raises_access_blocked_not_auth_required(
@@ -744,3 +746,51 @@ async def test_access_blocked_message_names_where_to_pass_headers(site: Site) ->
 
     assert "via the client's headers= parameter." in str(generic_error.value)
     assert "via SiteSDK(..., headers=...)." in str(site_error.value)
+
+
+async def test_get_relations_returns_data_array(site: Site) -> None:
+    relations = [{"related_type": {"id": 1, "label": "Адаптация"}, "media": {"id": 2}}]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url.path == "/api/manga/1--example/relations"
+        assert request.headers["Site-Id"] == str(site.id)
+        return httpx.Response(200, json={"data": relations})
+
+    async with _client(site, handler) as client:
+        result = await client.get_relations("1--example")
+
+    assert result == relations
+
+
+async def test_get_relations_raises_title_not_found_on_404(site: Site) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, json={"data": {"toast": {"message": "Not Found"}}})
+
+    async with _client(site, handler) as client:
+        with pytest.raises(TitleNotFoundError) as exc_info:
+            await client.get_relations("999--missing")
+
+    assert exc_info.value.slug_url == "999--missing"
+
+
+async def test_list_relation_types_sends_expected_query_params(site: Site) -> None:
+    types = [{"id": 1, "label": "Адаптация"}]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url.path == "/api/constants"
+        assert request.url.params.get_list("fields[]") == ["relationTypes"]
+        return httpx.Response(200, json={"data": {"relationTypes": types}})
+
+    async with _client(site, handler) as client:
+        result = await client.list_relation_types()
+
+    assert result == types
+
+
+async def test_list_relation_types_raises_rate_limit_error_on_429(site: Site) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, json={"data": {}})
+
+    async with _client(site, handler) as client:
+        with pytest.raises(RateLimitError):
+            await client.list_relation_types()

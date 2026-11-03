@@ -26,7 +26,7 @@ from libsocial.exceptions import (
     TitleNotFoundError,
     VolumeNotFoundError,
 )
-from libsocial.models import Chapter, Title, Volume
+from libsocial.models import Chapter, Relation, Title, Volume
 from libsocial.pacing import Pacer
 from libsocial.site import Site
 from libsocial.title import PlannedChapter, TitleClient, _resolve_bulk_branch_id
@@ -88,6 +88,29 @@ _TOC = [
 ]
 
 
+def _relation(type_id: int, label: str, media_id: int, *, model: str, site: int) -> dict[str, Any]:
+    return {
+        "order": media_id,
+        "related_type": {"id": type_id, "label": label},
+        "media": {
+            "id": media_id,
+            "name": f"Related {media_id}",
+            "slug": f"related-{media_id}",
+            "slug_url": f"{media_id}--related-{media_id}",
+            "model": model,
+            "site": site,
+            "cover": {},
+        },
+    }
+
+
+_RELATIONS = [
+    _relation(4, "Продолжение", 8, model="manga", site=3),
+    _relation(1, "Адаптация", 9, model="manga", site=1),
+    _relation(1, "Адаптация", 10, model="anime", site=5),
+]
+
+
 class _FakeApi:
     """Answers the three title endpoints; records every request it sees."""
 
@@ -96,6 +119,7 @@ class _FakeApi:
         self.toc = _TOC if toc is None else toc
         self.requests: list[httpx.Request] = []
         self.chapter_status: dict[str, int] = {}  # number -> forced error status
+        self.relations: list[dict[str, Any]] = _RELATIONS
 
     def __call__(self, request: httpx.Request) -> httpx.Response:
         self.requests.append(request)
@@ -103,6 +127,8 @@ class _FakeApi:
         path = request.url.path
         if path == f"/api/manga/{SLUG}":
             return httpx.Response(200, json={"data": _TITLE})
+        if path == f"/api/manga/{SLUG}/relations":
+            return httpx.Response(200, json={"data": self.relations})
         if path == f"/api/manga/{SLUG}/chapters":
             return httpx.Response(200, json={"data": self.toc})
         if path == f"/api/manga/{SLUG}/chapter":
@@ -611,3 +637,48 @@ def test_resolve_bulk_branch_id(
         _resolve_bulk_branch_id(branches, branch_id=branch_id, translation_index=translation_index)
         == expected
     )
+
+
+async def test_get_relations_returns_every_relation_in_the_api_order(
+    site: Site, tmp_path: Path
+) -> None:
+    async with _client(site, tmp_path, _FakeApi(site)) as client:
+        relations = await client.get_relations()
+
+    assert all(isinstance(relation, Relation) for relation in relations)
+    assert [(r.type.id, r.media.kind, r.media.site_id) for r in relations] == [
+        (4, "manga", 3),
+        (1, "manga", 1),
+        (1, "anime", 5),
+    ]
+
+
+async def test_get_relations_of_a_title_without_relations(site: Site, tmp_path: Path) -> None:
+    api = _FakeApi(site)
+    api.relations = []
+    async with _client(site, tmp_path, api) as client:
+        assert await client.get_relations() == []
+
+
+async def test_get_relations_is_cached_until_refresh(site: Site, tmp_path: Path) -> None:
+    api = _FakeApi(site)
+    reporter, buffer = _reporter_with_buffer("full")
+    async with _client(site, tmp_path, api) as client:
+        client._reporter = reporter
+        first = await client.get_relations()
+        assert await client.get_relations() == first
+        await client.get_relations(refresh=True)
+
+    assert api.paths() == ["/relations", "/relations"]
+    output = buffer.getvalue()
+    assert f"[api] fetching relations for {SLUG}" in output
+    assert f"[cache] relations for {SLUG}" in output
+
+
+async def test_get_relations_raises_title_not_found(site: Site, tmp_path: Path) -> None:
+    def api(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, json={"data": {}})
+
+    async with _client(site, tmp_path, api) as client:
+        with pytest.raises(TitleNotFoundError):
+            await client.get_relations()

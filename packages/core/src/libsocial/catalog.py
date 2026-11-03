@@ -305,6 +305,29 @@ class Catalog(Generic[TitleT]):
         self._cache.set(key, data)
         return _for_site(Label, data, self.site)
 
+    async def list_relation_types(self, *, refresh: bool = False) -> list[Label]:
+        """Fetch the full list of relation types (id → label): adaptation, source, sequel, ...
+
+        These are the values ``Relation.type`` takes on ``TitleClient.get_relations()``, so
+        relations can be picked by id (``relation.type.id == 1`` for adaptations) rather than
+        by their Russian label. Unlike ``list_statuses()``, nothing is filtered by site: the
+        entries carry no ``site_ids``, since relations themselves cross sites. Two ids share
+        the label ``"Альтернативная история"`` (5 and 15) — kept as the API sends them.
+
+        Args:
+            refresh: Bypass the disk cache and re-fetch from the API even if the list was
+                already cached.
+
+        Returns:
+            Every relation type (``Label``: id, label), in the API's order.
+        """
+        key = "catalog:relation_types"
+        data: list[dict[str, Any]] | None = None if refresh else self._cache.get(key)
+        if data is None:
+            data = await self._client.list_relation_types()
+            self._cache.set(key, data)
+        return [Label.model_validate(item) for item in data]
+
     def _build_page(self, data: dict[str, Any]) -> CatalogPage[TitleT]:
         meta = data["meta"]
         return self.page_model.model_validate(

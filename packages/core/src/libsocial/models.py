@@ -153,6 +153,51 @@ class Title(BaseModel):
         return str(value)
 
 
+class RelatedMedia(BaseModel):
+    """The other end of a ``Relation``: a title on any lib.social site, anime included.
+
+    Relations cross sites (a novel on ranobelib.me links to its manga on mangalib.me and its
+    anime on anilib.me), so this is not the calling site's ``Title`` model: ``site_id`` says
+    which site the title lives on and ``kind`` whether it is a ``"manga"`` (the API's name
+    for every readable title: manga, novel, ...) or an ``"anime"``. To fetch the related
+    title, pass ``slug_url`` to the client of the site ``site_id`` names.
+
+    ``type`` is the raw API field as-is, and means different things per ``kind``. For
+    readable titles it's the type classifier of the title's own site, the one ``Title.country``
+    maps (Japan, Korea, ... on ranobelib.me; Manga, Manhwa, Comic, ... on mangalib.me). For
+    anime it's the format (TV series, OVA, ...).
+    """
+
+    model_config = ConfigDict(populate_by_name=True)
+
+    id: int
+    name: str
+    rus_name: str | None = None
+    eng_name: str | None = None
+    slug: str
+    slug_url: str
+    kind: str = Field(alias="model")
+    site_id: int = Field(alias="site")
+    cover: Cover = Field(default_factory=Cover)
+    age_restriction: Label | None = Field(default=None, alias="ageRestriction")
+    status: Label | None = None
+    type: Label | None = None
+
+
+class Relation(BaseModel):
+    """A link from a title to a related one (adaptation, source, sequel, spin-off, ...).
+
+    ``type`` is read from the related title's side: on a novel, its manga is
+    ``"Адаптация"``; on that manga, the novel is ``"Источник"``. The full list of relation
+    types is ``Catalog.list_relation_types()``.
+    """
+
+    model_config = ConfigDict(populate_by_name=True)
+
+    type: Label = Field(alias="related_type")
+    media: RelatedMedia
+
+
 class ChapterUser(BaseModel):
     """The uploader of a chapter branch."""
 

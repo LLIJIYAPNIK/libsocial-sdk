@@ -275,6 +275,52 @@ and original-language names. The same rule is applied to them anyway, as the iss
 Normalizing names for comparison (case, punctuation, `×` → `x`) isn't done here. That
 belongs to whatever matches two catalogs against each other.
 
+### Related titles: `GET /api/manga/{slug_url}/relations` (checked 2026-11-03)
+
+What a title page shows as related titles (adaptation, source, sequel, spin-off, ...).
+`TitleClient.get_relations()`; the relation types are `Catalog.list_relation_types()`.
+
+- Response: `{"data": [...]}`. Each item is `{order, related_type: {id, label}, media}`. The
+  list comes in one response: `?page=2` returns the same bytes. It's always sorted by
+  `order`, which is the page's display order (checked on 96 titles), so the SDK keeps the
+  list order and doesn't model `order`. A title without relations returns `{"data": []}`
+  (36 of the 96). A missing title returns a 404 with the usual `"Not Found"` toast body
+  (`TitleNotFoundError`). A bare id (`/manga/6712/relations`) also works, as on the other
+  title endpoints.
+- **Not scoped by site.** No `Site-Id`, and `Site-Id` 1/2/3/5, all return the same bytes.
+  This is unlike `/manga/{slug}` and `/chapters`. The SDK still sends the header because
+  every request does.
+- **Relations cross the network.** `media.site` is the id of the site the related title
+  lives on, and `media.model` is `"manga"` (any readable title, novels included) or
+  `"anime"`. For High School DxD (novel, site 3) the 19 relations are 6 novels on site 3, 3
+  manga on site 2 and 10 anime on site 5. Across the 96-title sample (ranobelib and mangalib
+  catalogs, 151 relations) the pairs were `manga`/1, `manga`/3 and `anime`/5.
+  Some site-2 titles 404 on `/manga/{slug}` for every `Site-Id` without auth
+  (`620--highschool-dxd`), so a relation can point at a title the SDK can't open. The SDK
+  doesn't wrap anime: there is no anilib client.
+- `related_type` is read from the related title's side. On the novel the manga is
+  `"Адаптация"` (1), and on that manga the novel is `"Источник"` (2). The data can be
+  inconsistent: on the manga, the novel `6712` shows `name`/`rus_name` of the DX spin-off.
+  That's the API's data, passed through as is.
+- `media` fields (all 151 sampled items): `id`, `name`, `rus_name`, `eng_name` (sometimes
+  `null`), `model`, `slug`, `slug_url`, `cover`, `ageRestriction`, `site`, `type`,
+  `content_marking`, `status`, `releaseDateString` (empty in every sample). Only some items
+  have `edition` (novels, e.g. `{"short_name": "LN"}`, often `null`) or
+  `anilist_id`/`shiki_rate` (anime, `null` in every sample). `RelatedMedia` models the common
+  identity/display fields and renames `model` → `kind` and `site` → `site_id`, which clash
+  less with pydantic and with `Site`. `type` stays raw. For readable titles it's the type
+  classifier of the title's own site, the one `Title.country` maps: `"Япония"`/`"Английский"`
+  on site 3, `"Манга"`/`"Комикс"` on site 1. For anime it's the format (`"TV Сериал"`,
+  `"OVA"`, `"Неизвестный"`). Mapping it to `Country` would be wrong for anime.
+- Relation types: `GET /api/constants?fields[]=relationTypes` → 17 `{id, label}` entries.
+  Unlike `genres`/`types`/`status` they have **no `site_ids`**, so nothing is filtered. Ids are
+  0–16 but not in id order (`15, 16` come before `13, 14`), and `5` and `15` share the label
+  `"Альтернативная история"`. `0` `"Нет"` didn't appear in any sampled relation. Guessed
+  names (`related_types`, `relatedTypes`, `relation_types`, `relations`) return `{"data": {}}`.
+- `GET /api/manga/{slug_url}/similar` also exists. It returns user recommendations
+  (`"similar": "Схож по жанрам"`, `user_id` of whoever added it), not relations. It isn't
+  wrapped; it could be a separate feature.
+
 ### Title URL / slug format
 
 A title URL like `https://ranobelib.me/ru/book/91443--new-hero-in-dxd` (locale prefix is
