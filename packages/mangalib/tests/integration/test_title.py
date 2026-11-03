@@ -17,7 +17,7 @@ from mangalib import (
     MultipleTranslationsError,
     TitleNotFoundError,
 )
-from mangalib.models import Chapter, ChapterBranch, Title
+from mangalib.models import Chapter, ChapterBranch, Relation, Title
 
 CHAINSAW_MAN = "https://mangalib.me/ru/manga/7965--chainsaw-man"
 EARLY_ACCESS = "https://mangalib.me/ru/manga/226780--online-game-god-level-assassin-i-am-the-shadow"
@@ -150,3 +150,15 @@ async def test_list_image_servers_returns_mangalib_servers_only() -> None:
         "crop",
     ]
     assert all("hentai" not in server.url for server in servers)
+
+
+@pytest.mark.vcr
+async def test_get_relations_points_at_the_source_novel_on_ranobelib() -> None:
+    async with MangaLib("https://mangalib.me/ru/manga/6478--the-beginning-after-the-end") as lib:
+        relations = await lib.get_relations()
+
+    assert all(isinstance(r, Relation) for r in relations)
+    source = [r.media for r in relations if r.type.id == 2]  # Источник
+    assert [(m.site_id, m.kind, m.slug_url) for m in source] == [
+        (3, "manga", "14841--beginning-after-the-end-novel")
+    ]

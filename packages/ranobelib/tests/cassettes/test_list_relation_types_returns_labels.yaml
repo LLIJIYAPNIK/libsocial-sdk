@@ -1,0 +1,79 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://ranobelib.me
+      referer:
+      - https://ranobelib.me/
+      site-id:
+      - '3'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/constants?fields%5B%5D=relationTypes
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA82UzU7DQAyEXwXtuUjdeNOfPAc34JCSVKpUAYJyQFHeHXW+KHG2gFBPXFZW1p4d
+        j8fpQlOf6lB14a091qfDy/Pd52v7Hqr7LhyaUC0X4Vjv2mOowsPHMsXmfFp5PlMR+gVZMctaKivp
+        JN5TMX1JK8Ubfd+PSEWGxH101a3itaphoxyrRwzLMHgbHmJuYpZ2QrrEJjNnln5BFSdQjVjYRo+8
+        6bmWI9cyQ+VtmD25rlGcW5AUp0I6oACxv93fTNfpr42u5pQK1ZlENB5qbgXLJNAyjR2t5+WxVhcw
+        pwIiwKIWzIceR6TNHKlATZ/7Y8c+CaF4Lh/qdv5EpEsvNsPDbjSBnUxtgTpZL+b7gjpQUIlx0vfk
+        g5ivEAleJMVpK+lh9b2lYr5DQLGNgzvwhVTCF6y0YVuPPrPTOJr4D30bc+MyLk4GqIZLhOS72ksM
+        E9Mwq6s2J+Z/HtbF/6tA93Zyu24zsa/Z3Zj/pZyNBuvAaQv6hd8HN1Dm6Ngq9I99/wVz5NBlLwYA
+        AA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://ranobelib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Tue, 03 Nov 2026 16:34:32 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=ge1C0fu2bRBt6lF1; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg10_=1793723672; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg9_=13.143.160.204; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg1_=nWyKhhtKqxDM5NBM2mjc; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Wed,
+        03-Nov-2027 16:34:32 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '96'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

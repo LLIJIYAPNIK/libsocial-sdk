@@ -38,10 +38,24 @@ def test_mangalib_error_catches_errors_raised_by_the_core() -> None:
 
 
 @pytest.mark.parametrize(
-    "name", ["ChapterUser", "Country", "Cover", "Genre", "Label", "Person", "Tag", "Team"]
+    "name",
+    [
+        "ChapterUser",
+        "Country",
+        "Cover",
+        "Genre",
+        "Label",
+        "Person",
+        "RelatedMedia",
+        "Relation",
+        "Tag",
+        "Team",
+    ],
 )
 def test_site_independent_models_are_the_cores(name: str) -> None:
     assert getattr(models, name) is getattr(core_models, name)
+    if name not in {"ChapterUser", "Cover", "Person", "Tag", "Team"}:
+        assert getattr(mangalib, name) is getattr(core_models, name)
 
 
 @pytest.mark.parametrize("name", ["Title", "Chapter", "ChapterBranch"])
