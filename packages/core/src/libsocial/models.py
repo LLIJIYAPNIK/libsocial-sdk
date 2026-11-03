@@ -162,9 +162,10 @@ class RelatedMedia(BaseModel):
     for every readable title: manga, novel, ...) or an ``"anime"``. To fetch the related
     title, pass ``slug_url`` to the client of the site ``site_id`` names.
 
-    ``type`` is the raw API field as-is, and means different things per ``kind``: for
-    readable titles it's the origin classifier ``Title.country`` maps (Japan, Korea, ...),
-    for anime it's the format (TV series, OVA, ...).
+    ``type`` is the raw API field as-is, and means different things per ``kind``. For
+    readable titles it's the type classifier of the title's own site, the one ``Title.country``
+    maps (Japan, Korea, ... on ranobelib.me; Manga, Manhwa, Comic, ... on mangalib.me). For
+    anime it's the format (TV series, OVA, ...).
     """
 
     model_config = ConfigDict(populate_by_name=True)

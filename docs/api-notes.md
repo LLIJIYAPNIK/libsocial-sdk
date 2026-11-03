@@ -308,9 +308,10 @@ What a title page shows as related titles (adaptation, source, sequel, spin-off,
   have `edition` (novels, e.g. `{"short_name": "LN"}`, often `null`) or
   `anilist_id`/`shiki_rate` (anime, `null` in every sample). `RelatedMedia` models the common
   identity/display fields and renames `model` → `kind` and `site` → `site_id`, which clash
-  less with pydantic and with `Site`. `type` stays raw: for readable titles it's the origin
-  classifier (`Title.country`), for anime it's the format (`"TV Сериал"`, `"OVA"`,
-  `"Неизвестный"`). Mapping it to `Country` would be wrong for anime.
+  less with pydantic and with `Site`. `type` stays raw. For readable titles it's the type
+  classifier of the title's own site, the one `Title.country` maps: `"Япония"`/`"Английский"`
+  on site 3, `"Манга"`/`"Комикс"` on site 1. For anime it's the format (`"TV Сериал"`,
+  `"OVA"`, `"Неизвестный"`). Mapping it to `Country` would be wrong for anime.
 - Relation types: `GET /api/constants?fields[]=relationTypes` → 17 `{id, label}` entries.
   Unlike `genres`/`types`/`status` they have **no `site_ids`**, so nothing is filtered. Ids are
   0–16 but not in id order (`15, 16` come before `13, 14`), and `5` and `15` share the label
