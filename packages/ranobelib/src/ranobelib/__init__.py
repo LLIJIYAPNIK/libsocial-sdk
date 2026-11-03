@@ -24,6 +24,8 @@ from ranobelib.models import (
     Footnote,
     Genre,
     Label,
+    RelatedMedia,
+    Relation,
     Title,
     Volume,
 )
@@ -51,6 +53,8 @@ __all__ = [
     "RanobeLib",
     "RanobeLibError",
     "RateLimitError",
+    "RelatedMedia",
+    "Relation",
     "Title",
     "TitleNotFoundError",
     "Volume",

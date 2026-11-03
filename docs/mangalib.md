@@ -59,6 +59,15 @@ translation can be read without an account. Fetching a closed chapter raises
 [`AuthRequiredError`][mangalib.AuthRequiredError]. A whole-title download or estimate
 leaves closed chapters out.
 
+## Related titles
+
+[`get_relations()`][mangalib.MangaLib.get_relations] lists what the title page shows as
+related titles: the source novel, sequels, spin-offs, anime adaptations. They cross the
+lib.social network: [`RelatedMedia.site_id`][mangalib.RelatedMedia] says which site's
+client can open each one (a novel's `slug_url` goes to `ranobelib.RanobeLib`).
+[`Catalog.list_relation_types()`][mangalib.Catalog.list_relation_types] lists the relation
+types.
+
 ## More
 
 - [Examples](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/mangalib): a

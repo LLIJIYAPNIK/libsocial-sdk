@@ -23,7 +23,7 @@ classifiers = [
 dependencies = [
     "ebooklib>=0.20",
     "httpx>=0.27",
-    "libsocial-core>=1.0,<2",
+    "libsocial-core>=1.1,<2",
     "pydantic>=2.7",
     "weasyprint>=69.0",
 ]

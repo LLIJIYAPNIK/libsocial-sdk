@@ -41,10 +41,24 @@ def test_ranobelib_error_catches_errors_raised_by_the_core() -> None:
 
 @pytest.mark.parametrize(
     "name",
-    ["ChapterBranch", "ChapterUser", "Country", "Cover", "Genre", "Label", "Person", "Tag", "Team"],
+    [
+        "ChapterBranch",
+        "ChapterUser",
+        "Country",
+        "Cover",
+        "Genre",
+        "Label",
+        "Person",
+        "RelatedMedia",
+        "Relation",
+        "Tag",
+        "Team",
+    ],
 )
 def test_site_independent_models_are_the_cores(name: str) -> None:
     assert getattr(models, name) is getattr(core_models, name)
+    if name not in {"ChapterUser", "Cover", "Person", "Tag", "Team"}:
+        assert getattr(ranobelib, name) is getattr(core_models, name)
 
 
 def test_site_models_extend_the_cores() -> None:

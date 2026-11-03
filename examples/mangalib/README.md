@@ -31,6 +31,7 @@ you've read the ranobelib ones.
 | [`12_catalog_listing.py`](12_catalog_listing.py) | `Catalog` — `list_titles()` filters (AND/OR), `list_genres()` / `list_countries()` (title types) / `list_statuses()`, pagination, a listed title in `MangaLib`, `refresh=True` |
 | [`13_disk_caching.py`](13_disk_caching.py) | disk cache: `cache_dir`, `cache_ttl`, `refresh=True`, hits/misses via `verbosity="full"`, `cache_stats()` / `CacheStats` / `clear_cache()`; what isn't cached (page images, closed chapters) |
 | [`14_error_handling.py`](14_error_handling.py) | `MangaLibError` and its subclasses, each reproduced live except `RateLimitError`; `AccessBlockedError` and `headers=` |
+| [`15_related_titles.py`](15_related_titles.py) | `get_relations()` — sequel, colored version, novel spin-off, anime: `Relation`, `RelatedMedia` (`site_id`, `kind`, `type`); `Catalog.list_relation_types()`; opening the ones on mangalib.me with `MangaLib` |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/libsocial-sdk/mangalib-reference/)
 for every public class/method.

@@ -26,6 +26,10 @@
 
 ::: ranobelib.Label
 
+::: ranobelib.Relation
+
+::: ranobelib.RelatedMedia
+
 ## Exceptions
 
 ::: ranobelib.RanobeLibError

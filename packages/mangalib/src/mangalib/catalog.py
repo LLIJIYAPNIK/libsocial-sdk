@@ -25,7 +25,8 @@ class Catalog(_CoreCatalog[Title]):
 
     Lists titles (``list_titles()``) and the filter options for them (``list_genres()``,
     ``list_countries()`` — on mangalib.me these are the title types: manga, manhwa, manhua,
-    ... — and ``list_statuses()``), each filtered to mangalib.me.
+    ... — and ``list_statuses()``), each filtered to mangalib.me, plus the relation types of
+    ``MangaLib.get_relations()`` (``list_relation_types()``, the same on every site).
 
     Example:
         ```python

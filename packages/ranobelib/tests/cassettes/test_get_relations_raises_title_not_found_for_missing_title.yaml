@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://ranobelib.me
+      referer:
+      - https://ranobelib.me/
+      site-id:
+      - '3'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/1--this-title-does-not-exist-zzz/relations
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA6tWSkksSVSyqlYqyU8sLgEzKgtSlayUijNzUvNKlHSUclOLixPTQUJ++SUKbvml
+        eSlKtbW1AN/Kzk86AAAA
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://ranobelib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Tue, 03 Nov 2026 16:34:31 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=JwDku1H3HVS0lyKk; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg10_=1793723671; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg9_=13.143.160.204; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg1_=Gd2hoTJTaIikocmFezQB; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Wed,
+        03-Nov-2027 16:34:31 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '97'
+    status:
+      code: 404
+      message: Not Found
+version: 1

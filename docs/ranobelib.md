@@ -96,6 +96,21 @@ print(cache_stats(".cache"))  # CacheStats(entries=..., bytes=...)
 clear_cache(".cache", older_than=86400)  # Drop entries older than a day.
 ```
 
+### Related titles
+
+[`get_relations()`][ranobelib.RanobeLib.get_relations] lists what the title page shows as
+related titles: adaptations, source, sequels, spin-offs. Relations cross the lib.social
+network, so a novel's list includes its manga on mangalib.me and its anime on anilib.me.
+[`RelatedMedia.site_id`][ranobelib.RelatedMedia] says which site's client can open each one;
+[`Catalog.list_relation_types()`][ranobelib.Catalog.list_relation_types] lists the relation
+types, so code can pick them by id:
+
+```python
+for relation in await lib.get_relations():
+    if relation.type.id == 1 and relation.media.site_id == RanobeLib.site.id:  # Адаптация
+        print(relation.media.slug_url)  # Open with RanobeLib(relation.media.slug_url).
+```
+
 ## Examples
 
 [`examples/ranobelib/`](https://github.com/LLIJIYAPNIK/libsocial-sdk/tree/main/examples/ranobelib)

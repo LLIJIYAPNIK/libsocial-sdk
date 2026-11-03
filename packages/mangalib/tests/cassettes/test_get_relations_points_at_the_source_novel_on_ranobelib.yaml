@@ -1,0 +1,89 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://mangalib.me
+      referer:
+      - https://mangalib.me/
+      site-id:
+      - '1'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/6478--the-beginning-after-the-end/relations
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAACA92X3W/bNhDA/xVBTy1mxqI+bMkvRYptBRIg65a2eagLg7Ioh4lEZRJVLw38v48f
+        snyxpcSzswXYi2SRx7vjHe/H84OdEEHsydcHuygTWtoTZ2CXNCOCJjNxf0ftyYPNEnviDuyMxDSz
+        J/a0dnwcqqeP9dNVT4/q32P9O9FPLeMRezWwc5owstaF/dDHA5uTXKq3P11T6z1dMM4ZX1inqaCl
+        JeTYLzyxpS91NWsEtV2j2QG29G8vNj5Y+pUChzCYDsw02UwbT/2R0STtUb6Y7eVYXiQ6GjnhCyK/
+        q6xeyM94vQARtQDJBYjyBPHiuxQ3YrO6VCt1GBB6bsVcvksVupRltHEt9UcjB0cJSsPAQX4wjlCY
+        pj7ygiggURi5aaw2I67rPOaEKWvXQtxVk+lwOtQKT1i+yFh8wnhaTIf1XVaQpGrmpsMnfWql9vFi
+        pn04ublbSH8SmpI6E6/nTeNHnryyC7IiyIL+QStRsrlgBV+Xhr8pMxz+pOQqJmTGPZlMUI3Y2ypH
+        B5SdB068KcEIVAKB48rAvOCCcjHLSXkrNyhZ8E1aFUTUVV/xw8IzxR9oC6Yste7AWEuUBVn7cI9h
+        WyxLGrfHHBY50OlhBLZGt00224zb+q2ui1KsK/jqQpmXOKOkoj9Lpl3KeKst2vZqNWiRh7uRhztj
+        7IO9pwB/DgCJgWO6Az7Xl3LtVi8Ju70vaosX1m91RXIysC5YUuRUjZwxXlFmLYl1Qbh8F9ZlXdbv
+        donojiGDDeAMlj3gr8mPa20PrSO30eHPLXBawo2QPweJCMC5CuGJ2iGsORRN5mJgwXOhIXCHrJVb
+        m4lHVwxU2AiBsHuPbqB3hyBdBlxKt6e0MnmSJxUVOk+I6zSpgRudJrSUY3IVWhaokmlCUENDe517
+        hI5Q1nURjH1CIidNURjEkjiUJoioT0IleALXpTiJDroItNHpUHvd8m0fa0cB/2Cr/xzsx5nqBThA
+        5ccPCHsbhAdbCB9tJD990cfYxdssbY500+L8N7TuxOVAFUXGKjFTFnidZQq17JbNSqI2p0YgUt0e
+        pDpbvvnAEw/cXg0IdltHZ+yNw316x4l1mhd8UQk98CvJZM1Yby7UbfP2wL4SP91X4t6+cgLS2yQ2
+        ACQOoXaQJ0hWP7DeAEefuQjf7o29rjD1d7eq7elrhYjRo79Traez6dUJROhATV0M/Hia//B/lOH5
+        n5cfjml6D3GpXQydeIme9+WccQPnLy84vPX9dzzpBSjoukb/uwbYgPPZhtTrpuf2ntNunvhxz39z
+        58nmFIde6EctWs9IlTNOJ9YVk4l+X5ScdmBzBLBpNjwH4U0a8MGObbRxdB0i8DSaUmv7b0DTm0JF
+        88eM6/a3h2M3RhgtlWzcyEJK6Vgg1CnXxaDf7+dXn8++nFf35+IYBu0abKegiZcgzL6mjuXHIXZ6
+        6QBKAEM84Md4iLYqBd7M8IASc3BfsbFarb6t/gYyX3TthRMAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://mangalib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Tue, 03 Nov 2026 16:34:32 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=n7orqkmoPQdXrHUn; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg10_=1793723672; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg9_=13.143.160.204; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:32 GMT
+      - __ddg1_=rtKsk1fpt7xa909Y9j5x; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Wed,
+        03-Nov-2027 16:34:32 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '95'
+    status:
+      code: 200
+      message: OK
+version: 1

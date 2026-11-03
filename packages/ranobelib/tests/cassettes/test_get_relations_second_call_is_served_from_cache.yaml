@@ -1,0 +1,93 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - api.cdnlibs.org
+      origin:
+      - https://ranobelib.me
+      referer:
+      - https://ranobelib.me/
+      site-id:
+      - '3'
+      user-agent:
+      - Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15
+        (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1
+    method: GET
+    uri: https://api.cdnlibs.org/api/manga/14841--beginning-after-the-end-novel/relations
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEA8WXXW/bNhSG/4qgqw4zE1Gibdk3Q4ptBRKg65auvZgLg7Yoh4lEZfpYlgb+7zs8
+        h7aZxM6cuk1vFIaizqfOo9d3YSZbGY7/ugurOlN1OI56Ya0K2aps2t5eq3B8F+osHPNeWMiZKsJx
+        OOkiwSN7TQReaZ3btYg3O2KA6xT383DZC0uVaXBGFgdimPZCI0vwEb6/UMFrtdDGaLMITvJW1UEL
+        e7+YLISAumbqDlpjPPOcDDfrZIZrFeAfjCdRdi047tDtPt2WdBavaM+FG4E/ZRYrfzaw2TowuQ5M
+        YWBllWFJSmkWEh5sim4B2UDkbP0Qw4eY3aOH7KFpV9tS2howvLX7+Lz6x/blLsx1oVwVolEexYN5
+        zjhXQyZGPGJpGnOWJfPRKMmHvD8YQDjtRVfOjNTW1UXbXjfjyfHkGA0e6XJR6NmRNnk1Oe6ui0pm
+        jbs3OX4igfWZfWKYYgRHl9cLiCZTueyK9nvF4qIo4WX+PsXAAGAK5EL9oZq21vNWV2Y1DslmwPjg
+        RzstjW5hNGDw/DkcbY7ZV5f7r/EcX2actwT3Bbd25pVplWmnpayvYLpg2D+B8Va2XbNyLh5YpVmm
+        uSZ73hz5M57QKOLdhGbfTRkNlvUPOFGyUT8DU84haxtBGC6XvTVyIMWXQU4sRAJ8c0N0LvXVbdUF
+        pgp+6xpZyl7wVmdVqezOqTaN0sGNDN5KA3+r4Lyru5/gNX4AoxgB5Gri0IO4EQmWgBDZt2sRE3q8
+        LYcsrDTZEHM85JBFxceSCmovFRztJSO0SmfoOnoEN0FdpA45Q3SIonGOqHd0yhl3pyhyzIVeAt+g
+        8+eRPiEgU5ipLdgDmu7G/IqmUHD4KKxp2lCfmKlYhX1iBttkNy6xTexGMgNPsZuKNdAm5ltwqMXe
+        M3aAsW0gHgopR1Ges7Q/i5hQKmPS/itVmuf9OFY8G0EmzwcxZjA5xqjXyN3H20HI/WKvz4frYa4A
+        K9sxGm9I9u4N48kGpP37IOWDzcn3H/Bdj0km0Kz68KP1bE+YeiHYqeG+QqEx8zwInNs+ec524hLS
+        NbrQTTu1Ysx0RQHjcaGv9LQGrNKOj1SIYRtSvZxtaC5hUkoEkIx5k46gEsJGdU+68WiY7CfexsFJ
+        WZlF06Ka+1UWIGGCV29B0hQ/PGbpXsKOPy3s7n0R7wm7sddkR0UiHfE4xdvOOnUcu0UdSrA8oh+8
+        wp4+/uyRKfr40TWyGe4Hv21lgodXQNxfXjJJ5UZNmWO5AZNQbbDm6U5q4JPK8ylL20j47qT8LD7X
+        6dnf52/A2fOJh0aflJ47Q1oD0g/iIBB+9WDifvRv0o+ez8lvGslOjHo/93wxCiLVF6PcE604FjQ2
+        NBwkf2gUnDixZ5zeIN3q9l8GrPDjkwQ34fN/ZSkkt42hHBTkvZ/CRElM3Wk+St2Jqcf0TJNUgI53
+        MvRUNqU2ahx81CZjr6vaWO3zQGVyUljkhD4WvtrPHNuo/uSYnsDgVp8XRDt1hyzlxDz/q0TM8w3N
+        IRwPY9vj3YGqS0qO3djcZi43H0RYC8a2ntuGmd9v5x//PP1w1tyetYdg5rHDNUR8F18DIvu6OhQR
+        X+JnJwC8yX75n6PfQkEtl5+W/wFEyP8Q7hIAAA==
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-origin:
+      - https://ranobelib.me
+      cache-control:
+      - no-cache, private
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-security-policy:
+      - upgrade-insecure-requests;
+      content-type:
+      - application/json
+      date:
+      - Tue, 03 Nov 2026 16:34:31 GMT
+      keep-alive:
+      - timeout=60
+      server:
+      - ddos-guard
+      set-cookie:
+      - __ddg8_=Ci3gMrMv9Z1U3dCm; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg10_=1793723671; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg9_=13.143.160.204; Domain=.cdnlibs.org; Path=/; Expires=Tue, 03-Nov-2026
+        16:54:31 GMT
+      - __ddg1_=DSLEMuNTyV7IllA5dAoH; Domain=.cdnlibs.org; HttpOnly; Path=/; Expires=Wed,
+        03-Nov-2027 16:34:31 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      - Origin
+      x-ratelimit-limit:
+      - '100'
+      x-ratelimit-remaining:
+      - '98'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

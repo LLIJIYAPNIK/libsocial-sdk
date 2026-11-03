@@ -5,8 +5,8 @@ package:
 
 | Directory | Package | Import | Scripts |
 |---|---|---|---|
-| [`ranobelib/`](ranobelib/) | [`ranobelib-python-sdk`](../packages/ranobelib/) — ranobelib.me, text novels | `import ranobelib` | 19 |
-| [`mangalib/`](mangalib/) | [`mangalib-python-sdk`](../packages/mangalib/) — mangalib.me, manga page images | `import mangalib` | 14 |
+| [`ranobelib/`](ranobelib/) | [`ranobelib-python-sdk`](../packages/ranobelib/) — ranobelib.me, text novels | `import ranobelib` | 20 |
+| [`mangalib/`](mangalib/) | [`mangalib-python-sdk`](../packages/mangalib/) — mangalib.me, manga page images | `import mangalib` | 15 |
 | [`core/`](core/) | [`libsocial-core`](../packages/core/) — the shared core both are built on | `import libsocial` | 6 |
 
 Every script is a complete, self-contained program: run it as-is with

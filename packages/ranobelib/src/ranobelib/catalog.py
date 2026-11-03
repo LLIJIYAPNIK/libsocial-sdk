@@ -25,7 +25,9 @@ class Catalog(_CoreCatalog[Title]):
     """Entry point for listing/searching the ranobelib.me catalog.
 
     Lists titles (``list_titles()``) and the filter options for them (``list_genres()``,
-    ``list_countries()``, ``list_statuses()``), each filtered to ranobelib.me.
+    ``list_countries()``, ``list_statuses()``), each filtered to ranobelib.me, plus the
+    relation types of ``RanobeLib.get_relations()`` (``list_relation_types()``, the same on
+    every site).
 
     Example:
         ```python

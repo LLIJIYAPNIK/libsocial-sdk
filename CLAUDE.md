@@ -64,6 +64,8 @@ async with RanobeLib(
 
     all_volumes = await lib.download_title(translation_index=0, chapter_delay=0.5)
 
+    relations = await lib.get_relations()   # list[Relation]: адаптации, продолжения, ... (шаг 59)
+
     await lib.export(chapters, fmt="epub", path="output.epub")
 
     from ranobelib import chapter_size, volume_size
@@ -306,9 +308,10 @@ libsocial-sdk/
 │   │   ├── 16_sizing.py           # estimate_title_size()/chapter_size()/volume_size() — шаг 49
 │   │   ├── 17_console_output.py   # verbosity — шаг 49
 │   │   ├── 18_custom_exporter.py  # свой формат через exporters.register() — шаг 49
-│   │   └── 19_bulk_errors.py      # VolumeNotFoundError, MultipleTitleTranslationsError — шаг 49
+│   │   ├── 19_bulk_errors.py      # VolumeNotFoundError, MultipleTitleTranslationsError — шаг 49
+│   │   └── 20_related_titles.py   # get_relations(), list_relation_types() — шаг 59
 │   ├── mangalib/
-│   │   ├── README.md              # индекс; таблица файл → фича, 01–14
+│   │   ├── README.md              # индекс; таблица файл → фича, 01–15
 │   │   ├── 01_title_metadata.py … 05_volumes.py   # тайтл, оглавление, главы, тома — шаг 50
 │   │   ├── 06_translations.py     # переводы, RestrictedView, AuthRequiredError — шаг 51
 │   │   ├── 07_download_title.py   # download_title(), пропуск закрытых глав — шаг 51
@@ -318,7 +321,8 @@ libsocial-sdk/
 │   │   ├── 11_custom_exporter.py  # свой формат (html) через exporters.register() — шаг 53
 │   │   ├── 12_catalog_listing.py  # Catalog: фильтры, справочники, пагинация — шаг 54
 │   │   ├── 13_disk_caching.py     # кэш, refresh, cache_ttl, cache_stats/clear_cache — шаг 55
-│   │   └── 14_error_handling.py   # MangaLibError и подклассы, headers= — шаг 55
+│   │   ├── 14_error_handling.py   # MangaLibError и подклассы, headers= — шаг 55
+│   │   └── 15_related_titles.py   # get_relations(), list_relation_types() — шаг 59
 │   └── core/
 │       ├── README.md              # индекс: файл → фича; сайт без пакета — slashlib.me (id 2)
 │       ├── 01_urls_and_sites.py   # parse_slug_url, Site, browser_headers — шаг 56
@@ -1949,5 +1953,23 @@ owner/repo/workflow-file/environment) — это может сделать то�
       ядра до 1.1.0 → релиз `core-v1.1.0` → отдельный PR фасадов: `libsocial-core>=1.1,<2`,
       реэкспорт `Relation`/`RelatedMedia`, справочники, примеры. Если фасады поменять в этом же
       PR, упадёт `facade-vs-published-core`.
+
+59. **Связанные тайтлы в фасадах** (продолжение шага 58, после релиза `core-v1.1.0`).
+    - `ranobelib-python-sdk` и `mangalib-python-sdk` требуют `libsocial-core>=1.1,<2`.
+      `get_relations()`/`Catalog.list_relation_types()` наследуются от ядра без
+      переопределения: ответ не зависит от сайта, а `RelatedMedia` — не модель `Title` фасада,
+      так что фасаду нечего подставлять.
+    - `Relation`/`RelatedMedia` реэкспортированы из `models` и `__init__` обоих фасадов (те
+      же объекты, что в ядре, — проверяет `test_core_reexports.py`), добавлены в
+      `docs/ranobelib-reference.md`/`docs/mangalib-reference.md`; в руководствах
+      (`docs/ranobelib.md`, `docs/mangalib.md`) — короткий раздел «Related titles».
+    - Кассетные тесты в каждом фасаде: связи через сайты, кэш, 404, справочник типов.
+    - Примеры, прогнанные вживую 2026-11-03: `examples/ranobelib/20_related_titles.py` (DxD —
+      19 связей: 6 новелл на ranobelib, 3 манги на slashlib, 10 аниме; связанные новеллы
+      открываются `RanobeLib`, тип связи читается со стороны связанного тайтла) и
+      `examples/mangalib/15_related_titles.py` (Chainsaw Man: продолжение и цветная версия
+      открываются `MangaLib`, новелла-спин-офф и аниме — нет).
+    - Версии фасадов поднимает отдельный PR, как обычно (следующие минорные — `ranobelib 0.15.0`,
+      `mangalib 0.3.0`).
 
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.

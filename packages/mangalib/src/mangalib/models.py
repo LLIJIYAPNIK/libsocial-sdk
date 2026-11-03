@@ -2,10 +2,10 @@
 
 Everything that isn't specific to mangalib.me is ``libsocial-core``'s and re-exported here
 unchanged (``Cover``, ``Label``, ``Genre``, ``Tag``, ``Country``, ``Person``, ``Team``,
-``ChapterUser``). ``Title``, ``ChapterBranch``, ``Chapter``, ``Volume`` and ``CatalogPage``
-subclass the core's with what is: a chapter's ``pages`` instead of text, whether a
-translation is closed to readers without an account (``restricted_view``), and
-``Title.base_names`` without mangalib's format suffixes.
+``ChapterUser``, ``Relation``, ``RelatedMedia``). ``Title``, ``ChapterBranch``, ``Chapter``,
+``Volume`` and ``CatalogPage`` subclass the core's with what is: a chapter's ``pages`` instead
+of text, whether a translation is closed to readers without an account
+(``restricted_view``), and ``Title.base_names`` without mangalib's format suffixes.
 """
 
 from __future__ import annotations
@@ -16,7 +16,18 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 
 from libsocial import models as _core
-from libsocial.models import ChapterUser, Country, Cover, Genre, Label, Person, Tag, Team
+from libsocial.models import (
+    ChapterUser,
+    Country,
+    Cover,
+    Genre,
+    Label,
+    Person,
+    RelatedMedia,
+    Relation,
+    Tag,
+    Team,
+)
 
 __all__ = [
     "CatalogPage",
@@ -30,6 +41,8 @@ __all__ = [
     "Label",
     "Page",
     "Person",
+    "RelatedMedia",
+    "Relation",
     "RestrictedView",
     "Tag",
     "Team",

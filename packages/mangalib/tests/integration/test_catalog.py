@@ -37,3 +37,13 @@ async def test_list_genres_and_statuses_are_filtered_to_mangalib() -> None:
 
     assert genres
     assert [status.id for status in statuses] == [1, 2, 3, 4, 5]
+
+
+@pytest.mark.vcr
+async def test_list_relation_types_is_the_networks_list() -> None:
+    async with Catalog() as catalog:
+        types = await catalog.list_relation_types()
+
+    labels = {t.id: t.label for t in types}
+    assert labels[1] == "Адаптация"
+    assert labels[2] == "Источник"
