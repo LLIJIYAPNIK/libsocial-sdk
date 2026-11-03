@@ -33,6 +33,10 @@ the API returns for MangaLib is in [API notes](api-notes.md#mangalib-mangalib-py
 
 ::: mangalib.Volume
 
+::: mangalib.Relation
+
+::: mangalib.RelatedMedia
+
 ## Page images
 
 ::: mangalib.page_url
