@@ -1929,4 +1929,25 @@ owner/repo/workflow-file/environment) — это может сделать то�
       стало 6 глав; `10` — без GTK падал на `pdf`, теперь пропускает формат, которого нет в
       `EXPORTERS`.
 
+58. **Связанные тайтлы: `get_relations()` и `Catalog.list_relation_types()`, в ядре**
+    (адаптации манги/аниме, источник, продолжение, спин-офф). Проверено вживую, подробности —
+    в `docs/api-notes.md`, раздел "Related titles".
+    - `GET /api/manga/{slug_url}/relations` отдаёт весь список одним ответом, в порядке
+      показа на странице. Ответ не зависит от `Site-Id`. Связи идут по всей сети:
+      `media.site` (1/2/3/5) и `media.model` (`"manga"`/`"anime"`).
+    - Ядро: модели `Relation(type: Label, media: RelatedMedia)` и `RelatedMedia`. Это
+      отдельная модель, а не `Title`: у аниме поле `type` означает формат (TV/OVA), а не
+      страну, а `Title` требует полей, которых тут может не быть. Сырые `model`/`site`
+      переименованы в `kind`/`site_id`. `ApiClient.get_relations()`/`list_relation_types()`.
+      `TitleClient.get_relations(refresh=)` кэширует ответ под ключом `relations`.
+      `Catalog.list_relation_types(refresh=)` кэширует под `catalog:relation_types` и ничего
+      не фильтрует по сайту: у записей нет `site_ids`.
+    - `GET /similar` (рекомендации пользователей) сознательно не обёрнут — решение
+      пользователя: это не связи, а возможная отдельная фича.
+    - Фасады наследуют `get_relations()` от `TitleClient`, но опубликованные версии требуют
+      `libsocial-core>=1.0`. Поэтому порядок такой: этот PR (только ядро) → поднять версию
+      ядра до 1.1.0 → релиз `core-v1.1.0` → отдельный PR фасадов: `libsocial-core>=1.1,<2`,
+      реэкспорт `Relation`/`RelatedMedia`, справочники, примеры. Если фасады поменять в этом же
+      PR, упадёт `facade-vs-published-core`.
+
 Каждый пункт — отдельная ветка/PR по правилам из раздела Git workflow.
