@@ -10,8 +10,8 @@ Every script in this directory is a complete, self-contained program: run it as-
 produce the "Expected output" comment at the bottom of the file; the sites' data changes over
 time, so an old "Expected output" can drift from what you see.
 
-The site without a package of its own used in 03 and 04 is slashlib.me (site id 2). 06 needs
-both `ranobelib-python-sdk` and `mangalib-python-sdk` installed.
+The site without a package of its own used in 03 and 04 is slashlib.me (site id 2). 06 and 07
+need both `ranobelib-python-sdk` and `mangalib-python-sdk` installed.
 
 | File | Feature |
 |---|---|
@@ -21,6 +21,7 @@ both `ranobelib-python-sdk` and `mangalib-python-sdk` installed.
 | [`04_custom_catalog.py`](04_custom_catalog.py) | a `Catalog` for slashlib.me: `CatalogPage`, lookups (`Genre`, `Country`, `Label`) filtered by site versus the whole network; `cache_stats()` / `CacheStats` / `clear_cache()` |
 | [`05_pacing_and_console.py`](05_pacing_and_console.py) | `shared_pacer()` and `Pacer`: two clients for two sites sharing one request rate, measured; `Reporter` and `Verbosity` for progress and logs in the SDK's style |
 | [`06_both_sites.py`](06_both_sites.py) | ranobelib and mangalib together: one franchise in both catalogs, the shared models (`Title`, `Person`, `Cover`, `Tag`, `Team`, `ChapterUser`), one exception hierarchy under `LibSocialError` |
+| [`07_related_titles.py`](07_related_titles.py) | `get_relations()`: adaptations, source, spin-offs across sites — `Relation`, `RelatedMedia` (`site_id`, `kind`, `type`); `Catalog.list_relation_types()`; opening a related title with the client of its site |
 
 Every name in `libsocial.__all__` appears in at least one of these scripts. `RateLimitError`,
 `AccessBlockedError`, `AuthRequiredError` and `DownloadTitleInterruptedError` appear in 06
