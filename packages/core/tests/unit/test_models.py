@@ -3,7 +3,7 @@
 from datetime import UTC, datetime
 from typing import Any
 
-from libsocial.models import CatalogPage, Country, Title
+from libsocial.models import CatalogPage, Country, Relation, Title
 
 RAW_TITLE: dict[str, Any] = {
     "id": 91443,
@@ -189,3 +189,102 @@ def test_catalog_page_validates_items_as_the_given_title_model() -> None:
 
     assert isinstance(page.items[0], _SiteTitle)
     assert page.items[0].shout == "NEW HERO IN DXD"
+
+
+# Trimmed from GET /api/manga/6712--high-school-dxd-novel/relations: a readable title on
+# ranobelib.me (with the novel-only "edition" field) and an anime on anilib.me (with its own
+# extra fields), both ignored by the model.
+RAW_NOVEL_RELATION: dict[str, Any] = {
+    "order": 0,
+    "related_type": {"id": 4, "label": "Продолжение"},
+    "media": {
+        "id": 22513,
+        "name": "Shin Haisukuru Di Di",
+        "rus_name": "Истинная Старшая Школа D×D",
+        "eng_name": "True High School D×D",
+        "model": "manga",
+        "slug": "shin-high-school-dxd",
+        "slug_url": "22513--shin-high-school-dxd",
+        "cover": {"filename": "HaRtTLeDuYc3", "default": "https://cover.imglib.info/x.jpg"},
+        "ageRestriction": {"id": 3, "label": "16+"},
+        "site": 3,
+        "type": {"id": 10, "label": "Япония"},
+        "content_marking": [],
+        "status": {"id": 4, "label": "Приостановлен"},
+        "edition": {"id": 9, "slug": "light-novel", "name": "Лайт-новелла", "short_name": "LN"},
+        "releaseDateString": "",
+    },
+}
+RAW_ANIME_RELATION: dict[str, Any] = {
+    "order": 9,
+    "related_type": {"id": 1, "label": "Адаптация"},
+    "media": {
+        "id": 6515,
+        "name": "High School DxD",
+        "rus_name": "Старшая школа DxD",
+        "eng_name": None,
+        "model": "anime",
+        "slug": "high-school-dxd-anime",
+        "slug_url": "6515--high-school-dxd-anime",
+        "cover": {"filename": "04071c37"},
+        "ageRestriction": {"id": 4, "label": "R+"},
+        "site": 5,
+        "type": {"id": 16, "label": "TV Сериал"},
+        "content_marking": [],
+        "status": {"id": 2, "label": "Завершён"},
+        "releaseDateString": "",
+        "anilist_id": None,
+        "shiki_rate": None,
+    },
+}
+
+
+def test_relation_maps_the_raw_field_names() -> None:
+    relation = Relation.model_validate(RAW_NOVEL_RELATION)
+
+    assert relation.type.id == 4
+    assert relation.type.label == "Продолжение"
+    media = relation.media
+    assert media.slug_url == "22513--shin-high-school-dxd"
+    assert media.kind == "manga"
+    assert media.site_id == 3
+    assert media.age_restriction is not None and media.age_restriction.label == "16+"
+    assert media.status is not None and media.status.id == 4
+    assert media.type is not None and media.type.label == "Япония"
+    assert media.cover.default == "https://cover.imglib.info/x.jpg"
+
+
+def test_relation_to_an_anime_on_another_site() -> None:
+    media = Relation.model_validate(RAW_ANIME_RELATION).media
+
+    assert media.kind == "anime"
+    assert media.site_id == 5
+    assert media.eng_name is None
+    assert media.type is not None and media.type.label == "TV Сериал"  # A format, not a country.
+
+
+def test_related_media_needs_only_identity_fields() -> None:
+    relation = Relation.model_validate(
+        {
+            "related_type": {"id": 10, "label": "Другое"},
+            "media": {
+                "id": 1,
+                "name": "X",
+                "slug": "x",
+                "slug_url": "1--x",
+                "model": "manga",
+                "site": 1,
+            },
+        }
+    )
+
+    assert relation.media.status is None
+    assert relation.media.age_restriction is None
+    assert relation.media.cover.default is None
+
+
+def test_relation_round_trips_through_model_dump() -> None:
+    relation = Relation.model_validate(RAW_ANIME_RELATION)
+
+    assert Relation.model_validate(relation.model_dump()) == relation
+    assert Relation.model_validate(relation.model_dump(by_alias=True)) == relation
