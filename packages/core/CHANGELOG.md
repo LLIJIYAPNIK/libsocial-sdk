@@ -9,6 +9,8 @@ package follows [Semantic Versioning](https://semver.org/). Entries are generate
 `main` whenever a GitHub Release of this package is published — don't hand-edit released
 sections, fix the underlying commit message/PR title instead.
 
+## [1.1.1](https://github.com/LLIJIYAPNIK/libsocial-sdk/compare/core-v1.1.0..core-v1.1.1) - 2026-11-03
+
 ## [1.1.0](https://github.com/LLIJIYAPNIK/libsocial-sdk/compare/core-v1.0.2..core-v1.1.0) - 2026-11-03
 
 ### Added
