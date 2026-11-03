@@ -2,10 +2,10 @@
 
 Everything that isn't specific to ranobelib.me is ``libsocial-core``'s and re-exported here
 unchanged (``Cover``, ``Label``, ``Genre``, ``Tag``, ``Country``, ``Person``, ``Team``,
-``ChapterUser``, ``ChapterBranch``). ``Title``, ``Chapter``, ``Volume`` and ``CatalogPage``
-subclass the core's with what is: a chapter's text ``content`` and translator ``footnotes``
-(parsed from the API's HTML or ProseMirror), and ``Title.base_names`` without ranobelib's
-format suffixes.
+``ChapterUser``, ``ChapterBranch``, ``Relation``, ``RelatedMedia``). ``Title``, ``Chapter``,
+``Volume`` and ``CatalogPage`` subclass the core's with what is: a chapter's text ``content``
+and translator ``footnotes`` (parsed from the API's HTML or ProseMirror), and
+``Title.base_names`` without ranobelib's format suffixes.
 """
 
 from __future__ import annotations
@@ -27,6 +27,8 @@ from libsocial.models import (
     Genre,
     Label,
     Person,
+    RelatedMedia,
+    Relation,
     Tag,
     Team,
 )
@@ -43,6 +45,8 @@ __all__ = [
     "Genre",
     "Label",
     "Person",
+    "RelatedMedia",
+    "Relation",
     "Tag",
     "Team",
     "Title",
