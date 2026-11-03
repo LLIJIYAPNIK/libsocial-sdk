@@ -661,8 +661,12 @@ already tells the caller what *is* available.
 **Testing implication**: `tests/unit/test_pdf_exporter.py`'s WeasyPrint-dependent tests
 (`pytest.mark.skipif(weasyprint is None, ...)`) skip rather than fail on machines without
 the native deps — this repo's Windows dev environment among them. `ci.yml`'s `test` job
-installs `libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libcairo2` via `apt-get`
+installs `libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libcairo2` via `apt-get`
 before running pytest so they actually execute there instead of silently always skipping.
+The gdk-pixbuf package is `libgdk-pixbuf-2.0-0`, not `libgdk-pixbuf2.0-0`. The latter was
+only a transitional name and isn't in Ubuntu 26.04: once `ubuntu-latest` moved to it
+(2026-11), `apt-get` stopped with "has no installation candidate". The new name is in 24.04
+as well (checked on Launchpad).
 No VCR-backed integration test for `fmt="pdf"` exists (unlike txt/fb2/epub) for the same
 root cause: recording its cassette needs a real WeasyPrint run to make the real HTTP calls
 worth capturing, which isn't possible in this dev environment, and CI runs with
