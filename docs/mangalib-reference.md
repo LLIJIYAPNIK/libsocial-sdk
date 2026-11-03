@@ -72,6 +72,8 @@ with `@register`. `"pdf"` is registered only when the `pdf` extra (img2pdf) is i
 
 ::: mangalib.AuthRequiredError
 
+::: mangalib.TitleNotFoundError
+
 ::: mangalib.ChapterNotFoundError
 
 ::: mangalib.VolumeNotFoundError

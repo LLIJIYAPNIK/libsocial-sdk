@@ -31,6 +31,10 @@ the models and exceptions — see [libsocial-core](core.md).
 
 ::: libsocial.CatalogPage
 
+::: libsocial.Relation
+
+::: libsocial.RelatedMedia
+
 ## Exceptions
 
 ::: libsocial.LibSocialError
