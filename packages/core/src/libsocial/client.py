@@ -164,6 +164,24 @@ class ApiClient:
         data: list[dict[str, Any]] = response.json()["data"]
         return data
 
+    async def get_relations(self, slug_url: str) -> list[dict[str, Any]]:
+        """Fetch the raw list of titles related to ``slug_url`` (single request, no pagination).
+
+        Unlike the other title endpoints, this one doesn't depend on ``Site-Id`` (any value,
+        or none, gives the same answer — see docs/api-notes.md); the header is sent anyway,
+        like on every request.
+
+        Args:
+            slug_url: The title's ``{id}--{slug}`` identifier.
+
+        Returns:
+            The ``data`` array from the API response, in the site's display order.
+        """
+        response = await self._get(f"/manga/{slug_url}/relations")
+        self._raise_for_status(response, not_found=TitleNotFoundError(slug_url))
+        data: list[dict[str, Any]] = response.json()["data"]
+        return data
+
     async def get_chapter(
         self,
         slug_url: str,
@@ -322,6 +340,24 @@ class ApiClient:
             response, not_found=LibSocialError("Unexpected 404 from status list")
         )
         data: list[dict[str, Any]] = response.json()["data"]["status"]
+        return data
+
+    async def list_relation_types(self) -> list[dict[str, Any]]:
+        """Fetch the raw list of relation types (adaptation, source, sequel, ...).
+
+        Unlike ``list_genres``/``list_statuses``, the entries carry no ``site_ids``: the
+        vocabulary is the same on every site, as relations themselves cross sites.
+
+        Returns:
+            The raw ``data.relationTypes`` array from the API response.
+        """
+        response = await self._get(
+            "/constants", params=httpx.QueryParams([("fields[]", "relationTypes")])
+        )
+        self._raise_for_status(
+            response, not_found=LibSocialError("Unexpected 404 from relation type list")
+        )
+        data: list[dict[str, Any]] = response.json()["data"]["relationTypes"]
         return data
 
     async def _get(self, url: str, *, params: Any = None) -> httpx.Response:

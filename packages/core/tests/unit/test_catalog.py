@@ -42,6 +42,13 @@ _STATUSES = [
     {"id": 1, "label": "Онгоинг", "site_ids": [0, 1, 2, 3, 4, 5]},
     {"id": 6, "label": "Other site only", "site_ids": [5]},
 ]
+# No site_ids here: relation types are network-wide (relations cross sites).
+_RELATION_TYPES = [
+    {"id": 1, "label": "Адаптация"},
+    {"id": 2, "label": "Источник"},
+    {"id": 15, "label": "Альтернативная история"},
+    {"id": 13, "label": "Изначальная история"},
+]
 
 
 class _SiteTitle(Title):
@@ -75,7 +82,12 @@ def _constants_handler(
         if calls is not None:
             calls.append(request)
         field = request.url.params["fields[]"]
-        data = {"genres": _GENRES, "types": _TYPES, "status": _STATUSES}[field]
+        data = {
+            "genres": _GENRES,
+            "types": _TYPES,
+            "status": _STATUSES,
+            "relationTypes": _RELATION_TYPES,
+        }[field]
         return httpx.Response(200, json={"data": {field: data}})
 
     return handler
@@ -192,7 +204,9 @@ async def test_list_statuses_keeps_only_statuses_tagged_for_the_site(
     assert statuses == [Label(id=1, label="Онгоинг")]
 
 
-@pytest.mark.parametrize("method", ["list_genres", "list_countries", "list_statuses"])
+@pytest.mark.parametrize(
+    "method", ["list_genres", "list_countries", "list_statuses", "list_relation_types"]
+)
 async def test_constants_lists_are_cached_until_refresh(
     site: Site, tmp_path: Path, method: str
 ) -> None:
@@ -502,3 +516,12 @@ def test_cache_key_stable_for_equivalent_calls() -> None:
     )
 
     assert key1 == key2
+
+
+async def test_list_relation_types_keeps_every_type_in_the_api_order(
+    site: Site, tmp_path: Path
+) -> None:
+    async with _catalog(site, tmp_path, _constants_handler()) as catalog:
+        types = await catalog.list_relation_types()
+
+    assert types == [Label.model_validate(item) for item in _RELATION_TYPES]

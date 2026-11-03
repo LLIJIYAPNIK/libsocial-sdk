@@ -21,7 +21,7 @@ from libsocial.exceptions import (
     RateLimitError,
     VolumeNotFoundError,
 )
-from libsocial.models import ChapterBranch, ChapterT, TitleT, Volume
+from libsocial.models import ChapterBranch, ChapterT, Relation, TitleT, Volume
 from libsocial.numbering import parse_slug_url
 from libsocial.site import Site
 
@@ -253,6 +253,34 @@ class TitleClient(Generic[TitleT, ChapterT, VolumeT]):
             branch_id = self._resolve_branch_id(volume_str, number, raw_chapters)
             result.append(await self._fetch_chapter(volume_str, number, branch_id))
         return result
+
+    async def get_relations(self, *, refresh: bool = False) -> list[Relation]:
+        """Fetch the titles related to this one: adaptations, source, sequels, spin-offs, ...
+
+        Relations cross the whole lib.social network: a novel's list includes its manga
+        (mangalib.me) and anime (anilib.me) adaptations, each tagged with the site it lives
+        on (``Relation.media.site_id``) — this client can fetch only those on its own site.
+        A title without relations gives an empty list.
+
+        Args:
+            refresh: Bypass the disk cache and re-fetch from the API even if a cached
+                response is on hand.
+
+        Returns:
+            The relations in the site's display order (the order its title page shows).
+
+        Raises:
+            TitleNotFoundError: If the title doesn't exist.
+        """
+        key = self._cache_key("relations")
+        data: list[dict[str, Any]] | None = None if refresh else self._cache.get(key)
+        if data is not None:
+            self._reporter.log(f"[cache] relations for {self._slug_url}")
+        else:
+            self._reporter.log(f"[api] fetching relations for {self._slug_url}")
+            data = await self._client.get_relations(self._slug_url)
+            self._cache.set(key, data)
+        return [Relation.model_validate(item) for item in data]
 
     async def get_translations(self, volume: int, number: str) -> list[ChapterBranch]:
         """Fetch the available translations (branches) for a chapter.
