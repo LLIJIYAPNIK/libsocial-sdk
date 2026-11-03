@@ -35,6 +35,7 @@ mini-tutorial for the feature it demonstrates, not just copy-pasted.
 | [`17_console_output.py`](17_console_output.py) | `verbosity` — progress bars and a cache/API log in the console |
 | [`18_custom_exporter.py`](18_custom_exporter.py) | your own export format: `Exporter`, `register()`, `EXPORTERS` |
 | [`19_bulk_errors.py`](19_bulk_errors.py) | `VolumeNotFoundError`, `MultipleTitleTranslationsError` / `AmbiguousChapter`, `except RanobeLibError` |
+| [`20_related_titles.py`](20_related_titles.py) | `get_relations()` — sequels, spin-offs, adaptations across sites: `Relation`, `RelatedMedia` (`site_id`, `kind`, `type`); `Catalog.list_relation_types()`; opening related novels with `RanobeLib` |
 
 See the [full API reference](https://LLIJIYAPNIK.github.io/libsocial-sdk/ranobelib-reference/)
 for every public class/method. Two exceptions aren't demonstrated, since a short script can't
